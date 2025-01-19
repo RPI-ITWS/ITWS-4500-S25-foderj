@@ -27,3 +27,18 @@ Requirements:
 
 Before Submit: 
 	Download and setup git ignore file √
+
+
+https://foderj.eastus.cloudapp.azure.com/node
+Same thing as putting localhost:13 in from last class 
+This is where node is supposed to be serverd from 
+
+Paths between local and VM will need to change.
+
+Should work now and be able to serve as long as apache error fixed
+
+initialization notes: 
+	run 'sudo npm init' 
+	enter through all prompts 
+	type yes
+	'sudo npm install express' 
