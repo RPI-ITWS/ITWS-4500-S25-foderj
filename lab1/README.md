@@ -20,3 +20,10 @@ Function get/new/:number
 
 Must be served on: 
 	https://<FQDN>/node
+
+Requirements: 
+	Keep Port @ 3000
+
+
+Before Submit: 
+	Download and setup git ignore file √
