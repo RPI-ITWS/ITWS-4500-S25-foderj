@@ -34,12 +34,16 @@ Plan:
 		you don’t want to send the list in the body of your response; hint2: consider pagination, √
 		since you have a lot of articles!)
 		3. GET /runs/### = retrieve the specific ID from the JSON object √
-		4. POST /runs = append a run at the end of the JSON 
+		4. POST /runs = append a run at the end of the JSON √
 		5. PUT /runs = bulk update all your run
 		6. PUT /runs/### = update the specific run
 		7. DELETE /runs/### = delete the specific run
-		have the ability to handle error/non-valid requests
+
+		
+
 		Use pagnation and style ID response, on main page. raw response from API does not need to be styled 	
+
+		extremley basic error handling
 
 
 
@@ -71,7 +75,7 @@ Requirements:
 	Create API DOcumentation 
 	Document what you consider for creativity
 	Document API and Cite your sources
-
+	
 	A front end at the main area that allows the user to input a form that will return what they want: 
 		also include API Call Documentation 
 		test if returns correctly by making JS call to the API (on mainpage use fetch and present results, dont change header)
@@ -88,6 +92,7 @@ Before Submit:
 	Ensure no Npm init files in the repo
 	read over lab1 instructions again to be sure 
 	test with postman, they will test all of my endpoints so make sure they work
+	test on server 
 
 
 
@@ -136,9 +141,15 @@ Citations/What I learned:
 		https://www.geeksforgeeks.org/node-js-fs-writefilesync-method/
 	./ means current director 
 
+	Parsing req bodies: 
+		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.geeksforgeeks.org/express-js-express-json-function/&ved=2ahUKEwij5Z76koyLAxUxkIkEHZ1YCfoQFnoECAgQAQ&usg=AOvVaw2Hv2KKIqisiT2RMM7yHfmL
+
 future notes: 
 	for #4, would be more efficient to actually append 
 
 Questions: 
 	Use pagnation and style ID response, on main page. raw response from API does not need to be styled
 		is this correct
+
+Current: 
+	Finishing up appending, just have to put in right spot and test with postman 

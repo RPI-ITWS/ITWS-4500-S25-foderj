@@ -9,6 +9,10 @@ const data = require('./Project.json')
 const express = require('express')
 const app = express() // Storing all express things in thins variable
 const port = 3000
+//import file system module 
+const fs = require('fs');
+//allows for parsing incoming req bodies: 
+app.use(express.json());
 
 
 //notification message in terminal to tell me it's running  
@@ -29,22 +33,17 @@ function getIds(){
    return(ids)
 }
 
-
+//replaces attribute for entire json 
+function repAttr(attr, val){ 
+   for(var i = 0; i < data.length; i++){
+      data[i][attr] = val
+   }
+   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+}
 
 //retrieves listing of ID's 
 app.get('/runs', (req, res) => {
    var ids = getIds()
-   
-
-   // data.push(
-   //    {
-   //       "distance": 3, 
-   //       "time": 2,
-   //       "pace": 1
-   //    }
-   // );
-   fs.writeFileSync('./Project.json', data);
-   console.log(data[110])
    res.json(ids);
 })
 
@@ -68,17 +67,51 @@ app.get('/runs/:number', (req, res) => {
 
 //app.post to add a run to the end of the list 
 app.post('/runs', (req, res) => {
-   const {distance, time, pace} = req.body
-   //like using format in python
+   const { distance, time, pace } = req.body
+   
 
    data.push(
       {
+         "id": data.length + 1, //next element
          "distance": distance, 
          "time": time,
          "pace": pace
       }
    );
-   fs.writeFileSync('./Project.json', data);
-
+   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+   var len = data.length 
+   console.log(data[len-1]) //what was just send in 
+   //like using format in python
    res.json({ message: `Received data for run with distance ${distance}` });
+})
+
+/* PUT /runs = bulk update all your run
+
+expects anything like this, can only be 1 but will rewrite everything to having that attribute
+
+{
+   "distance": 6.7,
+   "time": 2760,
+   "pace": 412
+}
+
+
+Can only edit distance, time, and pace, as ID is uneditable as it is a unique identifier
+*/
+app.put('/runs', (req, res) =>{
+   //if not all are present, the ones that are not are undefined
+   const { distance, time, pace } = req.body
+
+   //executes if distance is defined 
+   if(distance){ 
+      repAttr("distance", distance); 
+   }
+   if(time){ 
+      repAttr("time", time); 
+   }
+   if(pace){ 
+      repAttr("pace", pace); 
+   }
+
+   res.json({ message: 'All runs updated accordingly' });
 })
