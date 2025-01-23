@@ -22,8 +22,7 @@ Plan:
 		
 
 	My personal Runs API: 
-		Upload 100 runs from my strava with endpoints how-ever it gives them to me
-		have a JSON with all of it
+
 		Server.js pulls from that JSON Data 
 		Could not get real data, but setting up server so I can easily sub it in if I wanted
 			navigate using run ID 
@@ -31,9 +30,9 @@ Plan:
 		1. GET / = retrieve an HTML/CSS/JS frontend of your creation (remember the
 		app.use(express.static(‘public’)) thing?)
 			Make functional Frontend: 
-				show examples for each type of request
-				include documentation of the API Above it 
-				Include the fact that documentation is in the API in creativity 
+				
+				
+				
 			
 			Dropdown for GET, POST, PUT, DELETE
 			Form: 
@@ -48,13 +47,14 @@ Plan:
 
 
 
-			fetch("resources/overwrite.php", {
-				"method" : "POST",
-				"headers" : {
-				"Content-Type" : "application/json; charset=utf-8"
-      		},
-      		"body" : JSON.stringify(overDat)+ id
-   		})
+
+			Pagenation √
+			remove async from mail and uncomment√
+			API error handling
+			can't submit form if not valid JSON 
+			Test JSON input Box 
+			include documentation of the API Above it (in textarea) witha  title above that 
+
 
 		2. GET /runs = retrieve a listing of run ID numbers (hint: you can use headers for this if
 		you don’t want to send the list in the body of your response; hint2: consider pagination, √
@@ -65,9 +65,6 @@ Plan:
 		6. PUT /runs/### = update the specific run √
 		7. DELETE /runs/### = delete the specific run √
 
-		
-
-		Use pagnation and style ID response, on main page. raw response from API does not need to be styled 	
 		
 		extremley basic error handling
 
@@ -120,9 +117,15 @@ Before Submit:
 	test with postman, they will test all of my endpoints so make sure they work
 	test on server 
 	validate pages 
+	commennt
+	Include the fact that documentation is in the API in creativity 
+
+	edit pagenation checker url to work live
 
 
-
+Creativity: 	
+	documentation is on the api page
+	as field updates it shows you what the javascript fetch call you are making would look like
 
 
 
@@ -180,6 +183,9 @@ Citations/What I learned:
 
 	HTML Textarea: 
 		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/tags/tag_textarea.asp&ved=2ahUKEwj0to--rIyLAxXSmYkEHVrmLqsQFnoECAgQAQ&usg=AOvVaw1zSyL_2DncySXU9AGIUEcO
+
+		Note that this prints whitespace as well 
+
 
 future notes: 
 	for #4, would be more efficient to actually append 

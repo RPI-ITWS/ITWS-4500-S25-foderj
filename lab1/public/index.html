@@ -20,7 +20,7 @@
       
       <br><br>
       <label for="url">Enter Request URL:</label>
-      <input type="text" id="url" name="url" placeholder="Request URL" required> 
+      <input type="text" id="url" name="url" placeholder="Request URL" required > 
       <br><br>
       <header>Enter JSON Body of request (if neccesary):</header>
       <textarea id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"name": "John", "age": 30}'></textarea>
@@ -30,11 +30,13 @@
       <button type="submit">Submit</button>
     </form>
 
-    <br><br>
+    <div id="APIres">
+
+    </div>
     
-    <!-- Toss in js function for response -->
-    <header>API Response:</header> 
-    <textarea readonly id="callresponse" rows="30" cols="70" >heya</textarea>
+    <button class="nav" id="prev"><</button>
+    <span class="nav" id="pgCount"></span>
+    <button class="nav" id="next">></button>
 
 
 
