@@ -205,6 +205,9 @@ Citations/What I learned:
 	Removing whitespace using regex: 
 		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://w3schools.invisionzone.com/topic/46639-space-remover-using-js-replacesg/&ved=2ahUKEwi67avG4IyLAxX7mokEHdlmJkEQFnoECBMQAQ&usg=AOvVaw2mX5dhkqg4CmSS0UwkwVHu
 
+	the gitignore given blocks the node modules 
+
+
 future notes: 
 	for #4, would be more efficient to actually append 
 	change indexing of data values ’
