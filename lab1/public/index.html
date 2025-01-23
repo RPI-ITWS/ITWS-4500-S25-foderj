@@ -19,12 +19,24 @@
       </select>
       
       <br><br>
-      <label for="url">Enter Request URL:</label>
-      <input type="text" id="url" name="url" placeholder="Request URL" required > 
+      <label  for="url">Enter Request URL:</label>
+      <input  type="text" id="url" name="url" placeholder="Request URL" required > 
       <br><br>
       <header>Enter JSON Body of request (if neccesary):</header>
-      <textarea id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"name": "John", "age": 30}'></textarea>
+      <textarea  id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"name": "John", "age": 30}'></textarea>
 
+
+      <br><br>
+      <header>What the fetch request you are creating would look like:</header>
+      <textarea readonly id="fetch" rows="10" cols="50">fetch(url, {
+        method: meth,
+
+        headers: {
+           "Content-Type": "application/json",
+        },
+
+        body: bod 
+     })</textarea>
       <br><br>
 
       <button type="submit">Submit</button>

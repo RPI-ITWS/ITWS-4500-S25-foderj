@@ -50,10 +50,11 @@ Plan:
 
 			Pagenation √
 			remove async from mail and uncomment√
-			API error handling
-			can't submit form if not valid JSON 
-			Test JSON input Box 
+			API error handling√
+			can't submit form if not valid JSON √
+			Testing JSON input Box through homepage √
 			include documentation of the API Above it (in textarea) witha  title above that 
+			
 
 
 		2. GET /runs = retrieve a listing of run ID numbers (hint: you can use headers for this if
@@ -121,6 +122,8 @@ Before Submit:
 	Include the fact that documentation is in the API in creativity 
 
 	edit pagenation checker url to work live
+	reset project.json 
+	remove console logs 
 
 
 Creativity: 	
@@ -185,6 +188,15 @@ Citations/What I learned:
 		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/tags/tag_textarea.asp&ved=2ahUKEwj0to--rIyLAxXSmYkEHVrmLqsQFnoECAgQAQ&usg=AOvVaw1zSyL_2DncySXU9AGIUEcO
 
 		Note that this prints whitespace as well 
+
+
+	app.use(express.json()); //what parses  -> what makes req/body a json 
+
+	Object.keys(req.body).length
+		//says there are no keys or vars in req.body (as req.body is a JSON)
+
+	Listen 
+	https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/obj_inputevent.asp&ved=2ahUKEwi92dXl2YyLAxXjnokEHcM2KMUQFnoECB8QAQ&usg=AOvVaw3AgHYO0Tmzu3jspRFsQm0N
 
 
 future notes: 

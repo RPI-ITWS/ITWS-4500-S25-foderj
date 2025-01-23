@@ -12,7 +12,7 @@ const port = 3000
 //import file system module 
 const fs = require('fs');
 //allows for parsing incoming req bodies: 
-app.use(express.json());
+app.use(express.json()); //what parses 
 app.use(express.static('public')) // now, when goes to localhost:3000, will end up at the homepage for the project (in the public directory) 
 
 //notification message in terminal to tell me it's running  
@@ -50,7 +50,11 @@ app.get('/runs', (req, res) => {
 //retrieves specified run id's 
 app.get('/runs/:number', (req, res) => {
    //req.params contains all route variables from the URL
+   
    var num = parseInt(req.params.number);
+   if(num-1 > data.length-1){
+      res.json({ message: `id '${num}' does not exist.` });
+   }
    res.json(data[num-1]) //-1 is because id's of my data starts at 1
    
 })
@@ -68,21 +72,34 @@ app.get('/runs/:number', (req, res) => {
 //app.post to add a run to the end of the list 
 app.post('/runs', (req, res) => {
    const { distance, time, pace } = req.body
-   
+   //says there are no keys or vars in req.body (as req.body is a JSON)
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: "Request body is empty" });
+   }
 
-   data.push(
-      {
-         "id": data.length + 1, //next element
-         "distance": distance, 
-         "time": time,
-         "pace": pace
-      }
-   );
-   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
-   var len = data.length 
-   console.log(data[len-1]) //what was just send in 
-   //like using format in python
-   res.json({ message: `Received data for run with distance ${distance}` });
+   if(!distance){ 
+      res.json({ message: `valid distance not given.` });
+   }else if(!time){ 
+      res.json({ message: `valid time not given.` }); 
+   }else if(!pace){ 
+      res.json({ message: `valid pace not given.` });
+   }else{
+      data.push(
+         {
+            "id": data.length + 1, //next element
+            "distance": distance, 
+            "time": time,
+            "pace": pace
+         }
+      );
+      fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+      var len = data.length 
+      console.log(data[len-1]) //what was just send in 
+      //like using format in python
+      res.json({ message: `Received data for run with distance ${distance}` });
+   }
+
+   
 })
 
 /* PUT /runs = bulk update all your run
@@ -99,6 +116,11 @@ expects anything like this, can only be 1 but will rewrite everything to having 
 Can only edit distance, time, and pace, as ID is uneditable as it is a unique identifier
 */
 app.put('/runs', (req, res) =>{
+
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: "Request body is empty" });
+   }
+
    //if not all are present, the ones that are not are undefined
    const { distance, time, pace } = req.body
 
@@ -112,6 +134,8 @@ app.put('/runs', (req, res) =>{
    if(pace){ 
       repAttr("pace", pace); 
    }
+   //
+
 
    res.json({ message: 'All runs updated accordingly' });
 })
@@ -125,8 +149,14 @@ expects id in URL and vars in JSON
 
 app.put('/runs/:number', (req, res) =>{
    //if not all are present, the ones that are not are undefined
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: "Request body is empty" });
+   }
 
    var index = parseInt(req.params.number) -1;
+   if(index > data.length-1){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
 
    const { distance, time, pace } = req.body
 
@@ -153,6 +183,10 @@ app.put('/runs/:number', (req, res) =>{
 
 app.delete('/runs/:number', (req, res) =>{
    var index = parseInt(req.params.number) -1;
+
+   if(index > data.length-1){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
 
    data.splice(index,1);
 

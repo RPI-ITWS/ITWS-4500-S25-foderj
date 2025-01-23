@@ -35,7 +35,7 @@ document.getElementById("next").addEventListener("click", function() {
 });
 
 //simple is JSON function for form submission: 
-function isJson(str) {
+function isJSON(str) {
    try {
        JSON.parse(str);
        return true; 
@@ -43,6 +43,21 @@ function isJson(str) {
        return false;
    }
 }
+
+
+document.getElementByID("url").addEventListener("input", function(event) {
+   
+});
+document.getElementByID("jsonInput").addEventListener("input", function(event) {
+   
+});
+
+//change because select element 
+document.getElementByID("apiCaller").addEventListener("change", function(event) {
+   
+});
+
+// for dropdown
 
 
 window.addEventListener("load", function() {
@@ -59,93 +74,99 @@ window.addEventListener("load", function() {
       var url = $('#url').val(); 
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 
-      if(bod.)
+      if(isJSON(bod) || bod == ""){
+         // var meth = "GET"; 
+         // var url = "http://localhost:3000/runs"; 
+         // var bod = $('#jsonInput').val(); //if nothing, body == ""
 
-      // var meth = "GET"; 
-      // var url = "http://localhost:3000/runs"; 
-      // var bod = $('#jsonInput').val(); //if nothing, body == ""
-
-      console.log(meth); 
-      console.log(url)
-      // console.log(JSON.parse(bod)) 
-
-
-      
-      //No body
-      //making request
-      if(meth == "GET" || meth == "DELETE"){
-         var fetchRes = await fetch(url, {
-            method: meth,
-            headers: {
-               "Content-Type": "application/json",
-            }
-         })
-      }else{
-         //is body
-         var fetchRes = await fetch(url, {
-            method: meth,
-            headers: {
-               "Content-Type": "application/json",
-            },
-            body: JSON.stringify(JSON.parse(bod)) //converts JS object, then to string from JSON
-         })
-      }
+         console.log(meth); 
+         console.log(url)
+         // console.log(JSON.parse(bod)) 
 
 
-      var parsed = await fetchRes.json()
-      console.log(parsed)
-
-      
-
-      if(meth != "GET" || url != "http://localhost:3000/runs"){
-         //is pretty printed 
-         $('.nav').css('display', 'none');
-         $('#APIres').html('<br><br> <header>API Raw Response:</header>\
-             <textarea readonly id="callresponse" rows="30" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
-      }else{
-         
-         IDPAGE = 0;
-         MAXPAGE = 0; 
-         HTMLSTRINGS.length = 0; 
-
-         //use pagenation --> so diplayed in 'proper html pages'
-         //pagenated and parsed response: 
-
-         //store length of array
-
-         var len = parsed.length;
-
-         console.log(parsed)
-
-         //makes list items and puts tham in array 
-         
-         var cur = ""
-         for(var i = 0; i < parsed.length; i++){
-            //if divisible by 10 
-            if (i%10 == 0 && i != 0){
-               HTMLSTRINGS.push(cur);
-               cur = ""; 
-            }else if(i == len-1){
-               //so that last item is included
-               cur += "<li>" + parsed[i].toString() + "</li>";
-               HTMLSTRINGS.push(cur);
-            }
-            cur += "<li>" + parsed[i].toString() + "</li>";
+         if(!bod == ""){
+            bod = JSON.stringify(JSON.parse(bod))//converts JS object, then to string from JSON
          }
 
-         console.log(HTMLSTRINGS) 
-         MAXPAGE = HTMLSTRINGS.length -1
+         //No body
+         //making request
+         if(meth == "GET" || meth == "DELETE"){
+            var fetchRes = await fetch(url, {
+               method: meth,
+               headers: {
+                  "Content-Type": "application/json",
+               }
+            })
+         }else{
+            //is body
+            var fetchRes = await fetch(url, {
+               method: meth,
+               headers: {
+                  "Content-Type": "application/json",
+               },
+               body: bod 
+            })
+         }
+
+
+         var parsed = await fetchRes.json()
+         console.log(parsed)
+
          
-         $('#APIres').html('<br><br> <header>API Response:</header> <span id="note">*ID list has been parsed/paginated*</span>\
-            <ul id="idList">' + HTMLSTRINGS[0] +'</ul>');
 
-         //unhide buttons
-         //set innder html of page count to 0 of max 
-         $('.nav').css('display', 'inline-block');
-         var max = MAXPAGE.toString();
-         $('#pgCount').html("0 of " + max);
+         if(meth != "GET" || url != "http://localhost:3000/runs"){
+            //is pretty printed 
+            $('.nav').css('display', 'none');
+            $('#APIres').html('<br><br> <header>API Raw Response:</header>\
+               <textarea readonly id="callresponse" rows="30" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
+         }else{         
+            IDPAGE = 0;
+            MAXPAGE = 0; 
+            HTMLSTRINGS.length = 0; 
 
+            //use pagenation --> so diplayed in 'proper html pages'
+            //pagenated and parsed response: 
+
+            //store length of array
+
+            var len = parsed.length;
+
+            console.log(parsed)
+
+            //makes list items and puts tham in array 
+            
+            var cur = ""
+            for(var i = 0; i < parsed.length; i++){
+               //if divisible by 10 
+               if (i%10 == 0 && i != 0){
+                  HTMLSTRINGS.push(cur);
+                  cur = ""; 
+               }else if(i == len-1){
+                  //so that last item is included
+                  cur += "<li>" + parsed[i].toString() + "</li>";
+                  HTMLSTRINGS.push(cur);
+               }
+               cur += "<li>" + parsed[i].toString() + "</li>";
+            }
+
+            console.log(HTMLSTRINGS) 
+            MAXPAGE = HTMLSTRINGS.length -1
+            
+            $('#APIres').html('<br><br> <header>API Response:</header> <span id="note">*ID list has been parsed/paginated*</span>\
+               <ul id="idList">' + HTMLSTRINGS[0] +'</ul>');
+
+            //unhide buttons
+            //set innder html of page count to 0 of max 
+            $('.nav').css('display', 'inline-block');
+            var max = MAXPAGE.toString();
+            $('#pgCount').html("0 of " + max);
+         }
+         
+      }else{
+         alert("text answered is not valid JSON, try again");
       }
+
+
 
    })
 });
