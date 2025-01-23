@@ -53,7 +53,7 @@ Plan:
 			API error handling√
 			can't submit form if not valid JSON √
 			Testing JSON input Box through homepage √
-			include documentation of the API Above it (in textarea) witha  title above that 
+			
 			
 
 
@@ -67,7 +67,7 @@ Plan:
 		7. DELETE /runs/### = delete the specific run √
 
 		
-		extremley basic error handling
+		
 
 
 
@@ -109,8 +109,11 @@ Requirements:
 
 
 
+Served at: https://foderj.eastus.cloudapp.azure.com/node
+
 Before Submit: 
 	Download and setup git ignore file √
+	toss on server 
 	test if returns correctly by making JS call to the API (on mainpage use fetch and present results, dont change header)
 	Go through requrements to see if it hits all. 
 	Ensure no Npm init files in the repo
@@ -123,7 +126,8 @@ Before Submit:
 
 	edit pagenation checker url to work live
 	reset project.json 
-	remove console logs 
+	remove console logs, clean files 
+	write documentation 
 
 
 Creativity: 	
@@ -198,11 +202,15 @@ Citations/What I learned:
 	Listen 
 	https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/obj_inputevent.asp&ved=2ahUKEwi92dXl2YyLAxXjnokEHcM2KMUQFnoECB8QAQ&usg=AOvVaw3AgHYO0Tmzu3jspRFsQm0N
 
+	Removing whitespace using regex: 
+		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://w3schools.invisionzone.com/topic/46639-space-remover-using-js-replacesg/&ved=2ahUKEwi67avG4IyLAxX7mokEHdlmJkEQFnoECBMQAQ&usg=AOvVaw2mX5dhkqg4CmSS0UwkwVHu
 
 future notes: 
 	for #4, would be more efficient to actually append 
 	change indexing of data values ’
 	clean input field and make it safe 
+	remove body portion for get and delete
+	include documentation on public page 
 
 Questions: 
 	Use pagnation and style ID response, on main page. raw response from API does not need to be styled

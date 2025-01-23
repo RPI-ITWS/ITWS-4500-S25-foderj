@@ -3,6 +3,9 @@
 var IDPAGE = 0;
 var MAXPAGE = 0; 
 var HTMLSTRINGS = new Array(); 
+var INPURL = ""
+var INPJSON = ""
+var INPMETH = "GET"
 
 //start function
 
@@ -45,16 +48,23 @@ function isJSON(str) {
 }
 
 
-document.getElementByID("url").addEventListener("input", function(event) {
-   
+document.getElementById("url").addEventListener("input", function() {
+   INPURL = $('#url').val();
+   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n   \
+        "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
-document.getElementByID("jsonInput").addEventListener("input", function(event) {
-   
+
+document.getElementById("jsonInput").addEventListener("input", function() {
+   INPJSON = $('#jsonInput').val().replace(/\s+/g, ''); //removes whitepace using regex
+   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
+      "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
 
 //change because select element 
-document.getElementByID("apiCaller").addEventListener("change", function(event) {
-   
+document.getElementById("apiCaller").addEventListener("change", function() {
+   INPMETH = $('#method').val();
+   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
+      "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
 
 // for dropdown
@@ -113,12 +123,13 @@ window.addEventListener("load", function() {
          console.log(parsed)
 
          
-
-         if(meth != "GET" || url != "http://localhost:3000/runs"){
+         //on server: https://foderj.eastus.cloudapp.azure.com/node/runs
+         //local: http://localhost:3000/runs
+         if(meth != "GET" || url != "https://foderj.eastus.cloudapp.azure.com/node/runs"){
             //is pretty printed 
             $('.nav').css('display', 'none');
             $('#APIres').html('<br><br> <header>API Raw Response:</header>\
-               <textarea readonly id="callresponse" rows="30" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
+               <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
          }else{         
             IDPAGE = 0;
             MAXPAGE = 0; 
