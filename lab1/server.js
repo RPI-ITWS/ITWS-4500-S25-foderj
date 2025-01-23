@@ -1,53 +1,84 @@
-// Had to run 'node server' in directory
-
-
-/* Vanilla Node
-var http = require('http'); //need http library, put all of those libs in this variable, what we are using for this class
-
-
-http.createServer(function(req, res) {  //anon function, has no name, first arg is http req header, second is respone 
-  res.writeHead(200, {'Content-Type': 'text/plain'}); //writing the header for the result 
-  res.end('Hello world\n'); // assembling a response that will be sent to the server when requested
-}).listen(3000, '127.0.0.1'); //Port number is 3000, IP/FQDM
-
-// 127.0.0.1 localhost for computers internal adress 
-
-console.log('Server running at 127.0.0.1:3000');
+/*
+This is where the 'API' lives, handles requests are returns correct from JSON file with data
+// http://localhost:3000/itws/4500 = https://foderj.eastus.cloudapp.azure.com/node/itws/4500
 */
 
 /*Using Express */ 
 
+const data = require('./Project.json')
 const express = require('express')
 const app = express() // Storing all express things in thins variable
 const port = 3000
 
-//first arg of get is location 
-//second is anonymous function
 
-// http://localhost:3000/itws/4500
-app.get('/itws/4500', (req, res) => {
-   res.json(
-      {
-         "course": "Web Science",
-         "number": "ITWS 4500",
-         "Description": "A course about web science"
-      });
-})
-
-app.get('/itws/2200', (req, res) => {
-   res.json(
-      {
-         "course": "Web System",
-         "number": "ITWS 2200",
-         "Description": "A course about web SYSTEMS"
-      });
-})
-
-//for adding a code
-app.post('/itws', (req, res) => {
-   console.log(req.body)
-})
-
+//notification message in terminal to tell me it's running  
 app.listen(port, () => {
    console.log('Listening on *:3000')
+})
+
+// app.get('/', (req, res) => {
+//    //returns homepage 
+// })
+
+// used to get list of ID's 
+function getIds(){
+   let ids = new Array(); 
+   for(var i = 0; i < data.length; i++){
+      ids.push(data[i]['id']);
+   }
+   return(ids)
+}
+
+
+
+//retrieves listing of ID's 
+app.get('/runs', (req, res) => {
+   var ids = getIds()
+   
+
+   // data.push(
+   //    {
+   //       "distance": 3, 
+   //       "time": 2,
+   //       "pace": 1
+   //    }
+   // );
+   fs.writeFileSync('./Project.json', data);
+   console.log(data[110])
+   res.json(ids);
+})
+
+//retrieves specified run id's 
+app.get('/runs/:number', (req, res) => {
+   //req.params contains all route variables from the URL
+   var num = parseInt(req.params.number);
+   res.json(data[num-1]) //-1 is because id's of my data starts at 1
+   
+})
+
+/*what req.body must look like: (we add out own id)
+
+{
+   "distance": 6.7,
+   "time": 2760,
+   "pace": 412
+}
+
+*/
+
+//app.post to add a run to the end of the list 
+app.post('/runs', (req, res) => {
+   const {distance, time, pace} = req.body
+   //like using format in python
+
+   data.push(
+      {
+         "distance": distance, 
+         "time": time,
+         "pace": pace
+      }
+   );
+   fs.writeFileSync('./Project.json', data);
+
+   res.json({ message: `Received data for run with distance ${distance}` });
 })
