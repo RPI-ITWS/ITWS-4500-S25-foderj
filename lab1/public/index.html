@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- //icon in URL -->
+    
+    <title>Joe's Runs API</title>
+    <link rel="stylesheet" href= "home.css">
+  </head>
+   <body>
+    <form id="apiCaller">
+      <label for="method">Choose a Call Method:</label>
+      <select id="method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+      </select>
+      
+      <br><br>
+      <label for="url">Enter Request URL:</label>
+      <input type="text" id="url" name="url" placeholder="Request URL" required> 
+      <br><br>
+      <header>Enter JSON Body of request (if neccesary):</header>
+      <textarea id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"name": "John", "age": 30}'></textarea>
+
+      <br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <br><br>
+    
+    <!-- Toss in js function for response -->
+    <header>API Response:</header> 
+    <textarea readonly id="callresponse" rows="30" cols="70" >heya</textarea>
+
+
+
+    <script  src="jquery-3.6.1.min.js"></script>
+    <script src="home.js"></script>
+ </body>
+</html>

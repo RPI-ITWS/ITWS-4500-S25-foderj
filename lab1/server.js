@@ -13,7 +13,7 @@ const port = 3000
 const fs = require('fs');
 //allows for parsing incoming req bodies: 
 app.use(express.json());
-
+app.use(express.static('public')) // now, when goes to localhost:3000, will end up at the homepage for the project (in the public directory) 
 
 //notification message in terminal to tell me it's running  
 app.listen(port, () => {
@@ -114,4 +114,54 @@ app.put('/runs', (req, res) =>{
    }
 
    res.json({ message: 'All runs updated accordingly' });
+})
+
+/*
+6. PUT /runs/### = update the specific run
+Update specific ID 
+
+expects id in URL and vars in JSON 
+*/
+
+app.put('/runs/:number', (req, res) =>{
+   //if not all are present, the ones that are not are undefined
+
+   var index = parseInt(req.params.number) -1;
+
+   const { distance, time, pace } = req.body
+
+   //executes if distance is defined 
+
+   if(distance){ 
+      data[index]['distance'] = distance; 
+   }
+   if(time){ 
+      data[index]['time'] = time; 
+   }
+   if(pace){ 
+      data[index]['pace'] = pace; 
+   }
+   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+   res.json({ message: `Run '${index+1}' updated accordingly`});
+})
+
+/*
+
+7. DELETE /runs/### = delete the specific run
+
+*/
+
+app.delete('/runs/:number', (req, res) =>{
+   var index = parseInt(req.params.number) -1;
+
+   data.splice(index,1);
+
+   //fix all ids, +1 because starts at 1
+   for(var i = index; i < data.length; i++){
+      data[i]['id'] = i+1;
+   }
+
+   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+
+   res.json({ message: `Run '${index+1}' deleted`});
 })

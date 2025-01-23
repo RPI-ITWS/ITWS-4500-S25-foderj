@@ -30,19 +30,45 @@ Plan:
 
 		1. GET / = retrieve an HTML/CSS/JS frontend of your creation (remember the
 		app.use(express.static(‘public’)) thing?)
+			Make functional Frontend: 
+				show examples for each type of request
+				include documentation of the API Above it 
+				Include the fact that documentation is in the API in creativity 
+			
+			Dropdown for GET, POST, PUT, DELETE
+			Form: 
+				Option to select: GET, POST, PUT, DELETE
+				url textbox:
+				body textbox:
+
+				Handle if not Valid JSON input
+
+				Box that presents the  the response: 
+					use pagenation for books 
+
+
+
+			fetch("resources/overwrite.php", {
+				"method" : "POST",
+				"headers" : {
+				"Content-Type" : "application/json; charset=utf-8"
+      		},
+      		"body" : JSON.stringify(overDat)+ id
+   		})
+
 		2. GET /runs = retrieve a listing of run ID numbers (hint: you can use headers for this if
 		you don’t want to send the list in the body of your response; hint2: consider pagination, √
 		since you have a lot of articles!)
-		3. GET /runs/### = retrieve the specific ID from the JSON object √
+		3. GET /runs/### = retrieve the specific run from the JSON object √
 		4. POST /runs = append a run at the end of the JSON √
-		5. PUT /runs = bulk update all your run
-		6. PUT /runs/### = update the specific run
-		7. DELETE /runs/### = delete the specific run
+		5. PUT /runs = bulk update all your run √
+		6. PUT /runs/### = update the specific run √
+		7. DELETE /runs/### = delete the specific run √
 
 		
 
 		Use pagnation and style ID response, on main page. raw response from API does not need to be styled 	
-
+		
 		extremley basic error handling
 
 
@@ -93,6 +119,7 @@ Before Submit:
 	read over lab1 instructions again to be sure 
 	test with postman, they will test all of my endpoints so make sure they work
 	test on server 
+	validate pages 
 
 
 
@@ -144,12 +171,24 @@ Citations/What I learned:
 	Parsing req bodies: 
 		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.geeksforgeeks.org/express-js-express-json-function/&ved=2ahUKEwij5Z76koyLAxUxkIkEHZ1YCfoQFnoECAgQAQ&usg=AOvVaw2Hv2KKIqisiT2RMM7yHfmL
 
+	Splice (JS): 
+		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/jsref_splice.asp&ved=2ahUKEwi6uZnZm4yLAxV4hIkEHbZvHF0QFnoECB0QAQ&usg=AOvVaw3E6K3kw9F_ybXFVnnwrx2h
+
+	Only use HTML for Node 
+
+	Node.js is very similar to using xampp 
+
+	HTML Textarea: 
+		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/tags/tag_textarea.asp&ved=2ahUKEwj0to--rIyLAxXSmYkEHVrmLqsQFnoECAgQAQ&usg=AOvVaw1zSyL_2DncySXU9AGIUEcO
+
 future notes: 
 	for #4, would be more efficient to actually append 
+	change indexing of data values ’
+	clean input field and make it safe 
 
 Questions: 
 	Use pagnation and style ID response, on main page. raw response from API does not need to be styled
 		is this correct
 
 Current: 
-	Finishing up appending, just have to put in right spot and test with postman 
+	logging the value of method 
