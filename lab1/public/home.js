@@ -1,4 +1,8 @@
-//handles form call 
+/* 
+Working Backend for API testing tool (index.html)
+*/
+
+//CONSTANTS
 
 var IDPAGE = 0;
 var MAXPAGE = 0; 
@@ -7,22 +11,39 @@ var INPURL = ""
 var INPJSON = ""
 var INPMETH = "GET"
 
-//start function
+//HELPER FUNCTIONS
 
+/*simple is JSON function for form submission: */
+function isJSON(str) {
+   try {
+       JSON.parse(str);
+       return true; 
+   } catch (error) {
+       return false;
+   }
+}
+
+//LISTENER FUNCTIONS
+
+/* Updates current page number accordingly, when previous button clicked*/ 
 document.getElementById("prev").addEventListener("click", function() {
+   //dec
    if(IDPAGE > 0){
       IDPAGE -= 1; 
    }
 
+   //update counter
    var cur = IDPAGE.toString();
    var max = MAXPAGE.toString();
    var pages = cur + " of " + max; 
    $('#pgCount').html(pages)
 
+   //update page shown
    $('#APIres').html('<br><br> <header>API Response:</header> <span id="note">*ID list has been parsed/paginated*</span>\
       <ul id="idList">' + HTMLSTRINGS[IDPAGE] +'</ul>');
 });
 
+/* Updates current page number accordingly, when next button clicked*/
 document.getElementById("next").addEventListener("click", function() {
    if(IDPAGE < MAXPAGE){
       IDPAGE += 1; 
@@ -37,69 +58,54 @@ document.getElementById("next").addEventListener("click", function() {
       <ul id="idList">' + HTMLSTRINGS[IDPAGE] +'</ul>');
 });
 
-//simple is JSON function for form submission: 
-function isJSON(str) {
-   try {
-       JSON.parse(str);
-       return true; 
-   } catch (error) {
-       return false;
-   }
-}
-
-
+/*When url input box is changed, this is called to update the fetch visualizer accordingly*/
 document.getElementById("url").addEventListener("input", function() {
    INPURL = $('#url').val();
    $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n   \
         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
 
+/*When json input box is changed, this is called to update the fetch visualizer accordingly*/
 document.getElementById("jsonInput").addEventListener("input", function() {
    INPJSON = $('#jsonInput').val().replace(/\s+/g, ''); //removes whitepace using regex
    $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
       "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
 
-//change because select element 
+/*When method selector is changed, this is called to update the fetch visualizer accordingly*/
 document.getElementById("apiCaller").addEventListener("change", function() {
    INPMETH = $('#method').val();
    $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
       "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
 });
 
-// for dropdown
-
+//MAIN EVENT LISTENER
 
 window.addEventListener("load", function() {
 
-   //calls everytime submit occurs
-   //event holds details about event 
-   //must be async because waiting on request 
+   /*calls everytime submit occurs
+   'event holds details about event' 
+   must be async because waiting on request */
    document.getElementById("apiCaller").addEventListener("submit", async function(event){
 
       //preventing from reloading page 
       event.preventDefault();
 
+      //defining submitted materials
       var meth = $('#method').val(); 
       var url = $('#url').val(); 
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 
+      //checks if user JSON input is correct
       if(isJSON(bod) || bod == ""){
-         // var meth = "GET"; 
-         // var url = "http://localhost:3000/runs"; 
-         // var bod = $('#jsonInput').val(); //if nothing, body == ""
-
-         console.log(meth); 
-         console.log(url)
-         // console.log(JSON.parse(bod)) 
 
 
          if(!bod == ""){
             bod = JSON.stringify(JSON.parse(bod))//converts JS object, then to string from JSON
          }
 
-         //No body
-         //making request
+         
+         //making request w/o body
          if(meth == "GET" || meth == "DELETE"){
             var fetchRes = await fetch(url, {
                method: meth,
@@ -108,7 +114,7 @@ window.addEventListener("load", function() {
                }
             })
          }else{
-            //is body
+            //needs body
             var fetchRes = await fetch(url, {
                method: meth,
                headers: {
@@ -118,34 +124,26 @@ window.addEventListener("load", function() {
             })
          }
 
-
          var parsed = await fetchRes.json()
-         console.log(parsed)
 
          
          //on server: https://foderj.eastus.cloudapp.azure.com/node/runs
          //local: http://localhost:3000/runs
          if(meth != "GET" || url != "https://foderj.eastus.cloudapp.azure.com/node/runs"){
-            //is pretty printed 
+
+            //no pagination neccesary
             $('.nav').css('display', 'none');
+            //is pretty printed 
             $('#APIres').html('<br><br> <header>API Raw Response:</header>\
                <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
-         }else{         
+         }else{    
+            //pagination neccesary     
             IDPAGE = 0;
             MAXPAGE = 0; 
             HTMLSTRINGS.length = 0; 
-
-            //use pagenation --> so diplayed in 'proper html pages'
-            //pagenated and parsed response: 
-
-            //store length of array
-
             var len = parsed.length;
 
-            console.log(parsed)
-
             //makes list items and puts tham in array 
-            
             var cur = ""
             for(var i = 0; i < parsed.length; i++){
                //if divisible by 10 
@@ -160,9 +158,10 @@ window.addEventListener("load", function() {
                cur += "<li>" + parsed[i].toString() + "</li>";
             }
 
-            console.log(HTMLSTRINGS) 
+            //defining largest possible page
             MAXPAGE = HTMLSTRINGS.length -1
             
+            //start presenting at 0
             $('#APIres').html('<br><br> <header>API Response:</header> <span id="note">*ID list has been parsed/paginated*</span>\
                <ul id="idList">' + HTMLSTRINGS[0] +'</ul>');
 
@@ -174,10 +173,7 @@ window.addEventListener("load", function() {
          }
          
       }else{
-         alert("text answered is not valid JSON, try again");
+         alert("text entered is not valid JSON, try again");
       }
-
-
-
    })
 });
