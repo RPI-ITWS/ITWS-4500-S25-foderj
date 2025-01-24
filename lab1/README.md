@@ -1,6 +1,6 @@
 
 Served at: https://foderj.eastus.cloudapp.azure.com/node
-
+*Note: must be configured for vm and local, as there are url differences*
 
 # Joe's Runs API Documentation:
 
@@ -15,7 +15,7 @@ fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
 
 	headers: {
            "Content-Type": "application/json",
-	},
+	}
 })
 ```
 - *Example Response*:
@@ -35,7 +35,7 @@ fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/32', {
 
 	headers: {
            "Content-Type": "application/json",
-	},
+	}
 })
 ```
 - *Example Response*:
@@ -71,31 +71,97 @@ fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
 }
 ```
 
-#### 4. POST https://foderj.eastus.cloudapp.azure.com/node/runs
+#### 4. PUT https://foderj.eastus.cloudapp.azure.com/node/runs
 
-- Will append a new run to the end of the existing database of runs 
-- Body of the request must be strinified JSON and include 'distance', 'time', and 'pace' for the entry to be added. 
+- Will bulk update anywhere from 1-3 attributes from all of the runs at the same time  
+- you will not be allowed to update the id of any run
+- If an ID is included in the body, nothing will change regarding ID's in the database 
+- Include the attributes you want to update in the body of your request 
 - Body Neccesary 
 - *Example Request*: 
 ```
 fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
-	method: 'POST',
+	method: 'PUT',
 
 	headers: {
            "Content-Type": "application/json",
 	},
 
-	body: '{"distance":9.1,"time":6710,"pace":684}'
+	body: '{"distance":2}'
      })
 ```
 - *Example Response*:
 ```
 {
-    "message": "Received data for run with distance 9.1"
+    "message": "All runs updated accordingly"
 }
 ```
 
+#### 5. PUT https://foderj.eastus.cloudapp.azure.com/node/runs/###
+
+- here '###' represents any valid id that correlates to a run
+- Will bulk update anywhere from 1-3 attributes of the run specified by the ID in the url
+- you will not be allowed to update the id of any run
+- If an ID is included in the body, nothing will change regarding ID's in the database 
+- Include the attributes you want to update in the body of your request 
+- Body Neccesary 
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/56', {
+	method: 'PUT',
+
+	headers: {
+           "Content-Type": "application/json",
+	},
+
+	body: '{"distance":2,"pace":543}'
+     })
+```
+- *Example Response*:
+```
+{
+    "message": "Run '56' updated accordingly"
+}
+```
+
+#### 6. DELETE https://foderj.eastus.cloudapp.azure.com/node/runs/###
+
+- here '###' represents any valid id that correlates to a run
+- Will delete any run specified by the ID in the url
+- you will not be able to acsess this run after it is deleted
+- Will update the ID's of the rest of the runs in the DB accordingly; the ones following the element deleted have their ID's decremented
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/92', {
+	method: 'DELETE',
+
+	headers: {
+           "Content-Type": "application/json",
+	}
+     })
+```
+- *Example Response*:
+```
+{
+    "message": "Run '92' deleted"
+}
+```
+---
 # Creativity 
+
+ I decided to go with functional creativity vs design (css) creativity as functional is defintley my strong suit. Here is what I would like to be considered: 
+
+ ##### 1. Form structure in the homepage
+ - Here I really wanted to make the forms as easy to use/understand, and as straightforward as possible for the user. I think the way I seperated the fetch request into fields was pretty creative as balances the line of requiring the user to read the documentation, while also being easy to operate very well. I also think the use of a textarea for my JSON input was beneficial to the user and good to include
+
+ ##### 2. Live Fetch Example
+ - In order for the user to be able to learn as much as possible from the docs, and my 'testing tool', I included a auto updating javascript fetch call. As the user enters data into the form, this readonly text-area updates and shows the user exactly how that would make that fetch API call in javascript. I think this would be really helpful for a user as they can easily copy and paste it, while also helping them to understand how API works. 
+
+##### 3. Pagination of Certain Responses
+ - The way I updated the page when certain requests were tested was something I thought was pretty creative. I'm happy I went about parsing the API response instead of having the API respond with an abnormal body as this maintains the standard of every other call. I also edit the DOM for each response and others show up in a readonly text-area. 
+
+##### 4. Documentation Markdown
+ - I tried to organize my documentation in a way that was very easy to read/follow and I think I did a good job of doing that using markdown. Including the code boxes along with the examples defintley makes it easier to understand. 
 
 ---
 ```
@@ -243,10 +309,10 @@ Before Submit:
 
 	edit pagenation checker url to work live √√
 	reset project.json √
-	remove console logs, clean files 
-	write documentation 
-	add creativity section 
-	finalize readme 
+	remove console logs, clean files √
+	write documentation √
+	add creativity section √
+	finalize readme √
 
 
 Creativity: 	
@@ -339,11 +405,12 @@ future notes:
 	optimize server.js:126 
 	reorganize documentation with what you want to do leading off as the header
 	fix indents on fetch example
+	don't decrement ID's 
 
 Questions: 
 	Use pagnation and style ID response, on main page. raw response from API does not need to be styled
 		is this correct
 
 Current: 
-	logging the value of method 
+	done √
 ```
