@@ -13,4 +13,6 @@ Getting node to run on VM notes:
 		sub 'http://localhost:3000/' for 'https://<FQDN>/node'. Example: 
 			http://localhost:3000/itws/4500 = https://<FQDN>/node/itws/4500
 		
+	'sudo npm install fs' because had to do it locally 
+	chmod 777 Projects.json so that I could edit file 
 	Everything should be served correctly from there

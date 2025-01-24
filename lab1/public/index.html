@@ -9,6 +9,8 @@
     <link rel="stylesheet" href= "home.css">
   </head>
    <body>
+
+    <!-- Form  -->
     <form id="apiCaller">
       <label for="method">Choose a Call Method:</label>
       <select id="method">
@@ -23,10 +25,11 @@
       <input  type="text" id="url" name="url" placeholder="Request URL" required > 
       <br><br>
       <header>Enter JSON Body of request (if neccesary):</header>
-      <textarea  id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"name": "John", "age": 30}'></textarea>
-
+      <textarea  id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"distance":8.7,"time":3749,"pace":436}'></textarea>
 
       <br><br>
+
+      <!-- Fetch visualizer -->
       <header>What the fetch request you are creating would look like using Fetch API:</header>
       <textarea readonly id="fetch" rows="10" cols="100">fetch('', {
         method: 'GET',
@@ -42,11 +45,12 @@
       <button type="submit">Submit</button>
     </form>
 
+    <!-- Response -->
     <div id="APIres">
 
     </div>
     
-    <button class="nav" id="prev"><</button>
+    <button class="nav" id="prev">&lt</button>
     <span class="nav" id="pgCount"></span>
     <button class="nav" id="next">></button>
 

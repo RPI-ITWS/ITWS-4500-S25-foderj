@@ -1,3 +1,104 @@
+
+Served at: https://foderj.eastus.cloudapp.azure.com/node
+
+
+# Joe's Runs API Documentation:
+
+#### 1. GET https://foderj.eastus.cloudapp.azure.com/node/runs
+
+- will return a list of all of the ID's from all of the runs in the form of JSON 
+- No Body neccesary. 
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
+	method: 'GET',
+
+	headers: {
+           "Content-Type": "application/json",
+	},
+})
+```
+- *Example Response*:
+```
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]
+```
+
+#### 2. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###
+
+- here '###' represents any valid id that correlates to a run
+- Only valid ID's will be accepted
+- No Body neccesary. 
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/32', {
+	method: 'GET',
+
+	headers: {
+           "Content-Type": "application/json",
+	},
+})
+```
+- *Example Response*:
+```
+{
+    "id": 32,
+    "distance": 8.9,
+    "time": 5479,
+    "pace": 412
+}
+```
+#### 3. POST https://foderj.eastus.cloudapp.azure.com/node/runs
+
+- Will append a new run to the end of the existing database of runs 
+- Body of the request must be strinified JSON and include 'distance', 'time', and 'pace' for the entry to be added. 
+- Body Neccesary 
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
+	method: 'POST',
+
+	headers: {
+           "Content-Type": "application/json",
+	},
+
+	body: '{"distance":9.1,"time":6710,"pace":684}'
+     })
+```
+- *Example Response*:
+```
+{
+    "message": "Received data for run with distance 9.1"
+}
+```
+
+#### 4. POST https://foderj.eastus.cloudapp.azure.com/node/runs
+
+- Will append a new run to the end of the existing database of runs 
+- Body of the request must be strinified JSON and include 'distance', 'time', and 'pace' for the entry to be added. 
+- Body Neccesary 
+- *Example Request*: 
+```
+fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
+	method: 'POST',
+
+	headers: {
+           "Content-Type": "application/json",
+	},
+
+	body: '{"distance":9.1,"time":6710,"pace":684}'
+     })
+```
+- *Example Response*:
+```
+{
+    "message": "Received data for run with distance 9.1"
+}
+```
+
+# Creativity 
+
+---
+```
 Plan: 
 	Orginization of the API is not that huge of a deal  
 	Function get/new/:number
@@ -79,6 +180,24 @@ Plan:
 
 		when adding an item, ALL FIELDS MUST BE FILLED OUT 
 
+	POST /runs = append a run at the end of the JSON
+
+	{
+		"distance": 6.7,
+		"time": 2760,
+		"pace": 412
+	}
+
+	PUT /runs = bulk update all your run
+
+expects anything like this, can only be 1 but will rewrite everything to having that attribute
+{
+   "distance": 6.7,
+   "time": 2760,
+   "pace": 412
+}
+Can only edit distance, time, and pace, as ID is uneditable as it is a unique identifier
+
 API Review Notes: 
 	just sends back some informaiton when you try to fetch something like: 
 		var fetchRes = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=76b8f36558ce3b5fbce8ba9d025e5fe9");
@@ -109,25 +228,25 @@ Requirements:
 
 
 
-Served at: https://foderj.eastus.cloudapp.azure.com/node
 
 Before Submit: 
 	Download and setup git ignore file √
-	toss on server 
-	test if returns correctly by making JS call to the API (on mainpage use fetch and present results, dont change header)
-	Go through requrements to see if it hits all. 
-	Ensure no Npm init files in the repo
-	read over lab1 instructions again to be sure 
-	test with postman, they will test all of my endpoints so make sure they work
-	test on server 
-	validate pages 
-	commennt
-	Include the fact that documentation is in the API in creativity 
+	toss on server √
+	test if returns correctly by making JS call to the API (on mainpage use fetch and present results, dont change header) √
+	Go through requrements to see if it hits all. √
+	no node module files in repo √
+	read over lab1 instructions again to be sure √
+	test with postman, they will test all of my endpoints so make sure they work √
+	test on server √
+	validate pages √
+	commennt √
 
-	edit pagenation checker url to work live
-	reset project.json 
+	edit pagenation checker url to work live √√
+	reset project.json √
 	remove console logs, clean files 
 	write documentation 
+	add creativity section 
+	finalize readme 
 
 
 Creativity: 	
@@ -158,6 +277,8 @@ Getting node to run on VM notes:
 Citations/What I learned: 
 	res.json automatically goes to the body: 
 		 https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.geeksforgeeks.org/difference-between-res-send-and-res-json-in-express-js/&ved=2ahUKEwi-07K824qLAxU1jYkEHclcEK8QFnoECBwQAQ&usg=AOvVaw0ohAkldKYEeutD-AUaXDUK
+
+	Browsers work through get requests
 	
 
 	Only would send info in the header for it to be a littl emore lightweight, 
@@ -205,12 +326,21 @@ Citations/What I learned:
 	Removing whitespace using regex: 
 		https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://w3schools.invisionzone.com/topic/46639-space-remover-using-js-replacesg/&ved=2ahUKEwi67avG4IyLAxX7mokEHdlmJkEQFnoECBMQAQ&usg=AOvVaw2mX5dhkqg4CmSS0UwkwVHu
 
+	the gitignore given blocks the node modules 
+
+	Stringified JSON: JSON simply converted to a string 
+
+
 future notes: 
 	for #4, would be more efficient to actually append 
 	change indexing of data values ’
 	clean input field and make it safe 
 	remove body portion for get and delete
-	include documentation on public page 
+	include documentation on public page
+	cannot change id message (for now just doesn't do anything) 
+	optimize server.js:126 
+	reorganize documentation with what you want to do leading off as the header
+	fix indents on fetch example
 
 Questions: 
 	Use pagnation and style ID response, on main page. raw response from API does not need to be styled
@@ -218,3 +348,4 @@ Questions:
 
 Current: 
 	logging the value of method 
+```
