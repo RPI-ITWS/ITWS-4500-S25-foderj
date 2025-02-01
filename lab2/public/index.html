@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- //icon in URL -->
+    
+    <title>Joe's Runs API</title>
+    <!-- Local: 
+    <link rel="stylesheet" href= "home.css"> -->
+    <link rel="stylesheet" href="/node/home.css">
+  </head>
+   <body>
+
+    <!-- Form  -->
+    <form id="apiCaller">
+      <label for="method">Choose a Call Method:</label>
+      <select id="method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+      </select>
+      
+      <br><br>
+      <label  for="url">Enter Request URL:</label>
+      <input  type="text" id="url" name="url" placeholder="Request URL" required > 
+      <br><br>
+      <header>Enter JSON Body of request (if neccesary):</header>
+      <textarea  id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"distance":8.7,"time":3749,"pace":436}'></textarea>
+
+      <br><br>
+
+      <!-- Fetch visualizer -->
+      <header>What the fetch request you are creating would look like using Fetch API:</header>
+      <textarea readonly id="fetch" rows="10" cols="100">fetch('', {
+        method: 'GET',
+
+        headers: {
+           "Content-Type": "application/json",
+        },
+
+        body: ''
+     })</textarea>
+      <br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Response -->
+    <div id="APIres">
+
+    </div>
+    
+    <button class="nav" id="prev">&lt</button>
+    <span class="nav" id="pgCount"></span>
+    <button class="nav" id="next">></button>
+
+
+    <!-- local: 
+    <script  src="jquery-3.6.1.min.js"></script>
+    <script src="home.js"></script> -->
+    <script  src="node/jquery-3.6.1.min.js"></script>
+    <script src="node/home.js"></script>
+ </body>
+</html>

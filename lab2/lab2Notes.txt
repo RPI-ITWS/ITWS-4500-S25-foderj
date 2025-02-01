@@ -1,0 +1,13 @@
+make our API call other API's 
+data that our server serves does not have to actually be on our server
+'2 data sources' means one from your own JSON and another from that random other API 
+Start making front end look nicer 
+
+Inclass trial run: 
+   make functions async and don't return api call until we get the weather data 
+
+   log API fetch for test endpoing 
+
+   Have to use our JSON objects for the post and put endpoints, but can just be a conglomerate of API's for the rest 
+
+pagenation is just responding with a capped limit, not actually multiple pages 

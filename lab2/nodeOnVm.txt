@@ -1,0 +1,18 @@
+Getting node to run on VM notes: 
+	can have any directory structure in your repo on your vm: everything will be served from: 
+		https://<FQDN>/node
+	navigate to directory on VM where you are storing you server.js file (the new 'project')
+	run 'sudo npm init' within that directory 
+	enter through all prompts 
+	type yes
+	'sudo npm install express' within that directory 
+	type 'node server' 
+	'Listening on *:3000' should pop up 
+	open web-browser and navigate 'to https://<FQDN>/node'
+	from here, your file structure should be the same as when you test locally, just substitute the URL in this way: 
+		sub 'http://localhost:3000/' for 'https://<FQDN>/node'. Example: 
+			http://localhost:3000/itws/4500 = https://<FQDN>/node/itws/4500
+		
+	'sudo npm install fs' because had to do it locally 
+	chmod 777 Projects.json so that I could edit file 
+	Everything should be served correctly from there
