@@ -2,25 +2,54 @@ Plan:
 
    
 
-   make our API call other API's 
-   data that our server serves does not have to actually be on our server
-   '2 data sources' means one from your own JSON and another from that random other API 
-   Start making front end look nicer 
 
-   Use weather API and Strava API 
 
-   Change API to actually Paginate Responses of ID's 
+   my new database is just going to be my strava runs from january but a much simplier JSON with not as much garbage, √
+   Going to pull more info about the run ID from strava and weather data from historical weather API. 
+   Get start, lat/long from strava -> use that to search the weather
+
+
+
+   6 new get endpoints √
+      these endpoints must return JSON conglomerates from 2 API sources
+      /runs/:number/precipitation
+         returns db obj with, array of rainfall throughout the day of the run
+      /runs/:number/weather
+         returns db obj with, weather codes throughout the day of the run
+      /runs/:number/temp
+         returns db obj with, temp in farenheight throughout the day of the run
+      /runs/:number/kudos
+         returns db obj with kudo information
+      /runs/:number/location
+         returns db obj with location info
+      /runs/:number/description
+         returns db obj with description of the run 
+
+
+   1 new post endpoint:  √
+      must add data from one external API to our 'db'
+      /runs/description
+         (adds description to everything in my database}) 
+
+   1 new PUT endpoint: √
+      update data in JSON (db) from one of external API's 
+      /runs/names
+         (updates all runs name from strava API in case the user changes them ) 
 
    
 
-Inclass trial run: 
-   make functions async and don't return api call until we get the weather data 
+   frontend must parse data returned and display it nicely (have a raw/nice toggle): 
+      emphizize overlap between when I am running and the conditions at that time -> for optimizing front-end next lab 
+      by nicely -> literally justnot in JSON
+
+   Update documentation accordingly 
+
+   Creativity 
+
+   Document API's I used 
       
 
-Plan: 
-   my new database is just going to be my strava runs from january but a much simplier JSON with not as much garbage, 
-   Going to pull more info about the run ID from strava and weather data from historical weather API. 
-   Get start, lat/long from strava -> use that to search the weather
+
 
    
 Strava API NOtes: 
@@ -31,6 +60,9 @@ Strava API NOtes:
 Historical Weather API Notes: 
    https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
 
+   goes up to 23rd hour 
+   
+   note: only has back to 2022 (works for my application)
 
 Reqs: 
    Have to use our JSON objects for the post and put endpoints, but can just be a conglomerate of API's for the rest 
@@ -55,9 +87,13 @@ Reqs:
 
 Things I leaned: 
    pagenation is just responding with a capped limit, not actually multiple pages 
+   don't send responses in loop 
 
 Before Submit: 
    Update docs of old and new endpoints
+   check if timezone causing any error 
+   add APIS to citations 
+   validation 
 
 getting Strava: 
    need read all in order to list our activities 
@@ -66,9 +102,22 @@ Future Notes:
    Add a .env so API's are called safely 
    add a strava ID and a 'my ID' 
    upgrate original PUTS/POSTS
+   delete description
+   expand local DB to more than just January runs 
+   post/put combo for kudos/descriptions
+   clean css (remove unecc)
+   Have a raw: formatted toggle 
+   Show more option to show all of the information stored in the database 
+   present time of run so you can see what the weather was during it 
 
 Citations: 
    url params
    https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.geeksforgeeks.org/how-to-use-get-parameter-in-express-js/&ved=2ahUKEwiBt6ztuqaLAxXmkYkEHZN2GX8QFnoECAsQAQ&usg=AOvVaw0ICZQQzq3O5ixbknHADPzn
 
    Date: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString&ved=2ahUKEwjNwoOM2qeLAxUrhIkEHamGAxAQFnoECAsQAQ&usg=AOvVaw1ulCBE--FosRxboAzo6Lk4
+
+   For each:   
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=http://www.w3schools.com/jsref/jsref_forEach.asp&ved=2ahUKEwiitrLJ6KeLAxV8q4kEHa7LGbMQFnoECCMQAQ&usg=AOvVaw2UpjRmq3mAH6qEiZbR2HNQ
+
+   HTML tables in JS: 
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/dom_obj_table.asp&ved=2ahUKEwjKtoj-raiLAxUyFFkFHWfkGOcQFnoECAoQAQ&usg=AOvVaw2abI5b6Wgq7ibbtY42ZMU5

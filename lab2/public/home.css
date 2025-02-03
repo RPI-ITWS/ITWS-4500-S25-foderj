@@ -1,8 +1,5 @@
 /* CSS for index.html (API Home Page) */
-#url{
-   width: 600px;
-   height: 20px
-}
+
 
 #idList{
    list-style-type: none;
@@ -15,4 +12,430 @@
    font-size: 0.7em;
    display: none;
 }
+
+
+
+/*CSS specific to lab2 page*/
+
+body {
+   width: 100%;
+   margin: 0 0 0 0;
+   overflow: scroll;
+   /* Citation: https://stock.adobe.com/search?k=white+to+blue+gradient */
+   background-image: url('back.png');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover; 
+}
+
+#content {
+   margin-top: 100; 
+}
+
+#apiCaller{
+   
+   text-align: center;
+}
+/* Email Box */
+
+.error {
+   background: rgba(255, 0, 0, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   padding: 10px;
+   border-radius: 5px;
+   margin-bottom: 15px;
+   color: white;
+}
+.error a {
+   color: white;
+   text-decoration: underline;
+}
+
+
+#mainSec{
+   padding-bottom: 200px;
+   display: none;
+}
+#firstSec{
+   padding-bottom: 500px;
+}
+
+#header{
+   background-color: #fd5201;
+   width: 100%;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto; 
+   padding: 5px;
+   margin-top: 0;
+   margin-bottom: 20px;
+   height: 100px; 
+   border-bottom: 5px solid white; 
+}
+
+#APIres{
+   text-align: center;
+   margin-bottom: 100px;
+}
+
+h1 { 
+   padding: 0 0 0 0;
+   margin: 0 0 0 0;
+   margin-top: 10px;
+   font-size: 4em;
+   text-align: center; 
+   color: white; 
+}
+
+.red{
+   color: red; 
+}
+
+.white{
+   color: white; 
+}
+
+.orange{
+   color: #F56600; 
+}
+.green{
+   color: #005030;
+}
+
+
+#locSel{
+   margin-left: auto;
+   margin-right: auto;
+   width: 20%;
+   font-size: 1.25em;
+   text-align: center;
+   padding: 7px;
+   border-radius: 10px;
+}
+
+h6{
+   font-size: 2.3em;
+   font-weight: 300;
+   text-align: center;
+   margin: 0 0 0 0;
+   padding: 50px 0 0 0; 
+}
+#drop{
+   padding-top: 15px;
+}
+
+/*Main Section*/
+
+
+
+.mainBut{
+   margin-top: 50px;
+   display: block; 
+   width: fit-content;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 20px; 
+   text-decoration: none;
+   color: white; 
+   font-size: 2.5em;
+   padding: 15px; 
+   border-radius: 30px;
+   background-color: #3b7ffe;
+}
+
+.mainBut:hover{
+   border: 5px solid black;
+   margin-bottom: 15px;
+   padding-top: 10px;
+}
+
+
+.innerHold{
+   text-align: center;
+   border-radius: 25px;
+}
+
+
+h3{
+   margin: 0 0 0 30;
+   padding: 0 0 0 0;
+   font-size: 2.3em;
+   font-weight: 300;
+   color: white; 
+   text-decoration: underline;
+}
+
+h4{
+   margin: 0 0 0 10px;
+   padding: 0 0 0 0;
+   font-size: 2.3em;
+   font-weight: 300;
+   color: #fd5201; 
+   
+}
+
+a:visited{
+   color: white; 
+}
+a:hover{
+   color: #fd5201;
+}
+
+#message{
+   display: none;
+}
+
+table{
+   font-size: 0.9em;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 15px
+}
+
+#runHoldW {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+#runHoldK {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+#runHoldL {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+#kudoHolder {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+#locHolder {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+#kudos{
+   display: none; 
+}
+#tabHolder{
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+.miscList {
+   font-size: 2em;
+   text-align: left;
+   list-style: none;
+}
+
+li{
+   margin-top: 10px
+}
+
+.res{
+   color: rgb(255, 255, 255);
+   font-weight: 700;
+}
+
+#mainTemp{
+   margin: 0 0 0 0;
+   padding: 0 0 0 21%;
+   text-align: left;
+   font-size: 1.6em;
+   margin-top: 20px;
+}
+
+h2{
+   margin: 10px 0 0 0;
+   font-size: 2.5em;
+   font-weight: 1000;
+   text-align: center;
+}
+
+#precip{
+   display: none; 
+}
+
+.mainHold{
+   display: flex;
+   justify-content: center;
+   text-align: center;
+}
+
+#curWeath{
+   width: 100%;
+}
+
+#weatherPng{
+   margin: 5% 5% 0 5%; 
+   width: 30%;
+   height: 30%;
+   background-color: rgb(91, 91, 233);
+   border: 3px solid black;
+}
+
+
+#desc{
+   margin: 5% 5% 0 0;
+   width: 55%;
+}
+
+#initHideW{
+   display: none;
+}
+
+
+
+#Music{
+   margin-top: 75px;
+   width: 45%;
+   margin-left: 10px;
+   background-color: black;
+   border: 5px solid #1ed760;
+}
+
+#spotHead{
+   color: #1ed760;
+
+}
+
+#spotIm{
+   padding: 5% 0 0 0;
+   width: 15%;
+}
+#spotUl{
+   margin: 5% 0 0 10%;
+   text-align: left;
+   color: #1ed760;
+   list-style: numbered;
+   font-size: 1.6em;
+}
+
+h5{
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+}
+
+.title{
+   text-decoration: underline;
+   font-weight: 1000;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   color: #1ed760;
+}
+
+.title:hover{
+   color:#9434d3;
+}
+
+.auth{
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: none;
+}
+
+.playIm{
+   width: 15%;
+   margin: 0 5% 0 10%;
+   padding: 0 0 0 0;
+   display: none;
+}
+
+.playInfo{
+   margin: 0 10% 0 0;
+   padding: 0 0 0 0;
+   display: block;
+   width: 60%;
+   text-align: left;
+}
+
+.listFlex{
+   display: block;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+}
+
+#lastLi{
+   padding-bottom: 10%;
+}
+
+
+
+/*Footer*/
+.mainFoot{
+   display: none; 
+}
+footer {
+   /* Sizing */
+   display: block;
+   width: 100.2%;
+   height: 125px;
+   text-align: center;
+   background-color: #3b7ffe;
+   border-top: 10px; 
+   /*Font info*/
+   color: white;
+   font-size: 0.9em;
+   font-weight: 300;
+}
+
+#lm{
+   font-weight: 300;
+   text-align: center;
+}
+
+#helpLogos{
+   padding-top: 15px;   
+   justify-content: center;
+}
+
+/* Discord Logo from: https://discord.com/branding */
+#discLogo{
+   padding-right: 12px;
+   width: 50px; 
+   height: auto; 
+}
+
+/*github logo from: https://github.com/logos */
+#gitLogo{
+   padding-left: 12px;
+   width: 50px;
+   height: auto; 
+}
+
+#cpright{
+   padding-bottom: 0px;
+   margin-bottom: 0px;
+   padding-top: 0px;
+   margin-top: 10px;
+}
+
+
 

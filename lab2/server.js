@@ -40,13 +40,7 @@ function repAttr(attr, val){
    fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
 }
 
-/*Fetches the weather data from the openWeatherAPI given your lat and long and returns a promise of it converted into JSON */ 
-async function getWeath(lat,lon){
-   var fetchRes = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=76b8f36558ce3b5fbce8ba9d025e5fe9");
-   var jsonRes = await fetchRes.json();
-   console.log(jsonRes); 
-   return(jsonRes); 
-}
+/*LAB2 HELPER FUNCTIONS*/
 
 /*Fetches auth from strava using refresh token*/ 
 async function getStravaAuth(){
@@ -65,7 +59,10 @@ async function getStravaAuth(){
    return(key); 
 }
 
-/*returns JSON obj of what strava gave me*/ 
+/*
+returns JSON obj of what strava gave me
+all of my activities from January 
+*/ 
 async function getAllStravaActs(key){
    var url = "https://www.strava.com/api/v3/athlete/activities?access_token=" + key + "&per_page=150&before=1738420719&after=1735742319"
    var fetchRes = await fetch(url, {
@@ -75,7 +72,321 @@ async function getAllStravaActs(key){
    return(result); 
 }
 
-//APP.-FUNCTIONS
+async function getStravaAct(id,key){
+   var url = "https://www.strava.com/api/v3/activities/" + id + "?access_token=" + key;
+   var fetchRes = await fetch(url, {
+      method: "GET",
+   })
+   var result = await fetchRes.json()
+   return(result); 
+}
+
+/*gets percipitation, weather, or temp for given range*/
+async function getWeathInfo(lat,long,date,pre,weather,temp){
+   var wantData = ""; 
+   if(pre){
+      wantData += "precipitation,"
+   }
+   if(weather){
+      wantData += "weather_code,"
+   }
+   if(temp){
+      wantData += "temperature_2m,"
+   }
+   if (wantData == ""){
+      return({ message: `weather Data retrieval error in 'getWeathInfo'` })
+   }
+   
+
+   //timezone set to auto, and units farenheight
+   var url = "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + long + "&start_date=" + date + "&end_date=" + date + "&hourly=" + wantData +"&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto";
+   var fetchRes = await fetch(url, {
+      method: "GET",
+   })
+   var result = await fetchRes.json()
+   return(result); 
+}
+
+
+
+
+
+async function getWHistCong(stravaAct, dbEnt, pre, weather,temp){
+   var lat = ""
+   var long = ""
+   if(stravaAct.start_latlng.length == 0){
+      return({ message: `No Location Data associated with run ${dbEnt.id}` })
+   }else{
+      lat = stravaAct.start_latlng[0]
+      long = stravaAct.start_latlng[1]
+   }
+
+   var start_end = dbEnt.start_date.slice(0,10) // in correct format for call
+
+
+   var weathInfo = await getWeathInfo(lat,long,start_end,pre,weather,temp); 
+   dbEnt.hourly = weathInfo.hourly; //JSON is key-value pairs
+
+   return(dbEnt); 
+   
+}
+
+/*SLOW*/ 
+function updateName(allAct){
+   for(var i = 0; i < data.length; i++){
+      for(var j = 0; j < allAct.length; j ++){
+         if(allAct[j].id == data[i].id){
+            data[i].name = allAct[j].name; 
+         } 
+      }
+   }
+   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
+}
+
+/*LAB2 APP FUNCTIONS*/
+
+/*
+GET /runs/###/precipitation = retrieve the specific run from the JSON object + the amount of rain throughout duration of run 
+*/
+app.get('/runs/:number/precipitation', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   var finalRes = await getWHistCong(act, data[index], true, false,false); 
+
+   res.json(finalRes); 
+
+}) 
+
+/*
+GET /runs/###/weather = retrieve the specific run from the JSON object + the weatherCode throughout duration of run 
+*/
+app.get('/runs/:number/weather', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   var finalRes = await getWHistCong(act, data[index], false, true, false); 
+
+   res.json(finalRes); 
+
+}) 
+
+/*
+GET /runs/###/temperature = retrieve the specific run from the JSON object + the temp throughout duration of run 
+*/
+app.get('/runs/:number/temperature', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   var finalRes = await getWHistCong(act, data[index], false, false, true); 
+
+   res.json(finalRes); 
+
+}) 
+
+/*
+GET /runs/###/kudos = retrieve the specific run from the JSON object + the weatherCode throughout duration of run 
+*/
+app.get('/runs/:number/kudos', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   dbEntry = data[index];
+   dbEntry.kudos = act.kudos_count;
+
+   res.json(dbEntry); 
+
+}) 
+
+/*
+GET /runs/###/location = retrieve the specific run from the JSON object + the weatherCode throughout duration of run 
+*/
+app.get('/runs/:number/location', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   // console.log(act.start_latlng)
+   if(act.start_latlng.length == 0){
+      res.json({ message: `No Location Data associated with run ${id}` })
+   }else{
+      dbEntry = data[index];
+      dbEntry.start_latlng = act.start_latlng
+      res.json(dbEntry); 
+   }
+
+}) 
+
+/*
+GET /runs/###/description = retrieve specific run with JSON conglomerate including description 
+*/
+app.get('/runs/:number/description', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   dbEntry = data[index];
+   dbEntry.description = act.description;
+
+   res.json(dbEntry); 
+
+
+}) 
+
+/*
+POST /runs/###/description = adds description to local db item
+*/
+app.post('/runs/:number/description', async (req, res) => {
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i].id  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var act = await getStravaAct(id,key); 
+
+   
+   data[index].description = act.description;
+   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
+
+
+   res.json({ message: `Description has been added to run '${id}'` });
+
+}) 
+
+
+/*
+PUT /runs/names = updates all names from strava servers as users typically change these from the default upload 
+*/
+app.put('/runs/names', async (req, res) => {
+
+
+   //getting strava activity
+   var key = await getStravaAuth(); 
+   var allAct = await getAllStravaActs(key); 
+
+   updateName(allAct);
+   
+
+   res.json({ message: `All run Names have been updated'` });
+
+}) 
+
+
+
+/*LAB1 APP FUNCTIONS*/
 
 //notification message in terminal to tell me it's running  
 app.listen(port, () => {
@@ -105,23 +416,28 @@ app.get('/runs', (req, res) => {
 /*
 GET /runs/### = retrieve the specific run from the JSON object
 */
-app.get('/runs/:number', (req, res) => {
+app.get('/runs/:number', async (req, res) => {
 
    //req.params contains all route variables from the URL
-   var num = parseInt(req.params.number);
+   var id = parseInt(req.params.number);
 
    //checking to macke sure said ID exists
+
+   var index = null; 
+   //checking to macke sure said ID exists
    for(var i = 0; i < data.length; i++){
-      if (data[i]["id"]  == num){
-         res.json(data[i])
+      if (data[i]["id"]  == id){
+         index = i; 
       }
    }
-
-   res.json({ message: `id '${num}' does not exist.` });//didn't work 
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      res.json(data[index])
+   }
+   
 
 }) 
-
-
 
 /*
 POST /runs = append a run at the end of the "DB"
@@ -131,7 +447,7 @@ app.post('/runs', (req, res) => {
 
    //says there are no keys or vars in req.body (as req.body is a JSON)
    if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ error: "Request body is empty" });
+      return res.status(400).json({ message: "Request body is empty" });
    }
 
    //if not all are present, the ones that are not are undefined
@@ -188,7 +504,7 @@ app.put('/runs', (req, res) =>{
 
    //checks if empty
    if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ error: "Request body is empty" });
+      return res.status(400).json({ message: "Request body is empty" });
    }
 
    const { distance, moving_time, average_speed } = req.body
@@ -214,14 +530,24 @@ expects id in URL and vars in JSON
 app.put('/runs/:number', (req, res) =>{
    
    if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ error: "Request body is empty" });
+      return res.status(400).json({ message: "Request body is empty" });
    }
 
-   var index = parseInt(req.params.number) -1;
-   if(index > data.length-1){
+   var id = parseInt(req.params.number);
+   
+      
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i]["id"]  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
    }
-
+   
+   
    const { distance, moving_time, average_speed } = req.body
 
    if(distance){ 
@@ -234,26 +560,30 @@ app.put('/runs/:number', (req, res) =>{
       data[index]['average_speed'] = average_speed; 
    }
    fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
-   res.json({ message: `Run '${index+1}' updated accordingly`});
+   res.json({ message: `Run '${id}' updated accordingly`});
 })
 
 /*
 7. DELETE /runs/### = delete the specific run
 */
 app.delete('/runs/:number', (req, res) =>{
-   var index = parseInt(req.params.number) -1;
+   var id = parseInt(req.params.number);
 
-   if(index > data.length-1){
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < data.length; i++){
+      if (data[i]["id"]  == id){
+         index = i; 
+      }
+   }
+   if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
    }
 
    //remove and shift from original
    data.splice(index,1);
 
-   //fix all ids, +1 because starts at 1
-   for(var i = index; i < data.length; i++){
-      data[i]['id'] = i+1;
-   }
+ 
    fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
-   res.json({ message: `Run '${index+1}' deleted`});
+   res.json({ message: `Run '${id}' deleted`});
 })

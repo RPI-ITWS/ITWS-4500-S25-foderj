@@ -41,3 +41,5 @@ Every time we make a call: must use strava refresh token to get a new auth token
          https://www.strava.com/api/v3/activities/13504259923?access_token=44d2d146d4313ad7a5efb99368c32ded0d8b61da //doing this as a URL param and not in auth because it's all backend anyway and would need an env to make it secure 
 
       or whatever one you want to make after going through API docs: https://developers.strava.com/docs/reference/#api-Activities-createActivity
+
+GET WAY MORE INFO if you search for something induvidually 

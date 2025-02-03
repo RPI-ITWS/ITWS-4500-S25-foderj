@@ -18,7 +18,8 @@
         "max_heartrate": 169,
         "elev_high": 143,
         "elev_low": 93,
-        "suffer_score": 78
+        "suffer_score": 78,
+        "description": "Feeling great m, gearing up for a crazy next 2. Left knee was a big tight but gonna get that right"
     },
     {
         "name": "Wu",
@@ -919,7 +920,8 @@
         "max_heartrate": 161,
         "elev_high": 129,
         "elev_low": 93.6,
-        "suffer_score": 32
+        "suffer_score": 32,
+        "description": "Total: 6.75 at 7:20ish/mile\nWas really cold but yet again nice to get it out of the way. Legs felt pretty good considering everything"
     },
     {
         "name": "1/9 WU",
@@ -939,7 +941,8 @@
         "max_heartrate": 148,
         "elev_high": 113,
         "elev_low": 105.4,
-        "suffer_score": 2
+        "suffer_score": 2,
+        "description": "Ok its actually pretty cold out today"
     },
     {
         "name": "6x100m strides + CD",
@@ -1032,26 +1035,5 @@
         "elev_high": 79.8,
         "elev_low": 74.6,
         "suffer_score": 8
-    },
-    {
-        "name": "Run",
-        "distance": 102323,
-        "moving_time": 1000,
-        "elapsed_time": 1000,
-        "total_elevation_gain": 0,
-        "type": "Run",
-        "id": 13504259978,
-        "start_date": "2025-02-03T14:27:55.023Z",
-        "average_speed": 340,
-        "max_speed": 340,
-        "average_cadence": null,
-        "average_watts": null,
-        "max_watts": null,
-        "kilojoules": null,
-        "average_heartrate": null,
-        "max_heartrate": null,
-        "elev_high": 0,
-        "elev_low": 0,
-        "suffer_score": null
     }
 ]

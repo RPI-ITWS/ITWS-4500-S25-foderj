@@ -12,49 +12,286 @@
   </head>
    <body>
 
-    <!-- Form  -->
-    <form id="apiCaller">
-      <label for="method">Choose a Call Method:</label>
-      <select id="method">
-          <option value="GET">GET</option>
-          <option value="POST">POST</option>
-          <option value="PUT">PUT</option>
-          <option value="DELETE">DELETE</option>
-      </select>
-      
-      <br><br>
-      <label  for="url">Enter Request URL:</label>
-      <input  type="text" id="url" name="url" placeholder="Request URL" required > 
-      <br><br>
-      <header>Enter JSON Body of request (if neccesary):</header>
-      <textarea  id="jsonInput" name="jsonInput" rows="10" cols="50" placeholder='{"distance":8.7,"time":3749,"pace":436}'></textarea>
-
-      <br><br>
-
-      <!-- Fetch visualizer -->
-      <header>What the fetch request you are creating would look like using Fetch API:</header>
-      <textarea readonly id="fetch" rows="10" cols="100">fetch('', {
-        method: 'GET',
-
-        headers: {
-           "Content-Type": "application/json",
-        },
-
-        body: ''
-     })</textarea>
-      <br><br>
-
-      <button type="submit">Submit</button>
-    </form>
-
-    <!-- Response -->
-    <div id="APIres">
-
+      <!-- Header -->
+    <div id="header">
+      <h1>
+          Joe's Runs API 
+      </h1>
     </div>
+
+
+      
     
-    <button class="nav" id="prev">&lt</button>
-    <span class="nav" id="pgCount"></span>
-    <button class="nav" id="next">></button>
+      <!-- Form  -->
+      <form id="apiCaller">
+        <h3>
+          <a href="https://github.com/RPI-ITWS/ITWS-4500-S25-foderj/tree/main/lab1#readme">
+            Click Here for Documentation
+          </a>
+        </h3>
+        <label for="method">Choose a Call Method:</label><br>
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+        
+        
+        <br><br>
+        <label  for="url">Enter Request URL:</label><br>
+        <input  type="text" size="86" id="url" name="url" placeholder="Request URL" required > 
+        <br><br>
+        <header>Enter JSON Body of request (if neccesary):</header>
+        <textarea  id="jsonInput" name="jsonInput" rows="15" cols="70" placeholder='{"distance":8.7,"time":3749,"pace":436}'></textarea>
+
+        <br><br>
+
+        <!-- Fetch visualizer -->
+        <header>What the fetch request you are creating would look like using Fetch API:</header>
+        <textarea readonly id="fetch" rows="15" cols="70">fetch('', {
+          method: 'GET',
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: ''
+      })</textarea>
+        <br><br>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <!-- Response -->
+      <div id="APIres">
+
+
+        <!-- weath table -->
+        <div class="mainHold" id="precip">
+          <div class="innerHold" id="runHoldW">
+             <h2 id="name">Really nice easy</h2>
+              <div class="innerHold" id="desc">
+                  <ul class="miscList">
+                    <li>Date:
+                        <span class="res">
+                          <span id='start_date'></span>
+                            
+                        </span>
+                    </li>
+                    <li>Duration:
+                        <span class="res">
+                          <span id="elapsed_time">
+                          </span> 
+                              
+                        </span>
+                    </li>
+                    <li>Distance:
+                        <span class="res">
+                          <span id="distance">
+                          </span> 
+                              miles
+                        </span>
+                    </li>
+                    <li>Speed:
+                      <span class="res">
+                        <span id="average_speed">
+                        </span> 
+                            mph
+                      </span>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+          
+          <div class="innerHold" id="tabHolder">
+             <h2 id="weathKind">Precipitation (inches)</h2>
+             <table id="top" border="1">
+              <tbody>
+                <tr>
+                  <td><b>Time</b></td>
+                  <td>0:00</td>
+                  <td>1:00</td>
+                  <td>2:00</td>
+                  <td>3:00</td>
+                  <td>4:00</td>
+                  <td>5:00</td>
+                  <td>6:00</td>
+                  <td>7:00</td>
+                  <td>8:00</td>
+                  <td>9:00</td>
+                  <td>10:00</td>
+                  <td>11:00</td>  
+                  <td>12:00</td>                                
+                </tr>
+                <tr>
+                  <td id="typeVal1"><b>Rain</b></td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>30</td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="bot" border="1">
+              <tbody>
+                <tr>
+                  <td><b>Time</b></td>
+                  <td>13:00</td>
+                  <td>14:00</td>
+                  <td>15:00</td>
+                  <td>16:00</td>
+                  <td>17:00</td>
+                  <td>18:00</td>
+                  <td>19:00</td>
+                  <td>20:00</td>
+                  <td>21:00</td>
+                  <td>22:00</td>         
+                  <td>23:00</td>                            
+                </tr>
+                <tr>
+                  <td id="typeVal2"><b>Rain</b></td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                  <td>30</td>
+                  <td>25</td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+
+          
+          
+        </div>
+
+        <!-- Kudos -->
+        <div class="mainHold" id="kudos">
+          <div class="innerHold" id="runHoldK">
+             <h2 id="kname">Really nice easy</h2>
+              <div class="innerHold" id="desc">
+                  <ul class="miscList">
+                    <li>Date:
+                        <span class="res">
+                          <span id='kstart_date'></span>
+                            
+                        </span>
+                    </li>
+                    <li>Duration:
+                        <span class="res">
+                          <span id="kelapsed_time">
+                          </span> 
+                              
+                        </span>
+                    </li>
+                    <li>Distance:
+                        <span class="res">
+                          <span id="kdistance">
+                          </span> 
+                              miles
+                        </span>
+                    </li>
+                    <li>Speed:
+                      <span class="res">
+                        <span id="kaverage_speed">
+                        </span> 
+                            mph
+                      </span>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+          
+          <div class="innerHold" id="kudoHolder">
+             <h2>Kudos Count</h2>
+             <ul class="miscList">
+                <li>Kudos:
+                  <span class="res">
+                    <span id="kudosRes">
+                    </span> 
+                        
+                  </span>
+                </li>
+             </ul>
+            
+          </div>
+
+        <!-- location -->
+        <div class="mainHold" id="location">
+          <div class="innerHold" id="runHoldL">
+             <h2 id="lname">Really nice easy</h2>
+              <div class="innerHold" id="desc">
+                  <ul class="miscList">
+                    <li>Date:
+                        <span class="res">
+                          <span id='lstart_date'></span>
+                            
+                        </span>
+                    </li>
+                    <li>Duration:
+                        <span class="res">
+                          <span id="lelapsed_time">
+                          </span> 
+                              
+                        </span>
+                    </li>
+                    <li>Distance:
+                        <span class="res">
+                          <span id="ldistance">
+                          </span> 
+                              miles
+                        </span>
+                    </li>
+                    <li>Speed:
+                      <span class="res">
+                        <span id="laverage_speed">
+                        </span> 
+                            mph
+                      </span>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+          
+          <div class="innerHold" id="locHolder">
+             <h2>Kudos Count</h2>
+             <ul class="miscList">
+                <li>Kudos:
+                  <span class="res">
+                    <span id="kudosRes">
+                    </span> 
+                        
+                  </span>
+                </li>
+             </ul>
+            
+          </div>
+
+          
+          
+        </div>
+        <div id="message"></div>
+      </div>
+
+
+    
+
 
 
     <!-- local:  -->
@@ -64,3 +301,4 @@
     <script src="node/home.js"></script> -->
  </body>
 </html>
+
