@@ -129,7 +129,7 @@ window.addEventListener("load", function() {
          
          //on server: https://foderj.eastus.cloudapp.azure.com/node/runs
          //local: http://localhost:3000/runs
-         if(meth != "GET" || url != "https://foderj.eastus.cloudapp.azure.com/node/runs"){
+         if(meth != "GET" || url != "http://localhost:3000/runs"){
 
             //no pagination neccesary
             $('.nav').css('display', 'none');

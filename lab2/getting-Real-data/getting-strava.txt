@@ -1,0 +1,43 @@
+
+
+https://www.strava.com/oauth/authorize?client_id=145983&redirect_uri=http://localhost&response_type=code&scope=activity:read_all
+
+4f0d619fff1da6adb647cda9118b004cc706b9ac
+
+https://www.strava.com/oauth/token?client_id=145983&client_secret=262ab851354d4695c018ca1cb8862dd15f24602d&code=e2713914ea6313e96815dbe255a73467db54f9ff&grant_type=authorization_code
+
+
+ 
+
+
+
+
+
+to refresh token and get new acsess: 
+
+access: 44d2d146d4313ad7a5efb99368c32ded0d8b61da
+refresh: 335a6282b6b80eeff4a2468be444f82ded0a523f
+
+https://www.strava.com/oauth/token?client_id=145983&client_secret=262ab851354d4695c018ca1cb8862dd15f24602d&refresh_token=335a6282b6b80eeff4a2468be444f82ded0a523f&grant_type=refresh_token
+
+Every time we make a call: must use strava refresh token to get a new auth token because it expires: 
+   POST with this: https://www.strava.com/oauth/token?client_id=145983&client_secret=262ab851354d4695c018ca1cb8862dd15f24602d&refresh_token=335a6282b6b80eeff4a2468be444f82ded0a523f&grant_type=refresh_token
+
+   Response: 
+      {
+         "token_type": "Bearer",
+         "access_token": "44d2d146d4313ad7a5efb99368c32ded0d8b61da",
+         "expires_at": 1738456445,
+         "expires_in": 20824,
+         "refresh_token": "335a6282b6b80eeff4a2468be444f82ded0a523f"
+      }
+
+   Use access_token to make call like this: 
+      To get all activities: 
+         https://www.strava.com/api/v3/athlete/activities?access_token=44d2d146d4313ad7a5efb99368c32ded0d8b61da
+         
+
+      to get a specific activity: 
+         https://www.strava.com/api/v3/activities/13504259923?access_token=44d2d146d4313ad7a5efb99368c32ded0d8b61da //doing this as a URL param and not in auth because it's all backend anyway and would need an env to make it secure 
+
+      or whatever one you want to make after going through API docs: https://developers.strava.com/docs/reference/#api-Activities-createActivity

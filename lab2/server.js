@@ -10,7 +10,7 @@ local vs on vm:
 
 // CONST-IMPORTS
 
-const data = require('./Project.json')
+const data = require('./db.json')
 const express = require('express')
 const app = express() // Storing all express things in this variable
 const port = 3000
@@ -19,13 +19,15 @@ app.use(express.json()); //allows for parsing incoming req bodies:
 app.use(express.static('public')) 
 
 
+
 //HELPER FUNCTIONS
 
 /* used to get list of ID's  from the data*/
-function getIds(){
+function getIds(page){
    let ids = new Array(); 
-   for(var i = 0; i < data.length; i++){
-      ids.push(data[i]['id']);
+
+   for(var i = 0; i < 15*page; i++){
+      ids.push(data[i]["id"]);
    }
    return(ids)
 }
@@ -35,14 +37,42 @@ function repAttr(attr, val){
    for(var i = 0; i < data.length; i++){
       data[i][attr] = val
    }
-   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
 }
 
 /*Fetches the weather data from the openWeatherAPI given your lat and long and returns a promise of it converted into JSON */ 
 async function getWeath(lat,lon){
    var fetchRes = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=76b8f36558ce3b5fbce8ba9d025e5fe9");
    var jsonRes = await fetchRes.json();
+   console.log(jsonRes); 
    return(jsonRes); 
+}
+
+/*Fetches auth from strava using refresh token*/ 
+async function getStravaAuth(){
+   
+   const url = "https://www.strava.com/oauth/token?client_id=145983&client_secret=262ab851354d4695c018ca1cb8862dd15f24602d&refresh_token=335a6282b6b80eeff4a2468be444f82ded0a523f&grant_type=refresh_token";
+
+   //Note this is post
+   var fetchRes = await fetch(url, {
+      method: "POST",
+   })
+
+   // Because .json also returns a promise
+   var parsed = await fetchRes.json()
+   var key = parsed.access_token; 
+   // console.log(key); 
+   return(key); 
+}
+
+/*returns JSON obj of what strava gave me*/ 
+async function getAllStravaActs(key){
+   var url = "https://www.strava.com/api/v3/athlete/activities?access_token=" + key + "&per_page=150&before=1738420719&after=1735742319"
+   var fetchRes = await fetch(url, {
+      method: "GET",
+   })
+   var result = await fetchRes.json()
+   return(result); 
 }
 
 //APP.-FUNCTIONS
@@ -54,9 +84,21 @@ app.listen(port, () => {
 
 /*
 GET /runs = retrieve a listing of run ID numbers
+Paginated by default -> default is 3
+pagenation must be > 0 
 */
 app.get('/runs', (req, res) => {
-   var ids = getIds()
+   //parsing return data to curate database
+   var page = req.query.page;
+   
+   if(page === undefined || parseInt(page) < 0){
+      page = 3;
+   }else{
+      page = parseInt(page);
+   }
+   console.log(page); 
+   var ids = getIds(page);
+
    res.json(ids);
 })
 
@@ -69,33 +111,21 @@ app.get('/runs/:number', (req, res) => {
    var num = parseInt(req.params.number);
 
    //checking to macke sure said ID exists
-   if(num-1 > data.length-1){
-      res.json({ message: `id '${num}' does not exist.` });
+   for(var i = 0; i < data.length; i++){
+      if (data[i]["id"]  == num){
+         res.json(data[i])
+      }
    }
-   res.json(data[num-1]) //-1 is because id's of my data starts at 1
+
+   res.json({ message: `id '${num}' does not exist.` });//didn't work 
+
 }) 
 
-/*inclass test with openweathermap*/ 
-app.get('/runs/inclass', async (req, res) => {
 
-   console.log("hey"); 
-   res.json({ message: `id does not exist.` });
-   // const weathDat = await getWeath("42.7284", "-73.6918");
-   // console.log(weathDat); 
-   
-   // res.json(weathDat); 
-   // //req.params contains all route variables from the URL
-   // var num = parseInt(req.params.number);
-
-   // //checking to macke sure said ID exists
-   // if(num-1 > data.length-1){
-   //    res.json({ message: `id '${num}' does not exist.` });
-   // }
-   // res.json(data[num-1]) //-1 is because id's of my data starts at 1
-}) 
 
 /*
 POST /runs = append a run at the end of the "DB"
+Not avaible for all params of a run yet 
 */
 app.post('/runs', (req, res) => {
 
@@ -105,30 +135,43 @@ app.post('/runs', (req, res) => {
    }
 
    //if not all are present, the ones that are not are undefined
-   const { distance, time, pace } = req.body
+   const { distance, moving_time, average_speed } = req.body
 
    //error handling
    if(!distance){ 
       res.json({ message: `valid distance not given.` });
-   }else if(!time){ 
-      res.json({ message: `valid time not given.` }); 
-   }else if(!pace){ 
-      res.json({ message: `valid pace not given.` });
+   }else if(!moving_time){ 
+      res.json({ message: `valid moving_time not given.` }); 
+   }else if(!average_speed){ 
+      res.json({ message: `valid average_speed not given.` });
    }else{
+      var curDate = new Date().toISOString();
       data.push(
          {
-            "id": data.length + 1, //next element
+            "name": "Run",
             "distance": distance, 
-            "time": time,
-            "pace": pace
+            "moving_time": moving_time,
+            "elapsed_time": moving_time,
+            "total_elevation_gain": 0,
+            "type": "Run",
+            "id": data.length + 13504259923, //next element (works for jan DB)
+            "start_date": curDate,
+            "average_speed": average_speed,
+            "max_speed": average_speed,
+            "average_cadence": null,
+            "average_watts": null,
+            "max_watts": null,
+            "kilojoules": null,
+            "average_heartrate": null,
+            "max_heartrate": null,
+            "elev_high": 0,
+            "elev_low": 0,
+            "suffer_score": null
          }
       );
-      fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
-      var len = data.length 
+      fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
       res.json({ message: `Received data for run with distance ${distance}` });
-   }
-
-   
+   }  
 })
 
 /* PUT /runs = bulk update all your run
@@ -136,10 +179,10 @@ app.post('/runs', (req, res) => {
 expects anything like this, can only be 1 but will rewrite everything to having that attribute
 {
    "distance": 6.7,
-   "time": 2760,
-   "pace": 412
+   "moving_time": 2760,
+   "average_speed": 412
 }
-Can only edit distance, time, and pace, as ID is uneditable as it is a unique identifier
+Can only edit distance, moving_time, and average_speed, as ID is uneditable as it is a unique identifier
 */
 app.put('/runs', (req, res) =>{
 
@@ -148,16 +191,16 @@ app.put('/runs', (req, res) =>{
       return res.status(400).json({ error: "Request body is empty" });
    }
 
-   const { distance, time, pace } = req.body
+   const { distance, moving_time, average_speed } = req.body
 
    if(distance){ 
       repAttr("distance", distance); 
    }
-   if(time){ 
-      repAttr("time", time); 
+   if(moving_time){ 
+      repAttr("moving_time", moving_time); 
    }
-   if(pace){ 
-      repAttr("pace", pace); 
+   if(average_speed){ 
+      repAttr("average_speed", average_speed); 
    }
 
    res.json({ message: 'All runs updated accordingly' });
@@ -179,18 +222,18 @@ app.put('/runs/:number', (req, res) =>{
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
    }
 
-   const { distance, time, pace } = req.body
+   const { distance, moving_time, average_speed } = req.body
 
    if(distance){ 
       data[index]['distance'] = distance; 
    }
-   if(time){ 
-      data[index]['time'] = time; 
+   if(moving_time){ 
+      data[index]['moving_time'] = moving_time; 
    }
-   if(pace){ 
-      data[index]['pace'] = pace; 
+   if(average_speed){ 
+      data[index]['average_speed'] = average_speed; 
    }
-   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
    res.json({ message: `Run '${index+1}' updated accordingly`});
 })
 
@@ -211,6 +254,6 @@ app.delete('/runs/:number', (req, res) =>{
    for(var i = index; i < data.length; i++){
       data[i]['id'] = i+1;
    }
-   fs.writeFileSync('./Project.json', JSON.stringify(data, null, 4));
+   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
    res.json({ message: `Run '${index+1}' deleted`});
 })
