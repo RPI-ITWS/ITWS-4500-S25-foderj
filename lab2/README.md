@@ -612,6 +612,9 @@ fetch('http://localhost:3000/runs/13375540243/names', {
  - Even  though it wasn't explicitly on the sheet, I updated my documentation to keep up with the current state of my API
 
 ---
+
+# Running Work Log: 
+
 ```
 Plan: 
 
@@ -706,9 +709,9 @@ Before Submit:
    validation √
    Creativity √
    comment √
-   Update docs of old and new endpoints
-   test on VM
-   Read over sheet once more
+   Update docs of old and new endpoints √
+   test on VM √
+   Read over sheet once more √
 
 getting Strava: 
    need read all in order to list our activities 
