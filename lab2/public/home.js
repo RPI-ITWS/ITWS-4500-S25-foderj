@@ -249,7 +249,7 @@ window.addEventListener("load", function() {
             }else if(typeof parsed.distance === 'undefined'){
                //must be list 
                //is pretty printed 
-               $('#APIres').html('<br><br> <header>List of IDs:</header>\
+               $('#message').html('<br><br> <header>List of IDs:</header>\
                   <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
             }else{
                //only show run
@@ -258,7 +258,6 @@ window.addEventListener("load", function() {
 
             
          }else{
-            console.log("here")
             $('#message').css('display', 'flex'); 
             $('#message').html(JSON.stringify(parsed.message)); 
          }

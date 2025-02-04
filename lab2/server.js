@@ -53,7 +53,6 @@ async function getStravaAuth(){
    // Because .json also returns a promise
    var parsed = await fetchRes.json()
    var key = parsed.access_token; 
-   // console.log(key); 
    return(key); 
 }
 
@@ -257,7 +256,6 @@ app.get('/runs/:number/kudos', async (req, res) => {
 
       dbEntry = JSON.parse(JSON.stringify(data[index])); //makes copy not alias
       dbEntry.kudos = act.kudos_count;
-      console.log(dbEntry)
 
       res.json(dbEntry); 
    }
@@ -289,7 +287,6 @@ app.get('/runs/:number/location', async (req, res) => {
       var key = await getStravaAuth(); 
       var act = await getStravaAct(id,key); 
 
-      // console.log(act.start_latlng)
       if(act.start_latlng.length == 0){
          res.json({ message: `No Location Data associated with run ${id}` })
       }else{
@@ -408,7 +405,6 @@ app.get('/runs', (req, res) => {
    }else{
       page = parseInt(page);
    }
-   console.log(page); 
    var ids = getIds(page);
 
    res.json(ids);
