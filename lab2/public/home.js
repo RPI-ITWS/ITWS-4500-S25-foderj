@@ -23,6 +23,22 @@ function isJSON(str) {
    }
 }
 
+/*seconds to 00:00:00*/
+function secondsToTimeFormat(seconds) {
+   const hours = Math.floor(seconds / 3600); 
+   const minutes = Math.floor((seconds % 3600) / 60); 
+   const remainingSeconds = seconds % 60; 
+
+   // Format as "HH:MM:SS" with leading zeros if necessary
+   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+}
+
+/*meters to miles conversion*/
+function metersToMiles(meters){
+   miles = meters /1609
+   return(Math.round(miles * 100) / 100) 
+}
+
 //LISTENER FUNCTIONS
 
 /*When url input box is changed, this is called to update the fetch visualizer accordingly*/
@@ -48,21 +64,7 @@ document.getElementById("apiCaller").addEventListener("change", function() {
 
 //OUTPUT FUNCTIONS
 
-function secondsToTimeFormat(seconds) {
-   const hours = Math.floor(seconds / 3600); 
-   const minutes = Math.floor((seconds % 3600) / 60); 
-   const remainingSeconds = seconds % 60; 
-
-   // Format as "HH:MM:SS" with leading zeros if necessary
-   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-}
-
-function metersToMiles(meters){
-   miles = meters /1609
-   return(Math.round(miles * 100) / 100) 
-}
-
-
+/*output for precipitation request*/
 function showPrecip(info){
    
    $('#precip').css('display', 'flex'); 
@@ -82,6 +84,7 @@ function showPrecip(info){
    }
 }
 
+/*output for weather request*/
 function showWeath(info){
    $('#precip').css('display', 'flex'); 
    $('#name').html(info.name);
@@ -103,6 +106,7 @@ function showWeath(info){
    }
 }
 
+/*output for temp request*/
 function showTemp(info){
    $('#precip').css('display', 'flex'); 
    $('#name').html(info.name);
@@ -124,6 +128,7 @@ function showTemp(info){
    }
 }
 
+/*output for kudos request*/
 function showKudos(info){
    $('#kudos').css('display', 'flex'); 
    $('#kname').html(info.name);
@@ -134,7 +139,7 @@ function showKudos(info){
    $('#kudosRes').html(info.kudos);
 }
 
-
+/*output for location request*/
 function showLoc(info){
    $('#location').css('display', 'flex'); 
    $('#lname').html(info.name);
@@ -146,6 +151,7 @@ function showLoc(info){
    $('#lat').html(info.start_latlng[0]);
 }
 
+/*output for description request*/
 function showDesc(info){
    $('#description').css('display', 'flex'); 
    $('#dname').html(info.name);
@@ -156,6 +162,7 @@ function showDesc(info){
    $('#descRes').html(info.description);
 }
 
+/*output for solo (run) request*/
 function showSolo(info){
    $('#solo').css('display', 'flex'); 
    $('#sname').html(info.name);
@@ -192,13 +199,10 @@ window.addEventListener("load", function() {
 
       //checks if user JSON input is correct
       if(isJSON(bod) || bod == ""){
-
-
          if(!bod == ""){
             bod = JSON.stringify(JSON.parse(bod))//converts JS object, then to string from JSON
          }
-
-         
+ 
          //making request w/o body
          if(meth == "GET" || meth == "DELETE"){
             var fetchRes = await fetch(url, {
@@ -259,13 +263,6 @@ window.addEventListener("load", function() {
             $('#message').html(JSON.stringify(parsed.message)); 
          }
 
-         
-
-         // $('.nav').css('display', 'none');
-         // //is pretty printed 
-         // $('#APIres').html('<br><br> <h4>API Response:</h4><br>\
-         //    <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
-         
          
       }else{
          alert("text entered is not valid JSON, try again");

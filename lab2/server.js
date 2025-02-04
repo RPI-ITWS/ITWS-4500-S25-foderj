@@ -40,8 +40,6 @@ function repAttr(attr, val){
    fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
 }
 
-/*LAB2 HELPER FUNCTIONS*/
-
 /*Fetches auth from strava using refresh token*/ 
 async function getStravaAuth(){
    
@@ -72,6 +70,7 @@ async function getAllStravaActs(key){
    return(result); 
 }
 
+/*Get activity from strava API given activity ID and key */
 async function getStravaAct(id,key){
    var url = "https://www.strava.com/api/v3/activities/" + id + "?access_token=" + key;
    var fetchRes = await fetch(url, {
@@ -107,10 +106,7 @@ async function getWeathInfo(lat,long,date,pre,weather,temp){
    return(result); 
 }
 
-
-
-
-
+/*Gets conglomerate of database entry and API response */
 async function getWHistCong(stravaAct, dbEnt, pre, weather,temp){
    var lat = ""
    var long = ""
@@ -131,7 +127,7 @@ async function getWHistCong(stravaAct, dbEnt, pre, weather,temp){
    
 }
 
-/*SLOW*/ 
+/*Updates names of all items in Database, given JSON of all activities from strava*/ 
 function updateName(allAct){
    for(var i = 0; i < data.length; i++){
       for(var j = 0; j < allAct.length; j ++){

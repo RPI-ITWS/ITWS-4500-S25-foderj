@@ -1,8 +1,25 @@
+
+# Creativity 
+
+ I decided to go with functional creativity vs design (css) creativity as functional is defintley my strong suit. Here is what I would like to be considered: 
+
+ ##### 1. API Combination
+ - Use of the historical weather API to see what the temperature was during that exact run in the exact location. 
+ - Using the lat and long of my runs to track said weather 
+ - getting a more in depth description of my runs 
+
+ ##### 2. Data formatting in homepage
+ - When presenting things like hourly precipitation/temperature, I curated a table in order for the user to better visualize the data. 
+
+##### 3. Homepage Design 
+ - I tried to make the design of my homepage fit a specific colorway and theme. 
+
+##### 4. Real Data
+ - I found a way encorporate the API of one of my favorite apps (Strava) into my project. This let to me restructuring my 'local' database which is now full of completley real data. 
+
+---
+```
 Plan: 
-
-   
-
-
 
    my new database is just going to be my strava runs from january but a much simplier JSON with not as much garbage, √
    Going to pull more info about the run ID from strava and weather data from historical weather API. 
@@ -92,10 +109,12 @@ Things I leaned:
    cannot send 2 res's (not like return statement, code after still executes)
 
 Before Submit: 
+   validation √
+   Creativity √
+   comment 
    Update docs of old and new endpoints
-   validation 
-   Creativity 
-   comment
+   test on VM
+   Read over sheet once more
 
 getting Strava: 
    need read all in order to list our activities 
@@ -133,3 +152,4 @@ Citations:
 
    Historical Weather API Notes: 
       https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
+```
