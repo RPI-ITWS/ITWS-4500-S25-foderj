@@ -75,7 +75,7 @@ function showPrecip(info){
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
    table = document.getElementById('top');
-   for(var i = 0; i < 12; i++){
+   for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.precipitation[i]
    }
    table2 = document.getElementById('bot');
@@ -97,7 +97,7 @@ function showWeath(info){
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
    table = document.getElementById('top');
-   for(var i = 0; i < 12; i++){
+   for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.weather_code[i]
    }
    table2 = document.getElementById('bot');
@@ -119,7 +119,7 @@ function showTemp(info){
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
    table = document.getElementById('top');
-   for(var i = 0; i < 12; i++){
+   for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.temperature_2m[i]
    }
    table2 = document.getElementById('bot');

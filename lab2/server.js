@@ -139,7 +139,7 @@ function updateName(allAct){
    fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
 }
 
-/*LAB2 APP FUNCTIONS*/
+/*APP FUNCTIONS*/
 
 /*
 GET /runs/###/precipitation = retrieve the specific run from the JSON object + the amount of rain throughout duration of run 
@@ -168,8 +168,6 @@ app.get('/runs/:number/precipitation', async (req, res) => {
 
       res.json(finalRes); 
    }
-
-
 
 }) 
 
@@ -200,8 +198,6 @@ app.get('/runs/:number/weather', async (req, res) => {
 
       res.json(finalRes); 
    }
-
-
 
 }) 
 
@@ -234,11 +230,10 @@ app.get('/runs/:number/temperature', async (req, res) => {
       res.json(finalRes); 
    }
 
-
 }) 
 
 /*
-GET /runs/###/kudos = retrieve the specific run from the JSON object + the weatherCode throughout duration of run 
+GET /runs/###/kudos = retrieve the specific run from the JSON object + the # of kudos it has
 */
 app.get('/runs/:number/kudos', async (req, res) => {
 
@@ -272,7 +267,7 @@ app.get('/runs/:number/kudos', async (req, res) => {
 }) 
 
 /*
-GET /runs/###/location = retrieve the specific run from the JSON object + the weatherCode throughout duration of run 
+GET /runs/###/location = retrieve the specific run from the JSON object + the location of the run 
 */
 app.get('/runs/:number/location', async (req, res) => {
 
@@ -374,8 +369,6 @@ app.post('/runs/:number/description', async (req, res) => {
 
    }
 
-
-
 }) 
 
 
@@ -395,10 +388,6 @@ app.put('/runs/names', async (req, res) => {
    res.json({ message: `All run Names have been updated'` });
 
 }) 
-
-
-
-/*LAB1 APP FUNCTIONS*/
 
 //notification message in terminal to tell me it's running  
 app.listen(port, () => {
