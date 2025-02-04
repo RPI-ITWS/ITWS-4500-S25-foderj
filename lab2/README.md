@@ -1,7 +1,8 @@
 
 
-Served at: https://foderj.eastus.cloudapp.azure.com/node
-*Note: must be configured for vm and local, as there are url differences*
+##### Served at: https://foderj.eastus.cloudapp.azure.com/node
+- *Note: must be configured for vm and local, as there are url differences*
+- *Note: path to lab2 folder on vm:* ```/var/www/html/foderjGit/lab2 ```
 
 # Joe's Runs API Documentation:
 
