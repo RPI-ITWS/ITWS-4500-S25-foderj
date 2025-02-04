@@ -183,6 +183,7 @@ a:hover{
 
 #message{
    display: none;
+   text-align: center;
 }
 
 table{
@@ -201,7 +202,28 @@ table{
    color: white;
 }
 
+#solo{
+   display: none;
+}
+
+#runHoldS{
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
 #runHoldK {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+#runHoldD {
    margin-top: 75px;
    margin-bottom: 0;
    width: 45%;
@@ -227,6 +249,22 @@ table{
    color: white;
 }
 
+#descHolder {
+   margin-top: 75px;
+   margin-bottom: 0;
+   width: 45%;
+   background-color: #fd5201;
+   border: 5px solid white;
+   color: white;
+}
+
+#description{
+   display: none;
+}
+
+#location{
+   display: none;
+}
 #locHolder {
    margin-top: 75px;
    margin-bottom: 0;

@@ -134,6 +134,37 @@ function showKudos(info){
    $('#kudosRes').html(info.kudos);
 }
 
+
+function showLoc(info){
+   $('#location').css('display', 'flex'); 
+   $('#lname').html(info.name);
+   $('#lstart_date').html(info.start_date.slice(0,10)); 
+   $('#lelapsed_time').html(secondsToTimeFormat(info.moving_time));
+   $('#ldistance').html(metersToMiles(info.distance));
+   $('#laverage_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
+   $('#long').html(info.start_latlng[1]);
+   $('#lat').html(info.start_latlng[0]);
+}
+
+function showDesc(info){
+   $('#description').css('display', 'flex'); 
+   $('#dname').html(info.name);
+   $('#dstart_date').html(info.start_date.slice(0,10)); 
+   $('#delapsed_time').html(secondsToTimeFormat(info.moving_time));
+   $('#ddistance').html(metersToMiles(info.distance));
+   $('#daverage_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
+   $('#descRes').html(info.description);
+}
+
+function showSolo(info){
+   $('#solo').css('display', 'flex'); 
+   $('#sname').html(info.name);
+   $('#sstart_date').html(info.start_date.slice(0,10)); 
+   $('#selapsed_time').html(secondsToTimeFormat(info.moving_time));
+   $('#sdistance').html(metersToMiles(info.distance));
+   $('#saverage_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
+}
+
 //MAIN EVENT LISTENER
 
 window.addEventListener("load", function() {
@@ -147,6 +178,9 @@ window.addEventListener("load", function() {
       $('#precip').css('display', 'none'); 
       $('#kudos').css('display', 'none'); 
       $('#message').css('display', 'none'); 
+      $('#location').css('display', 'none'); 
+      $('#description').css('display', 'none'); 
+      $('#solo').css('display', 'none'); 
 
       //preventing from reloading page 
       event.preventDefault();
@@ -204,9 +238,23 @@ window.addEventListener("load", function() {
                }            
             }else if(!(typeof parsed.kudos === 'undefined')){
                showKudos(parsed); 
+            }else if(!(typeof parsed.start_latlng === 'undefined')){
+               showLoc(parsed);
+            }else if(!(typeof parsed.description === 'undefined') && meth == "GET"){
+               showDesc(parsed);
+            }else if(typeof parsed.distance === 'undefined'){
+               //must be list 
+               //is pretty printed 
+               $('#APIres').html('<br><br> <header>List of IDs:</header>\
+                  <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
+            }else{
+               //only show run
+               showSolo(parsed); 
             }
-         }else{
+
             
+         }else{
+            console.log("here")
             $('#message').css('display', 'flex'); 
             $('#message').html(JSON.stringify(parsed.message)); 
          }

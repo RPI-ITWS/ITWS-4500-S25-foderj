@@ -29,7 +29,7 @@ Plan:
    1 new post endpoint:  √
       must add data from one external API to our 'db'
       /runs/description
-         (adds description to everything in my database}) 
+         (adds description to item specified in my database}) 
 
    1 new PUT endpoint: √
       update data in JSON (db) from one of external API's 
@@ -88,12 +88,14 @@ Reqs:
 Things I leaned: 
    pagenation is just responding with a capped limit, not actually multiple pages 
    don't send responses in loop 
+   JSON MAKES ALIAS
+   cannot send 2 res's (not like return statement, code after still executes)
 
 Before Submit: 
    Update docs of old and new endpoints
-   check if timezone causing any error 
-   add APIS to citations 
    validation 
+   Creativity 
+   comment
 
 getting Strava: 
    need read all in order to list our activities 
@@ -109,6 +111,8 @@ Future Notes:
    Have a raw: formatted toggle 
    Show more option to show all of the information stored in the database 
    present time of run so you can see what the weather was during it 
+   If make flexbox holding 2 info boxes dynamic 
+   if someone puts a non-int in for ID
 
 Citations: 
    url params
@@ -121,3 +125,11 @@ Citations:
 
    HTML tables in JS: 
       https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/dom_obj_table.asp&ved=2ahUKEwjKtoj-raiLAxUyFFkFHWfkGOcQFnoECAoQAQ&usg=AOvVaw2abI5b6Wgq7ibbtY42ZMU5
+
+   Strava API NOtes: 
+      what get mass activities, oldest is at bottom, and can paginate
+      https://developers.strava.com/docs/reference/#api-Activities-getActivityById
+
+
+   Historical Weather API Notes: 
+      https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18

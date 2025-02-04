@@ -163,15 +163,17 @@ app.get('/runs/:number/precipitation', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      var finalRes = await getWHistCong(act, JSON.parse(JSON.stringify(data[index])), true, false,false); 
+
+      res.json(finalRes); 
    }
 
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
 
-   var finalRes = await getWHistCong(act, data[index], true, false,false); 
-
-   res.json(finalRes); 
 
 }) 
 
@@ -193,15 +195,17 @@ app.get('/runs/:number/weather', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      var finalRes = await getWHistCong(act, JSON.parse(JSON.stringify(data[index])), false, true, false); 
+
+      res.json(finalRes); 
    }
 
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
 
-   var finalRes = await getWHistCong(act, data[index], false, true, false); 
-
-   res.json(finalRes); 
 
 }) 
 
@@ -223,15 +227,17 @@ app.get('/runs/:number/temperature', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      var finalRes = await getWHistCong(act, JSON.parse(JSON.stringify(data[index])), false, false, true); 
+
+      res.json(finalRes); 
    }
 
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
-
-   var finalRes = await getWHistCong(act, data[index], false, false, true); 
-
-   res.json(finalRes); 
 
 }) 
 
@@ -253,16 +259,19 @@ app.get('/runs/:number/kudos', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      dbEntry = JSON.parse(JSON.stringify(data[index])); //makes copy not alias
+      dbEntry.kudos = act.kudos_count;
+      console.log(dbEntry)
+
+      res.json(dbEntry); 
    }
 
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
 
-   dbEntry = data[index];
-   dbEntry.kudos = act.kudos_count;
-
-   res.json(dbEntry); 
 
 }) 
 
@@ -284,20 +293,22 @@ app.get('/runs/:number/location', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }
-
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
-
-   // console.log(act.start_latlng)
-   if(act.start_latlng.length == 0){
-      res.json({ message: `No Location Data associated with run ${id}` })
    }else{
-      dbEntry = data[index];
-      dbEntry.start_latlng = act.start_latlng
-      res.json(dbEntry); 
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      // console.log(act.start_latlng)
+      if(act.start_latlng.length == 0){
+         res.json({ message: `No Location Data associated with run ${id}` })
+      }else{
+         dbEntry = JSON.parse(JSON.stringify(data[index]));
+         dbEntry.start_latlng = act.start_latlng
+         res.json(dbEntry); 
+      }
    }
+
+
 
 }) 
 
@@ -319,16 +330,18 @@ app.get('/runs/:number/description', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
+
+      dbEntry = JSON.parse(JSON.stringify(data[index]));
+      dbEntry.description = act.description;
+
+      res.json(dbEntry); 
    }
 
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
 
-   dbEntry = data[index];
-   dbEntry.description = act.description;
-
-   res.json(dbEntry); 
 
 
 }) 
@@ -351,18 +364,21 @@ app.post('/runs/:number/description', async (req, res) => {
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }
-
-   //getting strava activity
-   var key = await getStravaAuth(); 
-   var act = await getStravaAct(id,key); 
+   }else{
+         //getting strava activity
+      var key = await getStravaAuth(); 
+      var act = await getStravaAct(id,key); 
 
    
-   data[index].description = act.description;
-   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
+      data[index].description = act.description;
+      fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
 
 
-   res.json({ message: `Description has been added to run '${id}'` });
+      res.json({ message: `Description has been added to run '${id}'` });
+
+   }
+
+
 
 }) 
 
@@ -545,22 +561,25 @@ app.put('/runs/:number', (req, res) =>{
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }
-   
-   
-   const { distance, moving_time, average_speed } = req.body
+   }else{
+      const { distance, moving_time, average_speed } = req.body
 
-   if(distance){ 
-      data[index]['distance'] = distance; 
+      if(distance){ 
+         data[index]['distance'] = distance; 
+      }
+      if(moving_time){ 
+         data[index]['moving_time'] = moving_time; 
+      }
+      if(average_speed){ 
+         data[index]['average_speed'] = average_speed; 
+      }
+      fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
+      res.json({ message: `Run '${id}' updated accordingly`});
+
    }
-   if(moving_time){ 
-      data[index]['moving_time'] = moving_time; 
-   }
-   if(average_speed){ 
-      data[index]['average_speed'] = average_speed; 
-   }
-   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
-   res.json({ message: `Run '${id}' updated accordingly`});
+   
+   
+
 })
 
 /*
@@ -578,12 +597,14 @@ app.delete('/runs/:number', (req, res) =>{
    }
    if(index == null){
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //remove and shift from original
+      data.splice(index,1);
+
+   
+      fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
+      res.json({ message: `Run '${id}' deleted`});
    }
 
-   //remove and shift from original
-   data.splice(index,1);
 
- 
-   fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));
-   res.json({ message: `Run '${id}' deleted`});
 })
