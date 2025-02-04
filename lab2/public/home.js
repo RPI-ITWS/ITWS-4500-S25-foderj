@@ -249,6 +249,7 @@ window.addEventListener("load", function() {
             }else if(typeof parsed.distance === 'undefined'){
                //must be list 
                //is pretty printed 
+               $('#message').css('display', 'flex'); 
                $('#message').html('<br><br> <header>List of IDs:</header>\
                   <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
             }else{
