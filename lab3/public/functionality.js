@@ -39,28 +39,6 @@ function metersToMiles(meters){
    return(Math.round(miles * 100) / 100) 
 }
 
-//LISTENER FUNCTIONS
-
-/*When url input box is changed, this is called to update the fetch visualizer accordingly*/
-document.getElementById("url").addEventListener("input", function() {
-   INPURL = $('#url').val();
-   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n   \
-        "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-});
-
-/*When json input box is changed, this is called to update the fetch visualizer accordingly*/
-document.getElementById("jsonInput").addEventListener("input", function() {
-   INPJSON = $('#jsonInput').val().replace(/\s+/g, ''); //removes whitepace using regex
-   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
-      "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-});
-
-/*When method selector is changed, this is called to update the fetch visualizer accordingly*/
-document.getElementById("apiCaller").addEventListener("change", function() {
-   INPMETH = $('#method').val();
-   $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
-      "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-});
 
 //OUTPUT FUNCTIONS
 
@@ -173,8 +151,46 @@ function showSolo(info){
 }
 
 //MAIN EVENT LISTENER
+//keeps checking until everything is loaded
+const waitForReactElement = (id, callback) => {
+   const checkInterval = setInterval(() => {
+     const element = document.getElementById(id);
+     if (element) {
+       clearInterval(checkInterval);
+       callback(element);
+     }
+   }, 50); // Check every 50ms
+ };
+ 
+ //waiting for last react element to load before start
+ waitForReactElement("apiCaller", (element) => {
 
-window.addEventListener("load", function() {
+
+   //LISTENER FUNCTIONS
+
+   /*When url input box is changed, this is called to update the fetch visualizer accordingly*/
+   document.getElementById("url").addEventListener("input", function() {
+      INPURL = $('#url').val();
+      console.log(INPURL); 
+      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n   \
+         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
+   });
+
+   /*When json input box is changed, this is called to update the fetch visualizer accordingly*/
+   document.getElementById("jsonInput").addEventListener("input", function() {
+      INPJSON = $('#jsonInput').val().replace(/\s+/g, ''); //removes whitepace using regex
+      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
+         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
+   });
+
+   /*When method selector is changed, this is called to update the fetch visualizer accordingly*/
+   document.getElementById("apiCaller").addEventListener("change", function() {
+      INPMETH = $('#method').val();
+      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
+         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
+   });
+
+
 
    /*calls everytime submit occurs
    'event holds details about event' 
@@ -268,4 +284,7 @@ window.addEventListener("load", function() {
          alert("text entered is not valid JSON, try again");
       }
    })
-});
+
+ });
+ 
+
