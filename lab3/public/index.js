@@ -23,19 +23,38 @@
 const { useState } = React;
 
 const MyComponent = () => {
-  const [text, setText] = useState('Original Text');
+  // State for the first textbox
+  const [firstText, setFirstText] = useState('');
+  
+  // State for the second textbox (this will be updated based on the first one)
+  const [secondText, setSecondText] = useState('');
 
-  const updateText = () => {
-    // Update the state to change the text
-    setText('Updated text with React.createElement!');
+  // Update the second textbox whenever the first one changes
+  const handleFirstTextChange = (e) => {
+    const newText = e.target.value;
+    setFirstText(newText);  // Update the first textbox state
+    setSecondText(newText); // Update the second textbox state
   };
 
-  // Return the JSX-like structure using React.createElement
   return React.createElement(
-    'div', 
+    'div',
     null,
-    React.createElement('h1', null, text),
-    React.createElement('button', { onClick: updateText }, 'Update Text')
+    React.createElement(
+      'input', 
+      {
+        type: 'text',
+        value: firstText, // Bind the value to the state
+        onChange: handleFirstTextChange, // Update the state when the first textbox changes
+      }
+    ),
+    React.createElement(
+      'input', 
+      {
+        type: 'text',
+        value: secondText, // Bind the value to the second textbox state
+        readOnly: true, // Make the second textbox read-only so the user can't change it
+      }
+    )
   );
 };
 
