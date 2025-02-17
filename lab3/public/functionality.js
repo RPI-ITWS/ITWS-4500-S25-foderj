@@ -166,30 +166,6 @@ const waitForReactElement = (id, callback) => {
  waitForReactElement("apiCaller", (element) => {
 
 
-   //LISTENER FUNCTIONS
-
-   /*When url input box is changed, this is called to update the fetch visualizer accordingly*/
-   document.getElementById("url").addEventListener("input", function() {
-      INPURL = $('#url').val();
-      console.log(INPURL); 
-      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n   \
-         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-   });
-
-   /*When json input box is changed, this is called to update the fetch visualizer accordingly*/
-   document.getElementById("jsonInput").addEventListener("input", function() {
-      INPJSON = $('#jsonInput').val().replace(/\s+/g, ''); //removes whitepace using regex
-      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
-         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-   });
-
-   /*When method selector is changed, this is called to update the fetch visualizer accordingly*/
-   document.getElementById("apiCaller").addEventListener("change", function() {
-      INPMETH = $('#method').val();
-      $('#fetch').html('fetch(\'' + INPURL +  '\', {\n\tmethod: \'' + INPMETH + '\',\n\n\theaders: {\n     \
-         "Content-Type": "application/json",\n\t},\n\n\tbody: \''+ INPJSON + '\'\n     })')
-   });
-
 
 
    /*calls everytime submit occurs

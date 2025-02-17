@@ -37,6 +37,12 @@ Things I learned/citations:
 
       Root node is replaced by the element I am rendering
 
+   Using Webhooks :
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://stackoverflow.com/questions/75153066/how-do-i-get-the-value-of-a-usestate-hook-from-an-imported-component-in-a-react&ved=2ahUKEwi2zfDwkMuLAxVxlokEHUqDLTQQFnoECE4QAQ&usg=AOvVaw0Fy6LTgNuv4EtmAj874ENB
+
+Creativity: 
+   Migrating functionality of mirror to react
+
 React Notes: 
 
    New thoughtprocess for making things: 
