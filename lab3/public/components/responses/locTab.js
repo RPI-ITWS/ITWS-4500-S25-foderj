@@ -1,6 +1,8 @@
+/*Responsible for Curating html for Location related responses */
 'use strict'; //catches mistakes
 import {makeStatDis, h2, infoLi} from './statDis.js';
 
+/*Creates the box which holds lat and long information  */
 function locHold(){
    return React.createElement(
       'div',
@@ -20,6 +22,10 @@ function locHold(){
    )
 }
 
+
+/*MAIN*/
+
+/*creates run description and location box*/
 function makeLoc(){
    return React.createElement(
       'div',

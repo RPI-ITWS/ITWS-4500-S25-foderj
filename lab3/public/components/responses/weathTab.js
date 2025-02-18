@@ -1,14 +1,10 @@
+
+/*Responsible for Curating html for weather related responses */
 'use strict'; //catches mistakes
 import {makeStatDis, h2} from './statDis.js';
 
 
-
-
-
-
-
-
-
+/*Makes the body of a table specific to this application*/
 function makeTbody(){
    return React.createElement(
       'tbody', 
@@ -73,6 +69,7 @@ function makeTbody(){
    )
 }
 
+/*Initializing the table*/
 function initTable({givID}){
    return React.createElement(
       'table', 
@@ -84,6 +81,7 @@ function initTable({givID}){
    )
 }
 
+/*Responsible for making entire weather description box*/
 function makeWeathDis(){
    return React.createElement(
       'div', 
@@ -93,6 +91,7 @@ function makeWeathDis(){
       },
       h2({innerText: 'Precipitation (inches)', givID: 'weathKind'}), 
       initTable({givID:'top'}),
+      // Couldn't use other function as there is a different amount of cells
       React.createElement(
          'table', 
          {
@@ -162,6 +161,9 @@ function makeWeathDis(){
    )
 }
 
+/*MAIN*/
+
+/*Makes weather and description tab*/
 function makeWeathTab(){
 
    return React.createElement(
@@ -178,7 +180,6 @@ function makeWeathTab(){
          makeWeathDis()
       )
    );
-
 }
 
 

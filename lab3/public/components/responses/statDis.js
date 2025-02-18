@@ -1,3 +1,6 @@
+/*Responsible for making running stats box */
+
+/*Creates header of box*/
 export function h2({ innerText, givID }) {
 
    return React.createElement(
@@ -9,7 +12,7 @@ export function h2({ innerText, givID }) {
    );
 }
 
-
+/*creates running stats list item*/
 export function infoLi({title,innerUnits, givID}){
    return React.createElement(
       'li', 
@@ -33,6 +36,8 @@ export function infoLi({title,innerUnits, givID}){
    )
 }
 
+
+/*creates entire running stats list*/
 function infoList({extraChar}){
    return React.createElement(
       'ul',
@@ -46,6 +51,8 @@ function infoList({extraChar}){
    )
 }
 
+/*MAIN*/
+/*creates entire running stats display box*/
 export function makeStatDis({extra}){
    return React.createElement(
       'div', 

@@ -52,38 +52,8 @@ function makeSelect(){
    );
 }
 
-/*Creates an input element*/
-function makeInput({givID, place}){
-   return React.createElement(
-      'input',
-      {
-         id: givID,
-         size: "86",
-         type: "text",
-         placeholder: place, 
-         required: true
-      },
-      null
 
-   );
-}
 
-/*Creates a text area*/
-function makeTxtArea({givID, place, inner, readO}){
-
-   return React.createElement(
-      'textarea',
-      {
-         id: givID,
-         rows: 15,
-         cols: 70,
-         placeholder: place, 
-         readOnly: readO,
-         defaultValue: inner
-      }
-
-   );
-}
 
 /*Creates a header with a given placeholder*/
 function makeHeader({place}){
@@ -98,7 +68,7 @@ function makeHeader({place}){
 
 /*Responsible for fetch caller functionality  */ 
 function makeMirror(){
-
+   //itial string in box
    var init = "fetch('', {\n\
           method: 'GET',\n\
 \n\
@@ -108,8 +78,11 @@ function makeMirror(){
 \n\
           body: ''\n\
       })"
+
+
    const [simpleFetch, setFetch] = useState(init);
 
+   //updates fetch box when others change
    const handleBoxChange = (e) => {
       const newText = e.target.value;
       if(e.target.id == 'url'){
@@ -134,7 +107,7 @@ function makeMirror(){
    };
 
 
-
+   //defining the intertwined components
    return React.createElement(
       'div', 
       null, 
@@ -197,6 +170,7 @@ function makeMirror(){
    )
 }
 
+/*simply makes submit button*/
 function makeSub(){
    return (React.createElement(
       'button', 

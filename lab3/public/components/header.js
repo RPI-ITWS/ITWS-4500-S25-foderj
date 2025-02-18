@@ -1,3 +1,4 @@
+/*Responsible for creating page header */
 'use strict'; //catches mistakes
 
 

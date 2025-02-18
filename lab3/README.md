@@ -1,754 +1,144 @@
 
-
 ##### Served at: https://foderj.eastus.cloudapp.azure.com/node
 - *Note: must be configured for vm and local, as there are url differences*
-- *Note: path to lab2 folder on vm:* ```/var/www/html/foderjGit/lab2 ```
+- *Note: path to lab3 folder on vm:* ```/var/www/html/foderjGit/lab3 ```
 
-# Joe's Runs API Documentation:
-
-#### 1. GET https://foderj.eastus.cloudapp.azure.com/node/runs
-
-- will return a list of all of the ID's from all of the runs in the form of JSON 
-- No Body neccesary.
-- can include {page} parameter in URL to paginate results (default is 3) 
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	}
-})
-```
-- *Example Response*:
-```
-[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]
-```
-
-#### 2. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###
-
-- here '###' represents any valid id that correlates to a run
-- Only valid ID's will be accepted
-- No Body neccesary. 
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/32', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	}
-})
-```
-- *Example Response*:
-```
-{
-    "name": "Easy + Cornfields Plus Turf",
-    "distance": 13627.9,
-    "moving_time": 3817,
-    "elapsed_time": 4761,
-    "total_elevation_gain": 143,
-    "type": "Run",
-    "id": 13295726858,
-    "start_date": "2025-01-07T21:02:51Z",
-    "average_speed": 3.57,
-    "max_speed": 5.7,
-    "average_watts": 226.6,
-    "max_watts": 497,
-    "kilojoules": 864.8,
-    "average_heartrate": 148.3,
-    "max_heartrate": 167,
-    "elev_high": 133.8,
-    "elev_low": 74.4,
-    "suffer_score": 79
-}
-```
-#### 3. POST https://foderj.eastus.cloudapp.azure.com/node/runs
-
-- Will append a new run to the end of the existing database of runs 
-- Body of the request must be strinified JSON and include 'distance', 'moving_time', and 'average_speed' for the entry to be added. 
-- Body Neccesary 
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
-	method: 'POST',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: '{"distance":9.1,"moving_time":6710,"average_speed":684}'
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "Received data for run with distance 9.1"
-}
-```
-
-#### 4. PUT https://foderj.eastus.cloudapp.azure.com/node/runs
-
-- Will bulk update anywhere from 1-3 attributes from all of the runs at the same time  
-- you will not be allowed to update the id of any run
-- If an ID is included in the body, nothing will change regarding ID's in the database 
-- Include the attributes you want to update in the body of your request 
-- Body Neccesary 
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs', {
-	method: 'PUT',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: '{"distance":2}'
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "All runs updated accordingly"
-}
-```
-
-#### 5. PUT https://foderj.eastus.cloudapp.azure.com/node/runs/###
-
-- here '###' represents any valid id that correlates to a run
-- Will update anywhere from 1-3 attributes of the run specified by the ID in the url
-- you will not be allowed to update the id of any run
-- If an ID is included in the body, nothing will change regarding ID's in the database 
-- Include the attributes you want to update in the body of your request 
-- Body Neccesary 
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/56', {
-	method: 'PUT',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: '{"distance":2,"average_speed":543}'
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "Run '56' updated accordingly"
-}
-```
-
-#### 6. DELETE https://foderj.eastus.cloudapp.azure.com/node/runs/###
-
-- here '###' represents any valid id that correlates to a run
-- Will delete any run specified by the ID in the url
-- you will not be able to acsess this run after it is deleted
-- Will update the ID's of the rest of the runs in the DB accordingly; the ones following the element deleted have their ID's decremented
-- *Example Request*: 
-```
-fetch('https://foderj.eastus.cloudapp.azure.com/node/runs/92', {
-	method: 'DELETE',
-
-	headers: {
-           "Content-Type": "application/json",
-	}
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "Run '92' deleted"
-}
-```
-
-#### 7. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/precipitation
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with hourly precipitation totals from the day you ran. 
-- This weather information is from: https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/precipitation', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "hourly": {
-    "time": [
-      "2025-01-16T00:00",
-      "2025-01-16T01:00",
-      "2025-01-16T02:00",
-      "2025-01-16T03:00",
-      "2025-01-16T04:00",
-      "2025-01-16T05:00",
-      "2025-01-16T06:00",
-      "2025-01-16T07:00",
-      "2025-01-16T08:00",
-      "2025-01-16T09:00",
-      "2025-01-16T10:00",
-      "2025-01-16T11:00",
-      "2025-01-16T12:00",
-      "2025-01-16T13:00",
-      "2025-01-16T14:00",
-      "2025-01-16T15:00",
-      "2025-01-16T16:00",
-      "2025-01-16T17:00",
-      "2025-01-16T18:00",
-      "2025-01-16T19:00",
-      "2025-01-16T20:00",
-      "2025-01-16T21:00",
-      "2025-01-16T22:00",
-      "2025-01-16T23:00"
-    ],
-    "precipitation": [0, 0, 0, 0, 0.004, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  }
-}
-```
-
-#### 8. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/weather
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with hourly weather codes from the day you ran. 
-- This weather information is from: https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/weather', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "hourly": {
-    "time": [
-      "2025-01-16T00:00",
-      "2025-01-16T01:00",
-      "2025-01-16T02:00",
-      "2025-01-16T03:00",
-      "2025-01-16T04:00",
-      "2025-01-16T05:00",
-      "2025-01-16T06:00",
-      "2025-01-16T07:00",
-      "2025-01-16T08:00",
-      "2025-01-16T09:00",
-      "2025-01-16T10:00",
-      "2025-01-16T11:00",
-      "2025-01-16T12:00",
-      "2025-01-16T13:00",
-      "2025-01-16T14:00",
-      "2025-01-16T15:00",
-      "2025-01-16T16:00",
-      "2025-01-16T17:00",
-      "2025-01-16T18:00",
-      "2025-01-16T19:00",
-      "2025-01-16T20:00",
-      "2025-01-16T21:00",
-      "2025-01-16T22:00",
-      "2025-01-16T23:00"
-    ],
-    "weather_code": [1, 3, 0, 3, 71, 3, 3, 3, 3, 3, 3, 0, 1, 2, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3]
-  }
-}
-```
-
-#### 9. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/temperature
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with hourly temperatures (F) from the day you ran. 
-- This weather information is from: https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/temperature', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "hourly": {
-    "time": [
-      "2025-01-16T00:00",
-      "2025-01-16T01:00",
-      "2025-01-16T02:00",
-      "2025-01-16T03:00",
-      "2025-01-16T04:00",
-      "2025-01-16T05:00",
-      "2025-01-16T06:00",
-      "2025-01-16T07:00",
-      "2025-01-16T08:00",
-      "2025-01-16T09:00",
-      "2025-01-16T10:00",
-      "2025-01-16T11:00",
-      "2025-01-16T12:00",
-      "2025-01-16T13:00",
-      "2025-01-16T14:00",
-      "2025-01-16T15:00",
-      "2025-01-16T16:00",
-      "2025-01-16T17:00",
-      "2025-01-16T18:00",
-      "2025-01-16T19:00",
-      "2025-01-16T20:00",
-      "2025-01-16T21:00",
-      "2025-01-16T22:00",
-      "2025-01-16T23:00"
-    ],
-    "temperature_2m": [18.7, 18.3, 19.6, 20.3, 21, 22.4, 21, 20.3, 21, 21.8, 23.7, 25.8, 27.1, 27.1, 27.4, 27.2, 27, 26.6, 25.2, 24.4, 24.9, 23.8, 23.6, 23.7]
-  }
-}
-```
-
-#### 10. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/kudos
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with kudos totals from the corresponding strava post.
-- This strava information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/kudos', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "kudos": 14
-}
-```
-
-#### 10. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/kudos
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with kudos totals from the corresponding strava post.
-- This strava information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/kudos', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "kudos": 14
-}
-```
-
-#### 11. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/location
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with the longitude and latitude of where this run was started from.
-- This longitude/latitude information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/location', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "start_latlng": [42.733489, -73.668357]
-}
-```
-
-#### 12. GET https://foderj.eastus.cloudapp.azure.com/node/runs/###/description
-
-- here '###' represents any valid id that correlates to a run
-- Will return a conglomerate JSON response of data in local (to vm) db.json along with the description of the run from my strava post
-- This description information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/description', {
-	method: 'GET',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-  "name": "Mind work",
-  "distance": 17524.9,
-  "moving_time": 4893,
-  "elapsed_time": 5096,
-  "total_elevation_gain": 198,
-  "type": "Run",
-  "id": 13375540243,
-  "start_date": "2025-01-16T23:30:32Z",
-  "average_speed": 3.582,
-  "max_speed": 6.52,
-  "average_watts": 238.9,
-  "max_watts": 434,
-  "kilojoules": 1169.2,
-  "average_heartrate": 150.2,
-  "max_heartrate": 168,
-  "elev_high": 113.2,
-  "elev_low": 66.4,
-  "suffer_score": 107,
-  "description": "Nice run with Matt and abbey for a bit @ turf then around. Got my head right from yeaterday and feeling good. Also did 3x200 cutdowns on turf"
-}
-```
-
-#### 13. POST https://foderj.eastus.cloudapp.azure.com/node/runs/###/description
-
-- here '###' represents any valid id that correlates to a run
-- Will append the local (vm) database with the corresponding description of the run from strava
-- This description information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/description', {
-	method: 'POST',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "Description has been added to run '13375540243'"
-}
-```
-
-#### 14. PUT https://foderj.eastus.cloudapp.azure.com/node/runs/names
-
-- here '###' represents any valid id that correlates to a run
-- Will update every entry of the local (vm) database with the most recent name of each run as users do often change the names of their runs
-- This name information is from: https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-- *Example Request*: 
-```
-fetch('http://localhost:3000/runs/13375540243/names', {
-	method: 'POST',
-
-	headers: {
-           "Content-Type": "application/json",
-	},
-
-	body: ''
-     })
-```
-- *Example Response*:
-```
-{
-    "message": "All run Names have been updated'"
-}
-```
-
----
 # Creativity 
 
- I decided to go with functional creativity vs design (css) creativity as functional is defintley my strong suit. Here is what I would like to be considered: 
+ The main area of creativity for this lab was scalability, along with migrating some cool functionalities from my functionality.js to react. 
 
- ##### 1. API Combination
- - Use of the historical weather API to see what the temperature was during that exact run in the exact location. 
- - Using the lat and long of my runs to track said weather 
- - getting a more in depth description of my runs 
+ ##### 1. Scalability/readability 
+ - Structured my react in a way in which is it easy to understand what each file is responsibile for
+ - Broke main page into 3 components: header, form, and results.
+ - I then had a main file for the results portion which imported 5 more subcomponents of results (represented by the responses folder). 
+ - the orginization of the files in this way allowed me to easily keep track of which portion of the lab I was working on and greatly impacted readability. 
 
- ##### 2. Data formatting in homepage
- - When presenting things like hourly precipitation/temperature, I curated a table in order for the user to better visualize the data. 
+ ##### 2. Miror functionality migrating to react
+ - I decided to change my fetch mirror functionality from manipulating the DOM to using states in react. 
+ - Integrated much easier with react than my previous funcionality. 
+ - This can be seen [here](https://github.com/RPI-ITWS/ITWS-4500-S25-foderj/blob/28f62c6d35d44bfe69a04c383ce5db3a8d2d83ff/lab3/public/components/form.js#L100)
+ 
 
-##### 3. Homepage Design 
- - I tried to make the design of my homepage fit a specific colorway and theme. 
+ ##### 3. File Seperation/Reusability
+- When creating files and functions, I made sure to think in terms of reusability when creating them. For example, 'statDis.js' in my responses folder in imported into almost every single on of my respones and a very similar version is used for each response. 
 
-##### 4. Real Data
- - I found a way encorporate the API of one of my favorite apps (Strava) into my project. This let to me restructuring my 'local' database which is now full of completley real data. 
 
- ##### 5. Updated Documentation
- - Even  though it wasn't explicitly on the sheet, I updated my documentation to keep up with the current state of my API
 
 ---
 
 # Running Work Log: 
-
 ```
+
+
+Functionality from lab2 must exist in Lab 3. 
+One file for each react component
+
+Make this exact lab but in react 
+
 Plan: 
+   make a main js file where all of the components come together and that is the only thing connected to our index.html
 
-   my new database is just going to be my strava runs from january but a much simplier JSON with not as much garbage, √
-   Going to pull more info about the run ID from strava and weather data from historical weather API. 
-   Get start, lat/long from strava -> use that to search the weather
+Requirements: 
+   remake the whole thing in react
+   know how to use create element
 
+before subit: 
+   validate, comment, write up creativity
+   remove log statements √
 
-
-   6 new get endpoints √
-      these endpoints must return JSON conglomerates from 2 API sources
-      /runs/:number/precipitation
-         returns db obj with, array of rainfall throughout the day of the run
-      /runs/:number/weather
-         returns db obj with, weather codes throughout the day of the run
-      /runs/:number/temp
-         returns db obj with, temp in farenheight throughout the day of the run
-      /runs/:number/kudos
-         returns db obj with kudo information
-      /runs/:number/location
-         returns db obj with location info
-      /runs/:number/description
-         returns db obj with description of the run 
-
-
-   1 new post endpoint:  √
-      must add data from one external API to our 'db'
-      /runs/description
-         (adds description to item specified in my database}) 
-
-   1 new PUT endpoint: √
-      update data in JSON (db) from one of external API's 
-      /runs/names
-         (updates all runs name from strava API in case the user changes them ) 
-
-   
-
-   frontend must parse data returned and display it nicely (have a raw/nice toggle): 
-      emphizize overlap between when I am running and the conditions at that time -> for optimizing front-end next lab 
-      by nicely -> literally justnot in JSON
-
-   Update documentation accordingly 
-
-   Creativity 
-
-   Document API's I used 
-      
-
-
-
-   
-Strava API NOtes: 
-   what get mass activities, oldest is at bottom, and can paginate
-   https://developers.strava.com/docs/reference/#api-Activities-getActivityById
-
-
-Historical Weather API Notes: 
-   https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
-
-   goes up to 23rd hour 
-   
-   note: only has back to 2022 (works for my application)
-
-Reqs: 
-   Have to use our JSON objects for the post and put endpoints, but can just be a conglomerate of API's for the rest 
-
-   you will need to have your endpoints make multiple
-   API calls and combine the results into a singular JSON object before sending it back to your
-   frontend.
-   6 new get endpoints
-      these endpoints must return JSON conglomerates from 2 API sources
-
-   1 new post endpoint: 
-      must add data from one external API to out 'db'
-
-   1 new PUT endpoint: 
-      update data in JSON (db) from one of external API's 
-
-   Update documentation accordingly 
-
-   frontend must parse data returned and display it nicely (have a raw/nice toggle) 
-
-   Document API's I used 
-
-Things I leaned: 
-   pagenation is just responding with a capped limit, not actually multiple pages 
-   don't send responses in loop 
-   JSON MAKES ALIAS
-   cannot send 2 res's (not like return statement, code after still executes)
-
-Before Submit: 
-   validation √
-   Creativity √
-   comment √
-   Update docs of old and new endpoints √
-   test on VM √
-   Read over sheet once more √
-
-getting Strava: 
-   need read all in order to list our activities 
+Creativity : 
+   Scalability
 
 Future Notes: 
-   Add a .env so API's are called safely 
-   add a strava ID and a 'my ID' 
-   upgrate original PUTS/POSTS
-   delete description
-   expand local DB to more than just January runs 
-   post/put combo for kudos/descriptions
-   clean css (remove unecc)
-   Have a raw: formatted toggle 
-   Show more option to show all of the information stored in the database 
-   present time of run so you can see what the weather was during it 
-   If make flexbox holding 2 info boxes dynamic 
-   if someone puts a non-int in for ID
-   add units to documentation 
+   could integrate functionality and react so that when a response happens, can have a standardized react element that shows up to throw stuff into. 
+   remove br and make the layout of the page more modern 
+   convert functionality to react as well 
 
-Citations: 
-   url params
-   https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.geeksforgeeks.org/how-to-use-get-parameter-in-express-js/&ved=2ahUKEwiBt6ztuqaLAxXmkYkEHZN2GX8QFnoECAsQAQ&usg=AOvVaw0ICZQQzq3O5ixbknHADPzn
+Things I learned/citations: 
+   react is just used to create functions that make components of your page, things that are not made more then once do not need a function
 
-   Date: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString&ved=2ahUKEwjNwoOM2qeLAxUrhIkEHamGAxAQFnoECAsQAQ&usg=AOvVaw1ulCBE--FosRxboAzo6Lk4
+   JS exports: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export&ved=2ahUKEwj3ptv08cWLAxXJhIkEHVc7FFMQFnoECBQQAQ&usg=AOvVaw28HYPqII1Z6cRpmSSihS-M
 
-   For each:   
-      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=http://www.w3schools.com/jsref/jsref_forEach.asp&ved=2ahUKEwiitrLJ6KeLAxV8q4kEHa7LGbMQFnoECCMQAQ&usg=AOvVaw2UpjRmq3mAH6qEiZbR2HNQ
+   one line function shortcut: () => fetchMe()
 
-   HTML tables in JS: 
-      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/dom_obj_table.asp&ved=2ahUKEwjKtoj-raiLAxUyFFkFHWfkGOcQFnoECAoQAQ&usg=AOvVaw2abI5b6Wgq7ibbtY42ZMU5
+   middle argument of createElement are any properties that you want to pass: 
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/jsref/met_document_createelement.asp&ved=2ahUKEwio5t6X9cWLAxUgm4kEHc9II4IQFnoECBkQAQ&usg=AOvVaw1byJ7ttU9lwiz-UMS49JF1
 
-   Strava API NOtes: 
-      what get mass activities, oldest is at bottom, and can paginate
-      https://developers.strava.com/docs/reference/#api-Activities-getActivityById
+   When doing this: 
+      const headerNode = document.getElementById('like-button-root');
+      const root = ReactDOM.createRoot(headerNode);
+      root.render(React.createElement(makeHeader)); // how to pass arguments 
+
+      Root node is replaced by the element I am rendering
+
+   Using Webhooks :
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://stackoverflow.com/questions/75153066/how-do-i-get-the-value-of-a-usestate-hook-from-an-imported-component-in-a-react&ved=2ahUKEwi2zfDwkMuLAxVxlokEHUqDLTQQFnoECE4QAQ&usg=AOvVaw0Fy6LTgNuv4EtmAj874ENB
+
+   JS export functions: 
+      https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export&ved=2ahUKEwjeyaX0z82LAxUPM1kFHTD8JZUQFnoECAkQAQ&usg=AOvVaw28HYPqII1Z6cRpmSSihS-M
+
+   For react files, if start with './', do not need to re-do path when on server
+
+Creativity: 
+   Migrating functionality of mirror to react
+
+React Notes: 
+
+   New thoughtprocess for making things: 
+      reuse- UI elements 
+      Not going to work on React and node working together
+
+   Frameworks:
+      standard way to build and deploy web apps 
+      learn how to think with frameworks (there are multiple) 
+      makes codebases easier to naviagate with the introduction of components 
+
+   Data Binding: 
+      html acts as a signpost of directives 
+      Directives: adds behavior to DOM 
+         Want to be reusable
+      Components: Headers, buttons, forms ect
+         written in js, shown as directive in html 
+         Want to be reusable
+
+   Event delegation: 
+      IS an event listener 
+
+   React start: 
+      installed with this (like Jquery) 
+      Props is short for properties 
+
+      this is a directive: <div id="like-button-root"></div>
+      Point of using react, to maximize minimizing writing code (multiple buttons, not one input box)
+      react helps with logic 
+
+Good example code: 
+   async function fetchMe(){
+      var fetchRes = await fetch("http://localhost:3000/runs/13343417366/temperature", {
+      method: "GET",
+      headers: {
+         "Content-Type": "application/json",
+      }
+   })
+
+   var parsed = await fetchRes.json()
+   console.log(parsed); 
+   }
 
 
-   Historical Weather API Notes: 
-      https://open-meteo.com/en/docs/historical-forecast-api#start_date=2025-01-18
+
+   function apiButton() {
+
+   return React.createElement(
+      'button',
+      {
+      onClick: () => fetchMe() //this makes react re-render the component as state or props changed, 
+      },
+      "Click here for API Call!"
+   );
+   }
+
+
+Current: 
+   done √
 ```
