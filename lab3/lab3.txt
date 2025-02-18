@@ -101,4 +101,4 @@ Good example code:
 
 
 Current: 
-   follow along how to update with new thing in
+   Form and mirroring almost done, just have to add get,post,put functionality. 

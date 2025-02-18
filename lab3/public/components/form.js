@@ -90,45 +90,6 @@ function makeHeader({place}){
 
 
 
-// const MyComponent = () => {
-//   // State for the first textbox
-//   const [firstText, setFirstText] = useState('');
-  
-//   // State for the second textbox (this will be updated based on the first one)
-//   const [secondText, setSecondText] = useState('');
-
-  
-//   //e is the event object 
-//   const handleFirstTextChange = (e) => {
-//     const newText = e.target.value;
-//     setFirstText(newText);  // Update the first textbox state
-//     setSecondText(newText); // Update the second textbox state
-//   };
-
-//   return React.createElement(
-//     'div',
-//     null,
-//     React.createElement(
-//       'input', 
-//       {
-//         type: 'text',
-//         value: firstText, // Bind the value to the state
-//         onChange: handleFirstTextChange, // Update the state when the first textbox changes
-//       }
-//     ),
-//     React.createElement(
-//       'input', 
-//       {
-//         type: 'text',
-//         value: secondText, // Bind the value to the second textbox state
-//         readOnly: true, // Make the second textbox read-only so the user can't change it
-//       }
-//     )
-//   );
-// };
-
-
-
 function makeMirror(){
 
 
@@ -148,12 +109,14 @@ function makeMirror(){
       const newText = e.target.value;
       if(e.target.id == 'url'){
          INPURL = newText
+      }else if(e.target.id == 'method'){
+         INPMETH = newText
       }else{
          INPJSON = newText
       }
 
       var newFetch = "fetch('" + INPURL + "', {\n\
-          method: 'GET',\n\
+          method: '" + INPMETH + "',\n\
 \n\
           headers: {\n\
             'Content-Type': 'application/json',\n\
@@ -167,10 +130,24 @@ function makeMirror(){
 
 
 
-
    return React.createElement(
       'div', 
       null, 
+      makeLabel({ innerText: 'Choose a Call Method:' }),
+      bk(),
+      React.createElement(
+         'select',
+         {
+            id: "method",
+            onChange: handleBoxChange
+         },
+         React.createElement('option',{value: "GET"}, "GET"),
+         React.createElement('option',{value: "POST"}, "POST"),
+         React.createElement('option',{value: "PUT"}, "PUT"),
+         React.createElement('option',{value: "DELETE"}, "DELETE")
+      ),
+      bk(),
+      bk(),
       makeLabel({ innerText: 'Enter Request URL:' }),
       bk(),
       React.createElement(
@@ -191,7 +168,7 @@ function makeMirror(){
       React.createElement(
          'textarea',
          {
-            id: "fetch",
+            id: "jsonInput",
             rows: 15,
             cols: 70,
             placeholder: '{"distance":9.1,"moving_time":6710,"average_speed":684}', 
@@ -204,7 +181,7 @@ function makeMirror(){
       React.createElement(
          'textarea',
          {
-            id: "jsonInput",
+            id: "fetch",
             rows: 15,
             cols: 70,
             placeholder: '{"distance":9.1,"moving_time":6710,"average_speed":684}', 
@@ -215,6 +192,16 @@ function makeMirror(){
    )
 }
 
+function makeSub(){
+   return (React.createElement(
+      'button', 
+      {
+         type: 'submit'
+      }, 
+      'Submit'
+   ))
+}
+
 /*MAIN*/
 function makeForm() {
 
@@ -222,13 +209,8 @@ function makeForm() {
       'form',
       {id: "apiCaller"},
       docHeader(),
-      makeLabel({ innerText: 'Choose a Call Method:' }),
-      bk(),
-      makeSelect(),
-      bk(),
-      bk(),
-      makeMirror()
-
+      makeMirror(),
+      makeSub()
    );
  
 }

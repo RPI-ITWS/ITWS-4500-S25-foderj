@@ -173,6 +173,7 @@ const waitForReactElement = (id, callback) => {
    must be async because waiting on request */
    document.getElementById("apiCaller").addEventListener("submit", async function(event){
 
+      console.log('here') 
       //hide all previous result options
       $('#precip').css('display', 'none'); 
       $('#kudos').css('display', 'none'); 
@@ -190,6 +191,7 @@ const waitForReactElement = (id, callback) => {
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 
       //checks if user JSON input is correct
+      console.log(bod)
       if(isJSON(bod) || bod == ""){
          if(!bod == ""){
             bod = JSON.stringify(JSON.parse(bod))//converts JS object, then to string from JSON
@@ -216,6 +218,7 @@ const waitForReactElement = (id, callback) => {
 
          var parsed = await fetchRes.json()
 
+         
          
          if (typeof parsed.message === 'undefined'){
             $('#message').css('display', 'none'); 
