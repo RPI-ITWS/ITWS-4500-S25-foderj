@@ -1,3 +1,4 @@
+/*Responsible for creating form in which user can make API Calls */
 'use strict'; //catches mistakes
 const { useState } = React; //basically importing
 var INPURL = ""
@@ -5,7 +6,7 @@ var INPJSON = ""
 var INPMETH = "GET"
 
 
-
+/*Makes header that links to API documentation*/
 function docHeader() {
 
    return React.createElement(
@@ -19,6 +20,7 @@ function docHeader() {
    );
 }
 
+/*Creates label to help label things within form*/
 function makeLabel({ innerText }){
    return React.createElement(
       'label',
@@ -27,6 +29,7 @@ function makeLabel({ innerText }){
    );
 }
 
+/*Quick Funciton To create a break*/
 function bk(){
    return React.createElement(
       'br',
@@ -35,6 +38,7 @@ function bk(){
    );
 }
 
+/*Makes select dropdown menu for form*/
 function makeSelect(){
    return React.createElement(
       'select',
@@ -48,6 +52,7 @@ function makeSelect(){
    );
 }
 
+/*Creates an input element*/
 function makeInput({givID, place}){
    return React.createElement(
       'input',
@@ -63,6 +68,7 @@ function makeInput({givID, place}){
    );
 }
 
+/*Creates a text area*/
 function makeTxtArea({givID, place, inner, readO}){
 
    return React.createElement(
@@ -79,6 +85,7 @@ function makeTxtArea({givID, place, inner, readO}){
    );
 }
 
+/*Creates a header with a given placeholder*/
 function makeHeader({place}){
    return React.createElement(
       'header',
@@ -89,11 +96,9 @@ function makeHeader({place}){
 
 
 
-
+/*Responsible for fetch caller functionality  */ 
 function makeMirror(){
 
-
-     // State for the first textbox
    var init = "fetch('', {\n\
           method: 'GET',\n\
 \n\

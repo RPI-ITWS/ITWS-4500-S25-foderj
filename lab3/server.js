@@ -580,7 +580,7 @@ app.delete('/runs/:number', (req, res) =>{
       res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
    }else{
       //remove and shift from original
-      data.splice(index,1);
+   
 
    
       fs.writeFileSync('./db.json', JSON.stringify(data, null, 4));

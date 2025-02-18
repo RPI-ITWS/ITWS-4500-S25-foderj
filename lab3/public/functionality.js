@@ -54,7 +54,6 @@ function showPrecip(info){
    $('#typeVal2').html("<b>Precipitation</b>");
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
-   console.log(document.getElementById('top'))
 
    var table = document.getElementById('top');
    for(var i = 0; i < 13; i++){
@@ -155,7 +154,7 @@ function showSolo(info){
 }
 
 //MAIN EVENT LISTENER
-//keeps checking until everything is loaded
+//keeps checking until everything is loaded from react
 const waitForReactElement = (id, callback) => {
    const checkInterval = setInterval(() => {
      const element = document.getElementById(id);
@@ -167,7 +166,7 @@ const waitForReactElement = (id, callback) => {
  };
  
  //waiting for last react element to load before start
- waitForReactElement("apiCaller", (element) => {
+ waitForReactElement("apiCaller", () => {
 
 
 
@@ -177,7 +176,6 @@ const waitForReactElement = (id, callback) => {
    must be async because waiting on request */
    document.getElementById("apiCaller").addEventListener("submit", async function(event){
 
-      console.log('here') 
       //hide all previous result options
       $('#precip').css('display', 'none'); 
       $('#kudos').css('display', 'none'); 
@@ -195,7 +193,6 @@ const waitForReactElement = (id, callback) => {
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 
       //checks if user JSON input is correct
-      console.log(bod)
       if(isJSON(bod) || bod == ""){
          if(!bod == ""){
             bod = JSON.stringify(JSON.parse(bod))//converts JS object, then to string from JSON
