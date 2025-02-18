@@ -20,4 +20,3 @@ window.addEventListener("load", function() {
    insertElement('insAPIres', makeRes); 
 })
 
-

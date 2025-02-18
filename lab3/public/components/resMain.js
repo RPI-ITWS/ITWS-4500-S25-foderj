@@ -1,5 +1,6 @@
 'use strict'; //catches mistakes
 import makeWeathTab from './responses/weathTab.js';
+import makeKudos from './responses/kudosTab.js';
 
 function makeRes(){
 
@@ -7,6 +8,7 @@ function makeRes(){
       'div',
       {id: "APIres"},
       makeWeathTab(),
+      makeKudos()
    );
 
 }

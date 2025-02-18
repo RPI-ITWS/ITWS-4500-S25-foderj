@@ -1,16 +1,75 @@
 'use strict'; //catches mistakes
-import {makeStatDis, h2} from './statDis.js';
 
 
+function h2({ innerText, givID }) {
+
+   return React.createElement(
+      'h2',
+      {
+         id: givID
+      },
+      innerText
+   );
+}
+
+function infoLi({title,innerUnits, givID}){
+   return React.createElement(
+      'li', 
+      null,
+      title, 
+      React.createElement(
+         'span',
+         {
+            className: 'res'
+         },
+         React.createElement(
+            'span', 
+            {
+               id: givID
+            },
+         ), 
+         innerUnits
+
+      )
+      
+   )
+}
+
+function infoList(){
+   return React.createElement(
+      'ul',
+      {
+         id: 'miscList' 
+      }, 
+      infoLi({title: 'Date:', innerUnits: null, givID: 'start_date'}),
+      infoLi({title: 'Duration:', innerUnits: null, givID: 'elapsed_time'}),
+      infoLi({title: 'Distance:', innerUnits: 'miles', givID: 'distance'}),
+      infoLi({title: 'Speed:', innerUnits: 'mph', givID: 'average_speed'})
+   )
+}
 
 
+function makeStatDis(){
+   React.createElement(
+      'div', 
+      {
+         className: 'innerHold', 
+         id: 'runHoldW'
+      },
+      h2({innerText: 'Really nice easy', givID: 'name'}), 
+      React.createElement(
+         'div', 
+         {
+            className: 'innerHold'
+         }, 
+         infoList()
+      )
 
-
-
-
+   )
+}
 
 function makeTbody(){
-   return React.createElement(
+   React.createElement(
       'tbody', 
       null,
       React.createElement(
@@ -74,7 +133,7 @@ function makeTbody(){
 }
 
 function initTable({givID}){
-   return React.createElement(
+   React.createElement(
       'table', 
       {
          id: givID
@@ -85,7 +144,7 @@ function initTable({givID}){
 }
 
 function makeWeathDis(){
-   return React.createElement(
+   React.createElement(
       'div', 
       {
          className: 'innerHold', 
@@ -93,71 +152,7 @@ function makeWeathDis(){
       },
       h2({innerText: 'Precipitation (inches)', givID: 'weathKind'}), 
       initTable({givID:'top'}),
-      React.createElement(
-         'table', 
-         {
-            id: 'bot'
-         }, 
-         React.createElement(
-            'tbody', 
-            null,
-            React.createElement(
-               'tr', 
-               null, 
-               React.createElement(
-                  'td', 
-                  null, 
-                  React.createElement(
-                     'b', 
-                     null,
-                     "Time"
-                     
-                  )
-               ),
-               React.createElement('td',null,'13:00'),
-               React.createElement('td',null,'14:00'),
-               React.createElement('td',null,'15:00'),
-               React.createElement('td',null,'16:00'),
-               React.createElement('td',null,'17:00'),
-               React.createElement('td',null,'18:00'),
-               React.createElement('td',null,'19:00'),
-               React.createElement('td',null,'20:00'),
-               React.createElement('td',null,'21:00'),
-               React.createElement('td',null,'22:00'),
-               React.createElement('td',null,'23:00')
-            ),
-            React.createElement(
-               'tr', 
-               null, 
-               React.createElement(
-                  'td', 
-                  {
-                     id: 'typeVal2'
-                  }, 
-                  React.createElement(
-                     'b', 
-                     null,
-                     "Rain"
-                  ),
-               ),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-               React.createElement('td',null,null),
-            ) 
-            
-         )
-         
-        
-      )
-      
+      initTable({givID:'bot'})
 
    )
 }
@@ -167,20 +162,17 @@ function makeWeathTab(){
    return React.createElement(
       'form',
       {id: "apiCaller"},
-      React.createElement(
+      React.createElement(public/components/responses/weathTab.js public/home.css
          'div', 
          {
             className: 'mainHold',
             id: 'precip'
          }, 
-
-         makeStatDis({extra: ''}),
+         makeStatDis(),
          makeWeathDis()
       )
    );
 
 }
-
-
 
 export default makeWeathTab;

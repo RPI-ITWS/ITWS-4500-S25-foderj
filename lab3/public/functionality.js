@@ -35,7 +35,7 @@ function secondsToTimeFormat(seconds) {
 
 /*meters to miles conversion*/
 function metersToMiles(meters){
-   miles = meters /1609
+   var miles = meters /1609
    return(Math.round(miles * 100) / 100) 
 }
 
@@ -50,13 +50,17 @@ function showPrecip(info){
    $('#start_date').html(info.start_date.slice(0,10)); 
    $('#elapsed_time').html(secondsToTimeFormat(info.moving_time));
    $('#distance').html(metersToMiles(info.distance));
+   $('#typeVal1').html("<b>Precipitation</b>");
+   $('#typeVal2').html("<b>Precipitation</b>");
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
-   table = document.getElementById('top');
+   console.log(document.getElementById('top'))
+
+   var table = document.getElementById('top');
    for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.precipitation[i]
    }
-   table2 = document.getElementById('bot');
+   var table2 = document.getElementById('bot');
    for(var j = 13; j < 24; j++){
       table2.rows[1].cells[j-12].textContent = info.hourly.precipitation[j]
    }
@@ -74,11 +78,11 @@ function showWeath(info){
    $('#typeVal2').html("<b>Code</b>");
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
-   table = document.getElementById('top');
+   var table = document.getElementById('top');
    for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.weather_code[i]
    }
-   table2 = document.getElementById('bot');
+   var table2 = document.getElementById('bot');
    for(var j = 13; j < 24; j++){
       table2.rows[1].cells[j-12].textContent = info.hourly.weather_code[j]
    }
@@ -96,11 +100,11 @@ function showTemp(info){
    $('#typeVal2').html("<b>Temp</b>");
    $('#average_speed').html(Math.round(info.average_speed * 2.237 * 100) / 100);
    
-   table = document.getElementById('top');
+   var table = document.getElementById('top');
    for(var i = 0; i < 13; i++){
       table.rows[1].cells[i+1].textContent = info.hourly.temperature_2m[i]
    }
-   table2 = document.getElementById('bot');
+   var table2 = document.getElementById('bot');
    for(var j = 13; j < 24; j++){
       table2.rows[1].cells[j-12].textContent = info.hourly.temperature_2m[j]
    }
