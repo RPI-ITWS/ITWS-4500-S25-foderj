@@ -53,7 +53,7 @@ export function makeStatDis({extra}){
          className: 'innerHold', 
          id: 'runHoldW'
       },
-      h2({innerText: 'Really nice easy', givID: 'name'}), 
+      h2({innerText: 'Really nice easy', givID: extra + 'name'}), 
       React.createElement(
          'div', 
          {
