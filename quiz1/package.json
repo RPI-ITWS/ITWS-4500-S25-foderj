@@ -1,0 +1,16 @@
+{
+  "name": "quiz1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "Important Assumptions:     \"20 points for backend (extending your API to include this new info, serving it to your frontend)\"       I assumed this meant extending the API we are making for this quiz to include the new functionality that frankfurter does not, not that we specifically had to add onto our API's from lab 1",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {}
+}
