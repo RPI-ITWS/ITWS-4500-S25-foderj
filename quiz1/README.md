@@ -1,9 +1,25 @@
-How to host: 
-   Navigate to quiz1 directory locally 
-   run 'npm install' 
-   run node server 
-   go to http://localhost:3000/index.html
-   
+## How to host: 
+- Navigate to quiz1 directory locally 
+-  run 'npm install' 
+-  run node server 
+-  go to http://localhost:3000/index.html
+
+---
+# Creativity 
+
+ I decided to go with functional creativity vs design (css) creativity as functional is defintley my strong suit. Here is what I would like to be considered: 
+
+ ##### 1. Allowing API Caller to specify value, conversion, ect
+ - In my backend, when making my get endpoint that converts currency, I made it for the user to specify query parameters that directly impact the API response, rather then just having certain conversions and amount hardcoded
+
+  ##### 2. Connecting the new info to my project
+ - A typical expense for runners is running shoes, so I figured the most helpful way for my site to use this conversion tool is to show the user a base rate of running shoes across different contries as I figured it would actually be helpful
+
+---
+
+Creativity: 
+   allowing caller to specifiy value, conversion, ect 
+   seeing cost of shoes in different countries 
 
 Important Assumptions: 
    assumed wanted this added to our already existing web-app 
@@ -14,9 +30,7 @@ Plan:
    if have time add the ability to change the value we want converted 
 
 
-Creativity: 
-   allowing caller to specifiy value, conversion, ect 
-   seeing cost of shoes in different countries 
+
 
 app.get('/runs', (req, res) => {
    //parsing return data to curate database
