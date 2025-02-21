@@ -15,6 +15,9 @@
   ##### 2. Connecting the new info to my project
  - A typical expense for runners is running shoes, so I figured the most helpful way for my site to use this conversion tool is to show the user a base rate of running shoes across different contries as I figured it would actually be helpful
 
+   ##### 3. Including Multiple Countries 
+ - I included multiple countries as I thought it would be more interesting to the user and allow for just a more descriptive use of the API functionality 
+
 ---
 
 Creativity: 
