@@ -9,13 +9,13 @@
 
  I decided to go with functional creativity vs design (css) creativity as functional is defintley my strong suit. Here is what I would like to be considered: 
 
- ##### 1. Allowing API Caller to specify value, conversion, ect
+##### 1. Allowing API Caller to specify value, conversion, ect
  - In my backend, when making my get endpoint that converts currency, I made it for the user to specify query parameters that directly impact the API response, rather then just having certain conversions and amount hardcoded
 
-  ##### 2. Connecting the new info to my project
+##### 2. Connecting the new info to my project
  - A typical expense for runners is running shoes, so I figured the most helpful way for my site to use this conversion tool is to show the user a base rate of running shoes across different contries as I figured it would actually be helpful
 
-   ##### 3. Including Multiple Countries 
+##### 3. Including Multiple Countries 
  - I included multiple countries as I thought it would be more interesting to the user and allow for just a more descriptive use of the API functionality 
 
 ---
