@@ -30,9 +30,15 @@ Before submit:
    Go through citations
    make sure valid error messages for incorrect calls
    remove console logs 
+   refresh DB 
+   test all endpoints 
 
 QUestions: 
    Should you client connect at the beggining of every funtion? 
 
 Creativity: 
    Relative URL's representative of where site is being hosted also work with my text boxes 
+   Updated Documentation
+   Gave ability to view fetch request, also updated it for DB requested 
+   formatting of results, is easy to navigat, also formatted preloaded elements of the DB to match my website well. 
+   Did a drop down as was more intuitive than the buttons 

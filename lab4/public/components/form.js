@@ -86,7 +86,11 @@ function makeMirror(){
    const handleBoxChange = (e) => {
       const newText = e.target.value;
       if(e.target.id == 'url'){
-         INPURL = newText
+         if(newText.trim() == "0" || newText.trim() == "empty"){
+            INPURL = "/db";
+         }else{
+            INPURL = "/db/" + newText.trim();
+         }
       }else if(e.target.id == 'method'){
          INPMETH = newText
       }else{
@@ -126,7 +130,7 @@ function makeMirror(){
       ),
       bk(),
       bk(),
-      makeLabel({ innerText: 'Enter Request URL:' }),
+      makeLabel({ innerText: 'Insert Document ID here (or "0" for /db):' }),
       bk(),
       React.createElement(
          'input',

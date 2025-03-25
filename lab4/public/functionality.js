@@ -189,7 +189,14 @@ const waitForReactElement = (id, callback) => {
 
       //defining submitted materials
       var meth = $('#method').val(); 
-      var url = $('#url').val(); 
+      var num = $('#url').val(); 
+      var url = ""; 
+      if(num.trim() == "0" || num.trim() == "empty"){
+         url = "/db";
+      }else{
+         url = "/db/" + num.trim();
+      }
+      
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 
       //checks if user JSON input is correct
@@ -246,7 +253,7 @@ const waitForReactElement = (id, callback) => {
                //must be list 
                //is pretty printed 
                $('#message').css('display', 'block'); 
-               $('#message').html('<br><br> <header>List of IDs:</header>\
+               $('#message').html('<br><br> <header>API Call Result:</header>\
                   <textarea readonly id="callresponse" rows="15" cols="70" >' + JSON.stringify(parsed, null, 4) + '</textarea>')
             }else{
                //only show run
