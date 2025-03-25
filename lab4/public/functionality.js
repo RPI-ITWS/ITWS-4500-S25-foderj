@@ -227,11 +227,20 @@ const waitForReactElement = (id, callback) => {
       var meth = INPMETH; 
       var num = $('#url').val(); 
       var url = ""; 
+
+      //vm
       if(num.trim() == "0" || num.trim() == "empty"){
-         url = "/db";
+         url = "node/db";
       }else{
-         url = "/db/" + num.trim();
+         url = "node/db/" + num.trim();
       }
+
+      // local:
+      // if(num.trim() == "0" || num.trim() == "empty"){
+      //    url = "/db";
+      // }else{
+      //    url = "/db/" + num.trim();
+      // }
       
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 

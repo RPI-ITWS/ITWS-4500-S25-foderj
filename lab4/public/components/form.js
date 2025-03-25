@@ -122,6 +122,15 @@ function makeMirror(){
    const handleBoxChange = (e) => {
       const newText = e.target.value;
       if(e.target.id == 'url'){
+
+         //vm
+         if(newText.trim() == "0" || newText.trim() == "empty"){
+            INPURL = "node/db";
+         }else{
+            INPURL = "node/db/" + newText.trim();
+         }
+         
+         //local
          if(newText.trim() == "0" || newText.trim() == "empty"){
             INPURL = "/db";
          }else{
