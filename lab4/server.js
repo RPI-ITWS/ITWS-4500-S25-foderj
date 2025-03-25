@@ -28,12 +28,14 @@ const counter = "counter";
 const client = new MongoClient(uri);
 
 
-//helpers 
+
+//HELPER FUNCTIONS
+
+/*returns an array listing all of the mongo ID's from the mongo DB */
 async function getMongoIDs(collection){
   
    //0 means it will not include id 
    const allDocs = await collection.find({}, { projection: { mongoNum: 1, _id: 0} }).toArray();
-   // console.log(allDocs); 
 
    
    //make array of pure nums 
@@ -43,258 +45,6 @@ async function getMongoIDs(collection){
    }
    return(valNums); 
 }
-
-// '/db' endpoitns 
-
-//returns a list of valid doc numbers 
-app.get('/db', async (req,res) =>{
-
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   valNums = await getMongoIDs(collection);
-   res.json(valNums); 
-
-})
-
-app.get('/db/:number', async (req,res) =>{
-
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   //req.params contains all route variables from the URL
-   var id = parseInt(req.params.number);
-   valNums = await getMongoIDs(collection);
-   
-
-   //checking to macke sure said ID exists
-   var index = null; 
-   //checking to macke sure said ID exists
-   for(var i = 0; i < valNums.length; i++){
-      if (valNums[i] == id){
-         index = id; 
-      }
-   }
-
-
-   if(index == null){
-      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }else{
-      var resDoc = await collection.find({mongoNum: index}).toArray();
-      resDoc = resDoc[0];
-
-      res.json(resDoc); 
-   }
-
-})
-
-//note: here does not need to include mongoNum field in body as it is automatically added
-//assumes this field is not included
-app.post('/db', async (req,res) =>{
-
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const runCol = database.collection(col2020);
-   const counterCol = database.collection(counter);
-
-   //req.params contains all route variables from the URL
-   var id = await counterCol.find({_id: "counter"}).toArray();
-   id = id[0]['val'];
-   await counterCol.updateOne( { _id: "counter" },  { $inc: { val: 1 } } ); //update so no 2 ids can be the same 
-
-
-   //says there are no keys or vars in req.body (as req.body is a JSON)
-   if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "Request body is empty" });
-   }else{
-
-         //if not all are present, the ones that are not are undefined
-      req.body['mongoNum'] = id;
-
-   
-      const result = await runCol.insertOne(req.body);
-      console.log(result); 
-      res.json({ message: `Received data and document added to DB, its ID is: ${result.insertedId}` });
-
-   }
-
-})
-
-
-//note: here does not need to include mongoNum field in body as it is automatically added
-//assumes this field is not included
-app.post('/db/:number', async (req,res) =>{
-
-
-   res.json({ message: `invalid endpoint, try /db` });
-
-
-
-})
-
-//updates field specified in body 
-app.put('/db/:number', async (req,res) => {
-
-
-   if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "Request body is empty" });
-   }
-
-   var id = parseInt(req.params.number);
-   
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   //req.params contains all route variables from the URL
-   var id = parseInt(req.params.number);
-   valNums = await getMongoIDs(collection);
-   
-
-   //checking to macke sure said ID exists
-   var index = null; 
-   //checking to macke sure said ID exists
-   for(var i = 0; i < valNums.length; i++){
-      if (valNums[i] == id){
-         index = id; 
-      }
-   }
-
-
-   if(index == null){
-      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }else{
-      //updating items accordingly 
-
-      //getItem
-      var resDoc = await collection.find({mongoNum: index}).toArray();
-      resDoc = resDoc[0];
-      //if fields specified in body are in document, change them accordingly
-      for(var key in req.body){
-         console.log(key); 
-         if(resDoc.hasOwnProperty(key)){
-            resDoc[key] = req.body[key]; 
-            await collection.updateOne( { mongoNum: index },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
-         }
-      }    
-      res.json({ message: `id '${parseInt(req.params.number)}' updated accordingly .` });
-   }
-
-})
-
-
-//updates all fields specified in body for all items if they are present in that item
-app.put('/db', async (req,res) => {
-
-
-   if (Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "Request body is empty" });
-   }
-
-
-   
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   //req.params contains all route variables from the URL
-
-
-
-
-   var resDoc = await collection.find({}).toArray();
-
-   // if fields specified in body are in document, change them accordingly
-   for(var key in req.body){
-      for(var i = 0; i < resDoc.length; i++){
-         if(resDoc[i].hasOwnProperty(key)){
-            await collection.updateOne( { mongoNum: resDoc[i]['mongoNum'] },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
-         }
-      }
-
-   }    
-   res.json({ message: `all items updated accordingly .` });
-
-
-})
-
-
-//no body neccesary for delete
-app.delete('/db/:number', async (req,res) => {
-   var id = parseInt(req.params.number);
-   
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   //req.params contains all route variables from the URL
-   var id = parseInt(req.params.number);
-   valNums = await getMongoIDs(collection);
-   
-
-   //checking to macke sure said ID exists
-   var index = null; 
-   //checking to macke sure said ID exists
-   for(var i = 0; i < valNums.length; i++){
-      if (valNums[i] == id){
-         index = id; 
-      }
-   }
-
-
-   if(index == null){
-      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
-   }else{
-      await collection.deleteOne({ mongoNum: index });
-      res.json({ message: `id '${parseInt(req.params.number)}' deleted from DB .` });
-   }
-})
-
-
-//Deletes it all 
-app.delete('/db', async (req,res) => {
-   
-   await client.connect();
-   console.log("Connected to MongoDB!");
-   // Select database and collection
-   const database = client.db(dbName);
-   const collection = database.collection(col2020);
-
-   await collection.deleteMany({});
-   res.json({ message: `DB Dropped .` });
-
-})
-
-//popFIle For Part 1 
-app.get('/mongoPop', async (req, res) => {
-
-
-   for(var i = 2; i < 101; i++){
-      let newEnt = JSON.parse(JSON.stringify(data1[0])); //making a copy
-      newEnt["mongoNum"] = i; 
-      data1.push(newEnt);
-   }
-
-   fs.writeFileSync('./modDocIns.json', JSON.stringify(data1, null, 4));
-
-}) 
-
-
-//HELPER FUNCTIONS
 
 /* used to get list of ID's  from the data*/
 function getIds(page){
@@ -413,6 +163,250 @@ function updateName(allAct){
 }
 
 /*APP FUNCTIONS*/
+
+// MONGODB ENDPOINTS 
+
+/*returns a list of valid doc numbers */
+app.get('/db', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   valNums = await getMongoIDs(collection);
+   res.json(valNums); 
+
+})
+
+/*Returns document specified by endpoint */
+app.get('/db/:number', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      var resDoc = await collection.find({mongoNum: index}).toArray();
+      resDoc = resDoc[0];
+
+      res.json(resDoc); 
+   }
+
+})
+
+/*
+Posts new document to DB based on body 
+note: here does not need to include mongoNum field in body as it is automatically added
+//assumes this field is not included*/
+app.post('/db', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const runCol = database.collection(col2020);
+   const counterCol = database.collection(counter);
+
+   //req.params contains all route variables from the URL
+   var id = await counterCol.find({_id: "counter"}).toArray();
+   id = id[0]['val'];
+   await counterCol.updateOne( { _id: "counter" },  { $inc: { val: 1 } } ); //update so no 2 ids can be the same 
+
+
+   //says there are no keys or vars in req.body (as req.body is a JSON)
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+   }else{
+
+         //if not all are present, the ones that are not are undefined
+      req.body['mongoNum'] = id;
+
+   
+      const result = await runCol.insertOne(req.body);
+      res.json({ message: `Received data and document added to DB, its ID is: ${result.insertedId}` });
+
+   }
+
+})
+
+
+/*Does nothing but throw error message as this is an invalid endpoint*/ 
+app.post('/db/:number', async (req,res) =>{
+   res.json({ message: `invalid endpoint, try /db` });
+
+})
+
+/*updates field specified in body to specific document specified by number */
+app.put('/db/:number', async (req,res) => {
+
+
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+   }
+
+   var id = parseInt(req.params.number);
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //updating items accordingly 
+
+      //getItem
+      var resDoc = await collection.find({mongoNum: index}).toArray();
+      resDoc = resDoc[0];
+      //if fields specified in body are in document, change them accordingly
+      for(var key in req.body){
+         if(resDoc.hasOwnProperty(key)){
+            resDoc[key] = req.body[key]; 
+            await collection.updateOne( { mongoNum: index },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
+         }
+      }    
+      res.json({ message: `id '${parseInt(req.params.number)}' updated accordingly .` });
+   }
+
+})
+
+
+/*updates all fields specified in body for all items if said field is present in that item*/
+app.put('/db', async (req,res) => {
+
+
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+   }
+
+
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   //req.params contains all route variables from the URL
+
+   var resDoc = await collection.find({}).toArray();
+
+   // if fields specified in body are in document, change them accordingly
+   for(var key in req.body){
+      for(var i = 0; i < resDoc.length; i++){
+         if(resDoc[i].hasOwnProperty(key)){
+            await collection.updateOne( { mongoNum: resDoc[i]['mongoNum'] },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
+         }
+      }
+
+   }    
+   res.json({ message: `all items updated accordingly .` });
+
+
+})
+
+
+/*Deletes document specified by number from DB */
+app.delete('/db/:number', async (req,res) => {
+   var id = parseInt(req.params.number);
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      await collection.deleteOne({ mongoNum: index });
+      res.json({ message: `id '${parseInt(req.params.number)}' deleted from DB .` });
+   }
+})
+
+
+/*Deletes entire Database  */
+app.delete('/db', async (req,res) => {
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   await collection.deleteMany({});
+   res.json({ message: `DB Dropped .` });
+
+})
+
+//popFIle For Part 1 
+app.get('/mongoPop', async (req, res) => {
+
+
+   for(var i = 2; i < 101; i++){
+      let newEnt = JSON.parse(JSON.stringify(data1[0])); //making a copy
+      newEnt["mongoNum"] = i; 
+      data1.push(newEnt);
+   }
+
+   fs.writeFileSync('./modDocIns.json', JSON.stringify(data1, null, 4));
+
+}) 
+
+//DB.JSON FUNCTIONS 
 
 /*
 GET /runs/###/precipitation = retrieve the specific run from the JSON object + the amount of rain throughout duration of run 
