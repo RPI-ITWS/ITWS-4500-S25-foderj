@@ -78,10 +78,10 @@ Before submit:
    Organize Code √
    add Summary √
    write creative section √
-   Test On Server
+   Test On Server √
    
-   put .envs on server 
-   refresh DB 
+   put .envs on server √
+   refresh DB √
 
 QUestions: 
    Should you client connect at the beggining of every funtion? 
