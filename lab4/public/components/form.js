@@ -65,6 +65,42 @@ function makeHeader({place}){
 }
 
 
+/*makes all of the method buttons on te same line*/
+function methButtons(){
+   return React.createElement(
+      'div', 
+      {}, 
+      React.createElement(
+         'button',
+         { //this makes react re-render the component as state or props changed, 
+            id: 'getButton'
+         },
+         "GET"
+      ), 
+      React.createElement(
+         'button',
+         { //this makes react re-render the component as state or props changed, 
+            id: 'putButton'
+         },
+         "PUT"
+      ), 
+      React.createElement(
+         'button',
+         { //this makes react re-render the component as state or props changed, 
+            id: 'postButton'
+         },
+         "POST"
+      ), 
+      React.createElement(
+         'button',
+         { //this makes react re-render the component as state or props changed, 
+            id: 'delButton'
+         },
+         "DELETE"
+      )
+   )
+
+}
 
 /*Responsible for fetch caller functionality  */ 
 function makeMirror(){
@@ -117,17 +153,7 @@ function makeMirror(){
       null, 
       makeLabel({ innerText: 'Choose a Call Method:' }),
       bk(),
-      React.createElement(
-         'select',
-         {
-            id: "method",
-            onChange: handleBoxChange
-         },
-         React.createElement('option',{value: "GET"}, "GET"),
-         React.createElement('option',{value: "POST"}, "POST"),
-         React.createElement('option',{value: "PUT"}, "PUT"),
-         React.createElement('option',{value: "DELETE"}, "DELETE")
-      ),
+      methButtons(),
       bk(),
       bk(),
       makeLabel({ innerText: 'Insert Document ID here (or "0" for /db):' }),
@@ -179,7 +205,8 @@ function makeSub(){
    return (React.createElement(
       'button', 
       {
-         type: 'submit'
+         type: 'submit',
+         id: 'subButton'
       }, 
       'Submit'
    ))

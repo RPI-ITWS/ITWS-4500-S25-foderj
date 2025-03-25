@@ -19,9 +19,10 @@ const fs = require('fs'); //importing file system module
 app.use(express.json()); //allows for parsing incoming req bodies: 
 app.use(express.static('public')) 
 //mongo
+require('dotenv').config();
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://josephfodera25:qiymmk71ndlD1hiG@cluster0.vsssh.mongodb.net/"; 
-const dbName = "JoeRuns";
+const uri = process.env.CONN_STR; 
+const dbName = process.env.DB_NAME;
 const col2020 = "2020";
 const counter = "counter"; 
 const client = new MongoClient(uri);

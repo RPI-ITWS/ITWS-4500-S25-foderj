@@ -13,11 +13,13 @@ TO do:
 
 Future Notes: 
    update DOCS
+   Shouldn't make dbConn every cal
 
 
 Server changes: 
    npm init -y  # Initialize a package.json if needed
    npm install mongodb
+   npm install dotenv
 
 
 Citations: 
@@ -32,6 +34,7 @@ Before submit:
    remove console logs 
    refresh DB 
    test all endpoints 
+   put .envs on server 
 
 QUestions: 
    Should you client connect at the beggining of every funtion? 

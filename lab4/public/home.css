@@ -478,4 +478,7 @@ footer {
 }
 
 
-
+/* Buttons */
+.selected{
+   background-color: #fd5201;
+}

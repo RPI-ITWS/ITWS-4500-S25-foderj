@@ -11,6 +11,7 @@ var INPURL = ""
 var INPJSON = ""
 var INPMETH = "GET"
 
+
 //HELPER FUNCTIONS
 
 /*simple is JSON function for form submission: */
@@ -170,11 +171,46 @@ const waitForReactElement = (id, callback) => {
 
 
 
+//button functions: 
+   document.getElementById("getButton").addEventListener("click", async function(event){
+      event.preventDefault();
+      INPMETH = "GET"; 
+      $('#putButton').removeClass('selected'); 
+      $('#postButton').removeClass('selected'); 
+      $('#delButton').removeClass('selected'); 
+      $('#getButton').addClass('selected'); 
+   })
+
+   document.getElementById("postButton").addEventListener("click", async function(event){
+      event.preventDefault();
+      INPMETH = "POST"; 
+      $('#putButton').removeClass('selected'); 
+      $('#getButton').removeClass('selected'); 
+      $('#delButton').removeClass('selected'); 
+      $('#postButton').addClass('selected'); 
+   })
+   document.getElementById("delButton").addEventListener("click", async function(event){
+      event.preventDefault();
+      INPMETH = "DELETE"; 
+      $('#putButton').removeClass('selected'); 
+      $('#getButton').removeClass('selected'); 
+      $('#postButton').removeClass('selected'); 
+      $('#delButton').addClass('selected'); 
+   })
+   document.getElementById("putButton").addEventListener("click", async function(event){
+      event.preventDefault();
+      INPMETH = "PUT"; 
+      $('#postButton').removeClass('selected'); 
+      $('#getButton').removeClass('selected'); 
+      $('#delButton').removeClass('selected'); 
+      $('#putButton').addClass('selected'); 
+   })
+
 
    /*calls everytime submit occurs
    'event holds details about event' 
    must be async because waiting on request */
-   document.getElementById("apiCaller").addEventListener("submit", async function(event){
+   document.getElementById("subButton").addEventListener("click", async function(event){
 
       //hide all previous result options
       $('#precip').css('display', 'none'); 
@@ -188,7 +224,7 @@ const waitForReactElement = (id, callback) => {
       event.preventDefault();
 
       //defining submitted materials
-      var meth = $('#method').val(); 
+      var meth = INPMETH; 
       var num = $('#url').val(); 
       var url = ""; 
       if(num.trim() == "0" || num.trim() == "empty"){
