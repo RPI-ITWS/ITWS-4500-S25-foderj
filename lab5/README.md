@@ -83,6 +83,10 @@
    - when importing things from the HTML, must use this: 
       - const { useEffect, useRef } = React;
 
+   - R studio Line Chart help: 
+      - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://r-graph-gallery.com/line-plot.html&ved=2ahUKEwiglKqA2r6MAxW_MVkFHVOpAc4QFnoECBUQAQ&usg=AOvVaw0x4GZVkyk7zejbvBO60I_N
+
+
 
 # Do to vm 
    - lab5 % sudo npm install d3@latest  
