@@ -126,7 +126,7 @@ function makeMirror(){
       const newText = e.target.value;
       if(e.target.id == 'url'){
 
-         //vm
+         // //vm
          if(newText.trim() == "0" || newText.trim() == "empty"){
             INPURL = "node/db";
          }else{
@@ -138,7 +138,7 @@ function makeMirror(){
          //    INPURL = "/db";
          // }else{
          //    INPURL = "/db/" + newText.trim();
-         }
+         // }
       }else if(e.target.id == 'method'){
          INPMETH = newText
       }else{
