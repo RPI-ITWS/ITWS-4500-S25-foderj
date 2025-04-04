@@ -1,3 +1,6 @@
+
+import makeWeathVis from './responses/weathVis.js';
+import KudoLineChart from './responses/kudoVis.js';
 /*Responsible for creating form in which user can make API Calls */
 'use strict'; //catches mistakes
 const { useState } = React; //basically importing
@@ -131,10 +134,10 @@ function makeMirror(){
          }
          
          //local
-         if(newText.trim() == "0" || newText.trim() == "empty"){
-            INPURL = "/db";
-         }else{
-            INPURL = "/db/" + newText.trim();
+         // if(newText.trim() == "0" || newText.trim() == "empty"){
+         //    INPURL = "/db";
+         // }else{
+         //    INPURL = "/db/" + newText.trim();
          }
       }else if(e.target.id == 'method'){
          INPMETH = newText
@@ -227,6 +230,8 @@ function makeForm() {
    return React.createElement(
       'form',
       {id: "apiCaller"},
+      KudoLineChart(),
+      makeWeathVis(), 
       docHeader(),
       makeMirror(),
       makeSub()

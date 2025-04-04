@@ -11,7 +11,6 @@ local vs on vm:
 // CONST-IMPORTS
 
 const data = require('./db.json')
-const data1 = require('./modDocIns.json')
 const express = require('express')
 const app = express() // Storing all express things in this variable
 const port = 3000
@@ -177,6 +176,25 @@ app.get('/db', async (req,res) =>{
 
    valNums = await getMongoIDs(collection);
    res.json(valNums); 
+
+})
+
+
+
+/*Returns document specified by endpoint */
+app.get('/db/docs', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+
+
+   var resDoc = await collection.find().toArray();
+   res.json(resDoc); 
+
 
 })
 
@@ -392,19 +410,29 @@ app.delete('/db', async (req,res) => {
 
 })
 
-//popFIle For Part 1 
-app.get('/mongoPop', async (req, res) => {
+// //popFIle For Part 1 
+// //assumes data does not have kudos or weather data associated with it yet 
+// app.get('/mongoPop', async (req, res) => {
 
 
-   for(var i = 2; i < 101; i++){
-      let newEnt = JSON.parse(JSON.stringify(data1[0])); //making a copy
-      newEnt["mongoNum"] = i; 
-      data1.push(newEnt);
-   }
+//    for(var i = 0; i < data.length; i++){
+//       var itemID = data[i]["id"]; 
+//       data[i]["mongoNum"] = i; //gives mongo ID 
+//       console.log(itemID); 
 
-   fs.writeFileSync('./congDocs.json', JSON.stringify(data1, null, 4));
+//       //getting strava activity
+//       var key = await getStravaAuth(); 
+//       var act = await getStravaAct(itemID,key); 
+         
+//       data[i]["kudos"] = act.kudos_count;
 
-}) 
+//       getWHistCong(act, data[i], false, false, true); 
+//    }
+
+//    fs.writeFileSync('./congDocs.json', JSON.stringify(data, null, 4));
+//    res.json({ message: `Doc Populated.` });
+
+// }) 
 
 //DB.JSON FUNCTIONS 
 

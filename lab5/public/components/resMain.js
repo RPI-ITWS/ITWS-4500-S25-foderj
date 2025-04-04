@@ -6,12 +6,14 @@ import makeLoc from './responses/locTab.js';
 import makeDesc from './responses/descTab.js';
 import {makeStatDis, h2, infoLi} from './responses/statDis.js';
 
+
 /*MAIN*/
 function makeRes(){
 
    return React.createElement(
       'div',
       {id: "APIres"},
+
       makeWeathTab(),
       makeKudos(),
       makeLoc(), 
