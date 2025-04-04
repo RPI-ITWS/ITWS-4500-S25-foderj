@@ -13,7 +13,7 @@ const KudoLineChart = () => {
       [
         React.createElement('img', {
           key: 'image', // Add a key to the image for React's virtual DOM
-          src: 'img5.png', // Path to the image
+          src: 'node/img5.png', // Path to the image
           alt: 'Kudos Line Chart', // Alt text for accessibility
           width: '70%' // Optional styling to make the image responsive
         })
