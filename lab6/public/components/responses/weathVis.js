@@ -3239,16 +3239,7 @@ const makeWeathVis = () => {
    const marginLeft = 40;
    //so that elemetn can stay dynamic if needed, second array tells react when to re-run the effect 
    useEffect(() => {
-      /*local*/
-      // fetch('http://localhost:3000/db/docs')  // Assuming your file is inside the public folder
-      // .then((response) => response.json())
-      // .then((jsonData) => {
-      //   setData(jsonData);
-      //   console.log(data); 
-      // })
-      // .catch((error) => {
-      //   console.error('Error loading JSON:', error);
-      // });
+
 
 
       // Clear previous SVG if re-rendered

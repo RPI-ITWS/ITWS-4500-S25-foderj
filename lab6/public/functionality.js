@@ -229,18 +229,18 @@ const waitForReactElement = (id, callback) => {
       var url = ""; 
 
       //vm
-      if(num.trim() == "0" || num.trim() == "empty"){
-         url = "node/db";
-      }else{
-         url = "node/db/" + num.trim();
-      }
+      // if(num.trim() == "0" || num.trim() == "empty"){
+      //    url = "node/db";
+      // }else{
+      //    url = "node/db/" + num.trim();
+      // }
 
       // local:
-      // if(num.trim() == "0" || num.trim() == "empty"){
-      //    url = "/db";
-      // }else{
-      //    url = "/db/" + num.trim();
-      // }
+      if(num.trim() == "0" || num.trim() == "empty"){
+         url = "/db";
+      }else{
+         url = "/db/" + num.trim();
+      }
       
       var bod = $('#jsonInput').val(); //if nothing, body == ""
 

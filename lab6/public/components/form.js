@@ -15,11 +15,26 @@ function docHeader() {
    return React.createElement(
       'h3',
       null,
+
+
       React.createElement(
          'a', 
          {href: "https://github.com/RPI-ITWS/ITWS-4500-S25-foderj/tree/main/lab2#readme"}, 
          "Click Here for Documentation"
+      ),
+      React.createElement(
+         'br',
+         null,
+         null
+      ),
+      //local
+      React.createElement(
+         'a', 
+         {href: "visualizations.html"}, 
+         "Click Here for Visualizations"
       )
+
+
    );
 }
 
@@ -127,18 +142,18 @@ function makeMirror(){
       if(e.target.id == 'url'){
 
          // //vm
-         if(newText.trim() == "0" || newText.trim() == "empty"){
-            INPURL = "node/db";
-         }else{
-            INPURL = "node/db/" + newText.trim();
-         }
+         // if(newText.trim() == "0" || newText.trim() == "empty"){
+         //    INPURL = "node/db";
+         // }else{
+         //    INPURL = "node/db/" + newText.trim();
+         // }
          
          //local
-         // if(newText.trim() == "0" || newText.trim() == "empty"){
-         //    INPURL = "/db";
-         // }else{
-         //    INPURL = "/db/" + newText.trim();
-         // }
+         if(newText.trim() == "0" || newText.trim() == "empty"){
+            INPURL = "/db";
+         }else{
+            INPURL = "/db/" + newText.trim();
+         }
       }else if(e.target.id == 'method'){
          INPMETH = newText
       }else{
@@ -230,8 +245,6 @@ function makeForm() {
    return React.createElement(
       'form',
       {id: "apiCaller"},
-      KudoLineChart(),
-      makeWeathVis(), 
       docHeader(),
       makeMirror(),
       makeSub()

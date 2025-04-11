@@ -13,3 +13,11 @@
 # To do
    - make react skeleton for quiz 
 
+# My Big Things
+   - make seperate page for visualizations
+
+   - Automated ETL endpoint that pulls from external API, Transforms Data, and Loads it into Mongo DB all at once
+
+   - Endpoint that connects to mongo DB and returns my top X longest runs in the database -> Just Distance, time and pace in good format
+
+   - Endpoint that gets data from mongo in specific way I want it, so I can easily load it into Rstudio and make a visualization
