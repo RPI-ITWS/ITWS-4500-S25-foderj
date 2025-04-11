@@ -1,0 +1,2 @@
+# Things to Remember Going forward
+   - when working with any problem set in a short amount of time, take entire scope of problem into account before starting to code, ESPECIALLY THE EXTRA CREDIT ON THE LAST PAGE. 
