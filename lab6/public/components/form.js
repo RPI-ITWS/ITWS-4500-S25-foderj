@@ -30,7 +30,7 @@ function docHeader() {
       //local
       React.createElement(
          'a', 
-         {href: "visualizations.html"}, 
+         {href: "node/visualizations.html"}, 
          "Click Here for Visualizations"
       )
 
