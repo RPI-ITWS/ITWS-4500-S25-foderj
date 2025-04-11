@@ -1,0 +1,22 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "Plan:  \tOrginization of the API is not that huge of a deal   \tFunction get/new/:number \t\tSomething becomes a variable, so don't have to run hundreds of endpoints; don't have to do:  \t\t\tget/new/1 \t\t\tget/new/2 \t\t\tget/new/3 \t\t\tget/new/4 \t\t\tget/new/5",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.15.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

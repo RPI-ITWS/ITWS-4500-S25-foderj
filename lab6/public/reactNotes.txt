@@ -1,0 +1,33 @@
+New thoughtprocess for making things: 
+   reuse- UI elements 
+   Not going to work on React and node working together
+
+Frameworks:
+   standard way to build and deploy web apps 
+   learn how to think with frameworks (there are multiple) 
+   makes codebases easier to naviagate with the introduction of components 
+
+Data Binding: 
+   html acts as a signpost of directives 
+   Directives: adds behavior to DOM 
+      Want to be reusable
+   Components: Headers, buttons, forms ect
+      written in js, shown as directive in html 
+      Want to be reusable
+
+Event delegation: 
+   IS an event listener 
+
+React start: 
+   installed with this (like Jquery) 
+   Props is short for properties 
+
+   this is a directive: <div id="like-button-root"></div>
+   Point of using react, to maximize minimizing writing code (multiple buttons, not one input box)
+   react helps with logic 
+
+
+Starting on Lab3: 
+
+Things I learned: 
+   one line function shortcut: () => fetchMe()
