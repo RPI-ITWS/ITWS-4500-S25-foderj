@@ -92,6 +92,15 @@ async function getAllStravaActs(key){
    return(result); 
 }
 
+async function getStravaActsFeb(key){
+   var url = "https://www.strava.com/api/v3/athlete/activities?access_token=" + key + "&per_page=150&before=1740762000&after=1738420719"
+   var fetchRes = await fetch(url, {
+      method: "GET",
+   })
+   var result = await fetchRes.json()
+   return(result); 
+}
+
 /*Get activity from strava API given activity ID and key */
 async function getStravaAct(id,key){
    var url = "https://www.strava.com/api/v3/activities/" + id + "?access_token=" + key;
@@ -141,8 +150,14 @@ async function getWHistCong(stravaAct, dbEnt, pre, weather,temp){
 
    var start_end = dbEnt.start_date.slice(0,10) // in correct format for call
 
-
+   // console.log(lat)
+   // console.log(long)
+   // console.log(start_end)
+   // console.log(pre)
+   // console.log(weather)
+   // console.log(temp)
    var weathInfo = await getWeathInfo(lat,long,start_end,pre,weather,temp); 
+   // console.log(weathInfo);
    dbEnt.hourly = weathInfo.hourly; //JSON is key-value pairs
 
    return(dbEnt); 
@@ -162,6 +177,34 @@ function updateName(allAct){
 }
 
 /*APP FUNCTIONS*/
+
+
+// Automated ETL Endpoint
+
+//pulls data directly from strava and tosses it into mongo 
+app.put('/db/jan/etl', async (req, res) => {
+
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const runCol = database.collection(col2020);
+
+   var key = await getStravaAuth(); 
+   var acts = await getAllStravaActs(key); 
+   curDocs = await runCol.countDocuments(); 
+
+   for(var i = 0; i < acts.length; i++){ 
+      acts[i]["mongoNum"] = i + curDocs; //gives mongo ID 
+      //adds all weather info to the data 
+      await getWHistCong(acts[i], acts[i], true, true, true); 
+      await runCol.insertOne(acts[i]);
+   }
+   
+   res.json({ message: `Entire DB Populated.` });
+
+}) 
 
 // MONGODB ENDPOINTS 
 
@@ -195,6 +238,41 @@ app.get('/db/docs', async (req,res) =>{
    var resDoc = await collection.find().toArray();
    res.json(resDoc); 
 
+
+})
+
+/*Returns :number Longest runs in the Database  */
+app.get('/db/:number', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      var resDoc = await collection.find({mongoNum: index}).toArray();
+      resDoc = resDoc[0];
+
+      res.json(resDoc); 
+   }
 
 })
 
@@ -410,29 +488,7 @@ app.delete('/db', async (req,res) => {
 
 })
 
-// //popFIle For Part 1 
-// //assumes data does not have kudos or weather data associated with it yet 
-// app.get('/mongoPop', async (req, res) => {
 
-
-//    for(var i = 0; i < data.length; i++){
-//       var itemID = data[i]["id"]; 
-//       data[i]["mongoNum"] = i; //gives mongo ID 
-//       console.log(itemID); 
-
-//       //getting strava activity
-//       var key = await getStravaAuth(); 
-//       var act = await getStravaAct(itemID,key); 
-         
-//       data[i]["kudos"] = act.kudos_count;
-
-//       getWHistCong(act, data[i], false, false, true); 
-//    }
-
-//    fs.writeFileSync('./congDocs.json', JSON.stringify(data, null, 4));
-//    res.json({ message: `Doc Populated.` });
-
-// }) 
 
 //DB.JSON FUNCTIONS 
 
