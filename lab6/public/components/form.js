@@ -142,18 +142,18 @@ function makeMirror(){
       if(e.target.id == 'url'){
 
          // //vm
-         // if(newText.trim() == "0" || newText.trim() == "empty"){
-         //    INPURL = "node/db";
-         // }else{
-         //    INPURL = "node/db/" + newText.trim();
-         // }
+         if(newText.trim() == "0" || newText.trim() == "empty"){
+            INPURL = "node/db";
+         }else{
+            INPURL = "node/db/" + newText.trim();
+         }
          
          //local
-         if(newText.trim() == "0" || newText.trim() == "empty"){
-            INPURL = "/db";
-         }else{
-            INPURL = "/db/" + newText.trim();
-         }
+         // if(newText.trim() == "0" || newText.trim() == "empty"){
+         //    INPURL = "/db";
+         // }else{
+         //    INPURL = "/db/" + newText.trim();
+         // }
       }else if(e.target.id == 'method'){
          INPMETH = newText
       }else{
