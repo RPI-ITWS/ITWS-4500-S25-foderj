@@ -6,6 +6,7 @@ Getting node to run on VM notes:
 	enter through all prompts 
 	type yes
 	'sudo npm install express' within that directory 
+   'sudo npm install dotenv' within that directory 
 	type 'node server' 
 	'Listening on *:3000' should pop up 
 	open web-browser and navigate 'to https://<FQDN>/node'
