@@ -12,6 +12,7 @@ local vs on vm:
 
 const data = require('./db.json')
 const express = require('express')
+
 const app = express() // Storing all express things in this variable
 const port = 3000
 const fs = require('fs'); //importing file system module 
@@ -242,7 +243,7 @@ app.get('/db/docs', async (req,res) =>{
 })
 
 /*Returns :number Longest runs in the Database  */
-app.get('/db/:number', async (req,res) =>{
+app.get('/db/longest/:number', async (req,res) =>{
 
    await client.connect();
    console.log("Connected to MongoDB!");
@@ -251,28 +252,36 @@ app.get('/db/:number', async (req,res) =>{
    const collection = database.collection(col2020);
 
    //req.params contains all route variables from the URL
-   var id = parseInt(req.params.number);
-   valNums = await getMongoIDs(collection);
+   var topX = parseInt(req.params.number);
+   curDocs = await collection.countDocuments(); 
    
-
-   //checking to macke sure said ID exists
-   var index = null; 
-   //checking to macke sure said ID exists
-   for(var i = 0; i < valNums.length; i++){
-      if (valNums[i] == id){
-         index = id; 
-      }
-   }
-
-
-   if(index == null){
-      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   if(topX>curDocs){
+      res.json({ message: `Not enough data in the MongoDB ` });
    }else{
-      var resDoc = await collection.find({mongoNum: index}).toArray();
-      resDoc = resDoc[0];
+      const sortedTop = await collection
+         .find({})
+         .sort({ distance: -1 }) //negative means descending 
+         .limit(topX)            // only the top 5 results
+         .toArray();
 
-      res.json(resDoc); 
+
+      
+      //making data Readable 
+      
+      var resJSON = []
+      for(var i = 0; i < sortedTop.length; i++){
+
+         var mph = (Math.round(sortedTop[i]["average_speed"] * 2.237 * 100) / 100)
+         resJSON.push({"time_in_sec": sortedTop[i]["elapsed_time"],"distance": sortedTop[i]["distance"]/1609, "avg_mph": mph } ); 
+      }
+      
+
+      res.json(resJSON); 
+      
    }
+
+
+
 
 })
 
