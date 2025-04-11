@@ -1,0 +1,1212 @@
+[
+   {
+       "id": 2568,
+       "date": "2019-10-23T09:45:17",
+       "date_gmt": "2019-10-23T17:45:17",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2568"
+       },
+       "modified": "2019-10-23T09:45:18",
+       "modified_gmt": "2019-10-23T17:45:18",
+       "slug": "robert-a-heinlein-2",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/robert-a-heinlein-2/",
+       "title": {
+           "rendered": "Robert A. Heinlein"
+       },
+       "content": {
+           "rendered": "\n<p>A human being should be able to change a diaper, plan an invasion, butcher a hog, conn a ship, design a building, write a sonnet, balance accounts, build a wall, set a bone, comfort the dying, take orders, give orders, cooperate, act alone, solve equations, analyze a new problem, pitch manure, program a computer, cook a tasty meal, fight efficiently, die gallantly. Specialization is for insects.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>A human being should be able to change a diaper, plan an invasion, butcher a hog, conn a ship, design a building, write a sonnet, balance accounts, build a wall, set a bone, comfort the dying, take orders, give orders, cooperate, act alone, solve equations, analyze a new problem, pitch manure, program a computer, cook [&hellip;]</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2568",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2568",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2568"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2568/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2569,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2568/revisions/2569"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2568"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2568"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2568"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2563,
+       "date": "2019-09-03T11:44:50",
+       "date_gmt": "2019-09-03T19:44:50",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2563"
+       },
+       "modified": "2019-09-03T11:44:50",
+       "modified_gmt": "2019-09-03T19:44:50",
+       "slug": "aza-raskin",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/aza-raskin/",
+       "title": {
+           "rendered": "Aza Raskin"
+       },
+       "content": {
+           "rendered": "\n<p>Design is not about learning to think outside the box, it’s about finding the right box to think inside of.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Design is not about learning to think outside the box, it’s about finding the right box to think inside of.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2563",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2563",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2563"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2563/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2564,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2563/revisions/2564"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2563"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2563"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2563"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2558,
+       "date": "2019-08-27T15:55:38",
+       "date_gmt": "2019-08-27T23:55:38",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2558"
+       },
+       "modified": "2019-08-27T15:55:40",
+       "modified_gmt": "2019-08-27T23:55:40",
+       "slug": "shawn-lukas-3",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/shawn-lukas-3/",
+       "title": {
+           "rendered": "Shawn Lukas"
+       },
+       "content": {
+           "rendered": "\n<p>When typography is on point, words become images.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>When typography is on point, words become images.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2558",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2558",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2558"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2558/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2559,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2558/revisions/2559"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2558"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2558"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2558"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2554,
+       "date": "2019-08-27T15:55:22",
+       "date_gmt": "2019-08-27T23:55:22",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2554"
+       },
+       "modified": "2019-08-27T15:55:24",
+       "modified_gmt": "2019-08-27T23:55:24",
+       "slug": "thomas-bohm",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/thomas-bohm/",
+       "title": {
+           "rendered": "Thomas Bohm"
+       },
+       "content": {
+           "rendered": "\n<p>Helvetica is good for typographers who do not know what to say.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Helvetica is good for typographers who do not know what to say.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2554",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2554",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2554"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2554/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2555,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2554/revisions/2555"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2554"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2554"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2554"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2550,
+       "date": "2019-08-27T15:55:02",
+       "date_gmt": "2019-08-27T23:55:02",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2550"
+       },
+       "modified": "2019-08-27T15:55:03",
+       "modified_gmt": "2019-08-27T23:55:03",
+       "slug": "robert-bringhurst-5",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/robert-bringhurst-5/",
+       "title": {
+           "rendered": "Robert Bringhurst"
+       },
+       "content": {
+           "rendered": "\n<p>Typography is the craft of endowing human language with a durable visual form.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Typography is the craft of endowing human language with a durable visual form.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2550",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2550",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2550"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2550/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2551,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2550/revisions/2551"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2550"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2550"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2550"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 1753,
+       "date": "2019-08-27T06:15:16",
+       "date_gmt": "2019-08-27T14:15:16",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=1753"
+       },
+       "modified": "2019-08-27T06:15:16",
+       "modified_gmt": "2019-08-27T14:15:16",
+       "slug": "bret-victor",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/bret-victor/",
+       "title": {
+           "rendered": "Bret Victor"
+       },
+       "content": {
+           "rendered": "<p>Have you ever tried multiplying roman numerals? It’s incredibly, ridiculously difficult. That’s why, before the 14th century, everyone thought that multiplication was an incredibly difficult concept, and only for the mathematical elite. Then Arabic numerals came along, with their nice place values, and we discovered that even seven-year-olds can handle multiplication just fine. There was nothing difficult about the concept of multiplication—the problem was that numbers, at the time, had a bad user interface.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Have you ever tried multiplying roman numerals? It’s incredibly, ridiculously difficult. That’s why, before the 14th century, everyone thought that multiplication was an incredibly difficult concept, and only for the mathematical elite. Then Arabic numerals came along, with their nice place values, and we discovered that even seven-year-olds can handle multiplication just fine. There was [&hellip;]</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-1753",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1753",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=1753"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1753/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2543,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1753/revisions/2543"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=1753"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=1753"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=1753"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 1861,
+       "date": "2019-08-27T06:14:47",
+       "date_gmt": "2019-08-27T14:14:47",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=1861"
+       },
+       "modified": "2019-08-27T06:14:48",
+       "modified_gmt": "2019-08-27T14:14:48",
+       "slug": "john-sloan",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/john-sloan/",
+       "title": {
+           "rendered": "John Sloan"
+       },
+       "content": {
+           "rendered": "<p>Whoever heard of a musician who was passionately fond of B flat? Color is like music. The palette is an instrument that can be orchestrated to build form.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Whoever heard of a musician who was passionately fond of B flat? Color is like music. The palette is an instrument that can be orchestrated to build form.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-1861",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1861",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=1861"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1861/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2541,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/1861/revisions/2541"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=1861"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=1861"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=1861"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2487,
+       "date": "2019-08-27T06:14:20",
+       "date_gmt": "2019-08-27T14:14:20",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2487"
+       },
+       "modified": "2019-08-27T06:14:20",
+       "modified_gmt": "2019-08-27T14:14:20",
+       "slug": "david-ogilvy-8",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/david-ogilvy-8/",
+       "title": {
+           "rendered": "David Ogilvy"
+       },
+       "content": {
+           "rendered": "<p>If it doesn&#8217;t sell, it isn&#8217;t creative.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>If it doesn&#8217;t sell, it isn&#8217;t creative.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2487",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2487",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2487"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2487/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2488,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2487/revisions/2488"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2487"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2487"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2487"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2501,
+       "date": "2019-08-27T06:14:11",
+       "date_gmt": "2019-08-27T14:14:11",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2501"
+       },
+       "modified": "2019-08-27T06:14:12",
+       "modified_gmt": "2019-08-27T14:14:12",
+       "slug": "ezra-caldwell",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/ezra-caldwell/",
+       "title": {
+           "rendered": "Ezra Caldwell"
+       },
+       "content": {
+           "rendered": "<p>If tools give too much control, you might end up doing exactly what you were trying to do, and that might not be very good.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>If tools give too much control, you might end up doing exactly what you were trying to do, and that might not be very good.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2501",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2501",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2501"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2501/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2539,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2501/revisions/2539"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2501"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2501"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2501"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   },
+   {
+       "id": 2504,
+       "date": "2019-07-03T18:26:22",
+       "date_gmt": "2019-07-04T02:26:22",
+       "guid": {
+           "rendered": "https://quotesondesign.com/?p=2504"
+       },
+       "modified": "2019-07-03T18:26:22",
+       "modified_gmt": "2019-07-04T02:26:22",
+       "slug": "ted-turner",
+       "status": "publish",
+       "type": "post",
+       "link": "https://quotesondesign.com/ted-turner/",
+       "title": {
+           "rendered": "Ted Turner"
+       },
+       "content": {
+           "rendered": "<p>Early to bed, early to rise, work like hell, and advertise.</p>\n",
+           "protected": false
+       },
+       "excerpt": {
+           "rendered": "<p>Early to bed, early to rise, work like hell, and advertise.</p>\n",
+           "protected": false
+       },
+       "author": 2,
+       "featured_media": 0,
+       "comment_status": "closed",
+       "ping_status": "closed",
+       "sticky": false,
+       "template": "",
+       "format": "standard",
+       "meta": {
+           "_jetpack_memberships_contains_paid_content": false,
+           "footnotes": ""
+       },
+       "categories": [
+           1
+       ],
+       "tags": [],
+       "class_list": [
+           "post-2504",
+           "post",
+           "type-post",
+           "status-publish",
+           "format-standard",
+           "hentry",
+           "category-uncategorized"
+       ],
+       "jetpack_featured_media_url": "",
+       "jetpack_sharing_enabled": true,
+       "_links": {
+           "self": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2504",
+                   "targetHints": {
+                       "allow": [
+                           "GET"
+                       ]
+                   }
+               }
+           ],
+           "collection": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts"
+               }
+           ],
+           "about": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/types/post"
+               }
+           ],
+           "author": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/users/2"
+               }
+           ],
+           "replies": [
+               {
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/comments?post=2504"
+               }
+           ],
+           "version-history": [
+               {
+                   "count": 1,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2504/revisions"
+               }
+           ],
+           "predecessor-version": [
+               {
+                   "id": 2505,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/posts/2504/revisions/2505"
+               }
+           ],
+           "wp:attachment": [
+               {
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/media?parent=2504"
+               }
+           ],
+           "wp:term": [
+               {
+                   "taxonomy": "category",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/categories?post=2504"
+               },
+               {
+                   "taxonomy": "post_tag",
+                   "embeddable": true,
+                   "href": "https://quotesondesign.com/wp-json/wp/v2/tags?post=2504"
+               }
+           ],
+           "curies": [
+               {
+                   "name": "wp",
+                   "href": "https://api.w.org/{rel}",
+                   "templated": true
+               }
+           ]
+       }
+   }
+]

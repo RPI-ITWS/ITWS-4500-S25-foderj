@@ -35,13 +35,13 @@ const client = new MongoClient(uri);
 async function getMongoIDs(collection){
   
    //0 means it will not include id 
-   const allDocs = await collection.find({}, { projection: { mongoNum: 1, _id: 0} }).toArray();
+   const allDocs = await collection.find({}).toArray();
 
    
    //make array of pure nums 
    let valNums = new Array(); 
    for(var i = 0; i < allDocs.length; i++){
-      valNums.push(allDocs[i]["mongoNum"]);
+      valNums.push(allDocs[i]["id"]);
    }
    return(valNums); 
 }
@@ -178,6 +178,267 @@ function updateName(allAct){
 }
 
 /*APP FUNCTIONS*/
+
+
+//QUIZ 2 
+
+
+/*Deletes entire quiz2 collection  */
+app.delete('/quiz2', async (req,res) => {
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+   await collection.deleteMany({});
+   res.json({ message: `Collection Dropped .` });
+
+})
+
+// Automated ETL Endpoint for Quiz 2
+//run ETL pipeline for either possible (just comment out for now)
+// just said we must write it    
+app.post('/quiz2', async (req, res) => {
+
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const runCol = database.collection("quotes");
+   var curDocs = await runCol.countDocuments(); 
+
+   //get 25 from forismatic
+   var forismaticRes = [];
+   for(var i = 0; i < 20; i++){
+      curDocs += 1;
+      const url = "https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en&key=1";
+
+      //Note this is post
+      var fetchRes = await fetch(url, {
+         method: "GET",
+      })
+      
+      const text = await fetchRes.text(); // get raw response
+      const cleaned = text.replace(/\\'/g, "'"); // fix bad escapes
+      const curQuote = JSON.parse(cleaned); 
+      // Because .json also returns a promise
+      // var curQuote = await fetchRes.json();
+
+      await runCol.insertOne({"id": curDocs,"author": curQuote['quoteAuthor'], "quote": curQuote['quoteText'] });
+
+   }
+
+   //add 5 from: https://quotesondesign.com/wp-json/wp/v2/posts
+
+   var fetchRes = await fetch("https://quotesondesign.com/wp-json/wp/v2/posts", {
+      method: "GET",
+   })
+   // Because .json also returns a promise
+   var desArray = await fetchRes.json()
+   
+   for(var j = 0; j < 5; j++){
+      console.log(desArray[j]);
+      curDocs += 1;
+      await runCol.insertOne({"id": curDocs,"author": desArray[j]["title"]["rendered"], "quote": desArray[j]["content"]["rendered"] });
+   }
+
+
+
+   console.log(forismaticRes); 
+   
+   res.json({ message: `Entire DB Populated.` });
+
+}) 
+
+/*Returns document specified by endpoint */
+app.post('/quiz2/:number', async (req,res) =>{
+
+
+   res.json({
+      "error": {
+        "code": 405,
+        "message": "Method Not Allowed: The 'POST' method is not supported for the requested resource."
+      }
+    });
+   
+
+})
+
+/*returns a list of valid doc numbers */
+app.get('/quiz2', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+   valNums = await getMongoIDs(collection);
+   res.json(valNums); 
+
+})
+
+/*Returns document specified by endpoint */
+app.get('/quiz2/:number', async (req,res) =>{
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      var resDoc = await collection.find({id: index}).toArray();
+      resDoc = resDoc[0];
+
+      res.json(resDoc); 
+   }
+
+})
+
+/*updates all fields specified in body for all items if said field is present in that item*/
+app.put('/quiz2', async (req,res) => {
+
+
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+   }
+
+
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+   //req.params contains all route variables from the URL
+
+   var resDoc = await collection.find({}).toArray();
+
+   // if fields specified in body are in document, change them accordingly
+   for(var key in req.body){
+      for(var i = 0; i < resDoc.length; i++){
+         if(resDoc[i].hasOwnProperty(key)){
+            await collection.updateOne( { id: resDoc[i]['id'] },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
+         }
+      }
+
+   }    
+   res.json({ message: `all items updated accordingly .` });
+
+
+})
+
+/*updates all fields specified in body for all items if said field is present in that item*/
+app.put('/quiz2/:number', async (req,res) => {
+
+
+   if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+   }
+
+
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      //req.params contains all route variables from the URL
+
+      var resDoc = await collection.find({}).toArray();
+
+      // if fields specified in body are in document, change them accordingly
+      
+      for(var key in req.body){
+         if(resDoc[id].hasOwnProperty(key)){
+            await collection.updateOne( { id: resDoc[id-1]['id'] },  { $set:{[key]: req.body[key]} } ); //update so no 2 ids can be the same 
+         }
+      }
+         
+
+        
+      res.json({ message: `all items updated accordingly .` });
+   }
+
+})
+
+
+/*Deletes document specified by number from DB */
+app.delete('/quiz2/:number', async (req,res) => {
+   var id = parseInt(req.params.number);
+   
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection("quotes");
+
+   //req.params contains all route variables from the URL
+   var id = parseInt(req.params.number);
+   valNums = await getMongoIDs(collection);
+   
+
+   //checking to macke sure said ID exists
+   var index = null; 
+   //checking to macke sure said ID exists
+   for(var i = 0; i < valNums.length; i++){
+      if (valNums[i] == id){
+         index = id; 
+      }
+   }
+
+
+   if(index == null){
+      res.json({ message: `id '${parseInt(req.params.number)}' does not exist.` });
+   }else{
+      await collection.deleteOne({ id: index });
+      res.json({ message: `id '${parseInt(req.params.number)}' deleted from DB .` });
+   }
+})
+
+
 
 
 // Automated ETL Endpoint

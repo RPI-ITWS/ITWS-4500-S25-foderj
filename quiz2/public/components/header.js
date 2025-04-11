@@ -10,7 +10,7 @@ function makeHeader() {
    {
        id: 'header'  //this makes react re-render the component as state or props changed, 
    },
-   "Joe's Mongo API"
+   "Joe's Quiz 2"
  );
 }
 

@@ -17,22 +17,7 @@ function docHeader() {
       null,
 
 
-      React.createElement(
-         'a', 
-         {href: "https://github.com/RPI-ITWS/ITWS-4500-S25-foderj/tree/main/lab2#readme"}, 
-         "Click Here for Documentation"
-      ),
-      React.createElement(
-         'br',
-         null,
-         null
-      ),
-      //local
-      React.createElement(
-         'a', 
-         {href: "visualizations.html"}, 
-         "Click Here for Visualizations"
-      )
+
 
 
    );
@@ -150,9 +135,9 @@ function makeMirror(){
          
          //local
          if(newText.trim() == "0" || newText.trim() == "empty"){
-            INPURL = "/db";
+            INPURL = "/quiz2";
          }else{
-            INPURL = "/db/" + newText.trim();
+            INPURL = "/quiz2/" + newText.trim();
          }
       }else if(e.target.id == 'method'){
          INPMETH = newText
@@ -183,7 +168,7 @@ function makeMirror(){
       methButtons(),
       bk(),
       bk(),
-      makeLabel({ innerText: 'Insert Document ID here (or "0" for /db):' }),
+      makeLabel({ innerText: 'Insert Document ID here (or "0" for /quiz2):' }),
       bk(),
       React.createElement(
          'input',

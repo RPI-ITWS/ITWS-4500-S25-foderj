@@ -237,9 +237,9 @@ const waitForReactElement = (id, callback) => {
 
       // local:
       if(num.trim() == "0" || num.trim() == "empty"){
-         url = "/db";
+         url = "/quiz2";
       }else{
-         url = "/db/" + num.trim();
+         url = "/quiz2/" + num.trim();
       }
       
       var bod = $('#jsonInput').val(); //if nothing, body == ""
