@@ -1,21 +1,6 @@
          
-# Creativity: 
 
 
-
-# Learning
-   - Use RStudio visualization tool easy 
-   - ETL -> Extract, Transform, and load
-      - ETL pipeline: 
-         - Extract data from external API's Transform that data in the way you want, load that DAta into mongoDB 
-   - discoverability in terms of database outputs, make endpoints understandable and allow user to navigate entire API/Database intuitivley or with very helpful instructions 
-   - Get data from a MongoDB via a Node API
-      - literally our get endpoints that use mongo
-   - Get data from external APIs via a Node API
-      - literally our get endpoints that use external API's 
-   - Know How to do a visualization. 
-
-- They\'re is invalid 
 
 
 
@@ -36,6 +21,21 @@
    - General Stylling of the Website Using React. 
       - created informative form, titles, and text inputs/boxes 
 
+
+# Learning
+   - Use RStudio visualization tool easy 
+   - ETL -> Extract, Transform, and load
+      - ETL pipeline: 
+         - Extract data from external API's Transform that data in the way you want, load that DAta into mongoDB 
+   - discoverability in terms of database outputs, make endpoints understandable and allow user to navigate entire API/Database intuitivley or with very helpful instructions 
+   - Get data from a MongoDB via a Node API
+      - literally our get endpoints that use mongo
+   - Get data from external APIs via a Node API
+      - literally our get endpoints that use external API's 
+   - Know How to do a visualization. 
+   - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/js/js_string_methods.asp&ved=2ahUKEwjk3MH939CMAxWKlIkEHde9BzYQFnoECBgQAQ&usg=AOvVaw2-sKX3zd2wceCVayF-y7hv
+
+- They\'re is invalid 
 
 # After quiz
    - make sure database is in good shape
