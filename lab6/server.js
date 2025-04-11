@@ -242,6 +242,26 @@ app.get('/db/docs', async (req,res) =>{
 
 })
 
+/*Download kudos CSV which I can immediatley put into R Script and generate graph   */
+app.get('/db/kudocsv', async (req,res) => {
+
+   await client.connect();
+   console.log("Connected to MongoDB!");
+   // Select database and collection
+   const database = client.db(dbName);
+   const collection = database.collection(col2020);
+   const allItems = await collection.find({}).toArray();
+   const csvHeader = 'date,kudos\n';
+   const csvRows = allItems.map(item => `${new Date(item.start_date).toISOString().slice(0, 10)},${item.kudos_count}`).join('\n');
+   const csvData = csvHeader + csvRows;
+   res.setHeader('Content-Type', 'text/csv');
+   res.setHeader('Content-Disposition', 'attachment; filename=kudos.csv');
+   
+   
+   res.send(csvData);
+   
+})
+
 /*Returns :number Longest runs in the Database  */
 app.get('/db/longest/:number', async (req,res) =>{
 

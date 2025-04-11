@@ -20,5 +20,16 @@ library(readr)
 # Read the CSV using read_csv() from readr, automatically converts to date objects
 data <- read_csv("kudos.csv")
 
-# Print the data
-print(data)
+ggplot(data, aes(x = date, y = kudos)) +
+  geom_line(color = "steelblue", size = 1.5) +  # Line with blue color
+  geom_point(color = "red", size = 3) +         # Red dots for each data point
+  labs(title = "Kudos Line Chart",
+       x = "Date",
+       y = "Kudos") +
+  theme_minimal() +                             # Clean theme
+  scale_x_date(date_labels = "%b %d, %Y",       # Format x-axis to show full date
+               date_breaks = "1 day") +         # Set the breaks to 1 day
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+
+ggsave("kudos_line_chart.png", plot = plot, width = 10, height = 6, dpi = 300)

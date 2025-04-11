@@ -31,6 +31,7 @@
 
    - Endpoint that gets data from mongo in specific way I want it, so I can easily load it into Rstudio and make a visualization
 
+   - updated graph 
 
 # Future Notes
    - check if old mongo Server.js functions 
