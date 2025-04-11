@@ -181,7 +181,6 @@ function updateName(allAct){
 
 
 // Automated ETL Endpoint
-
 //pulls data directly from strava and tosses it into mongo 
 app.put('/db/jan/etl', async (req, res) => {
 
