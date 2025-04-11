@@ -63,7 +63,7 @@
 # Future Notes
    - check if old mongo Server.js functions 
 
-# learning
+# Citations
    - insert an entire array into mongoDB
       - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.baeldung.com/java-mongodb-document-insert-array&ved=2ahUKEwiEyeC7h9CMAxXSEGIAHY_PDN8QFnoECBQQAQ&usg=AOvVaw3vSueJtvPvbIy_MfNX0Y2d
    - return csv from node API 
